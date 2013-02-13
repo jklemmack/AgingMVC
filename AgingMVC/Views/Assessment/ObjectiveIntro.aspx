@@ -8,9 +8,9 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <p>
         <%=Model.ObjectiveText %></p>
-    <iframe src="<%:ViewBag.VideoURL %>" width="950" height="600"></iframe>
+    <iframe src="<%:ViewBag.VideoURL %>" width="950" height="650"></iframe>
     <div>
-        <div>
+        <div style="float: left;">
             <a href="/Assessment/<%:ViewBag.Domain %>/<%: ViewBag.Parent %>/<%: ViewBag.Page - 1 %>"
                 class="back">Back</a></div>
         <div class="rightnav">

@@ -23,12 +23,13 @@
         <li>
             <div>
                 <img src="<%: Url.Content(video.ThumbImageURL) %>" alt="<%: video.ShortText %>" width="367"
-                    height="109" />A video showing how a caregiver can be dropped abruptly into the task of caregiving without a dang lick of warning.  Totally suxors.<%:video.ShortText %></div>
+                    height="109" />A video showing how a caregiver can be dropped abruptly into
+                the task of caregiving without a dang lick of warning. Totally suxors.<%:video.ShortText %></div>
         </li>
         <%} %>
     </ul>
     <div>
-        <div>
+        <div style="float: left;">
             <a href="/" class="back">Return to Main Page</a></div>
         <div class="rightnav">
             <a href="/Assessment/<%: ViewBag.Domain %>/<%: ViewBag.Parent %>/<%: ViewBag.Page + 1 %>"

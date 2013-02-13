@@ -123,7 +123,7 @@
         <div class="taskheader">
             <h2>
                 These are important tasks that we have identified for you to complete. Please read
-                them carefully and answer the two following questions.</h2>
+                them carefully and answer the following questions.</h2>
         </div>
         <div class="taskcompleted">
             <h2>
