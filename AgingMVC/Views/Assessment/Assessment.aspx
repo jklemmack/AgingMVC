@@ -75,6 +75,8 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <script language="javascript" type="text/javascript">
 
+        var tasks = <%=ViewBag.TaskDescriptions%>;
+
         $(function () {
 
             function EnableTaskCompleted(taskId, disable) {
@@ -97,7 +99,8 @@
             });
 
             $(".dialoglink").click(function() {
-                var taskId = $(event.target).attr("taskid");
+                //var taskId = $(event.target).attr("taskid");
+                var taskId = $(this).attr("taskid");
                                 
                 $("#dialog-message")
                     .html(tasks[taskId].Description)
@@ -113,8 +116,6 @@
             });
 
         });
-
-        var tasks = <%=ViewBag.TaskDescriptions%>
 
     </script>
     <div>

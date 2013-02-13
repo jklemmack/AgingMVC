@@ -95,6 +95,7 @@ namespace AgingMVC.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public ActionResult Index(string Domain, string Parent, int? Page)
         {
             int DomainId = -1;
