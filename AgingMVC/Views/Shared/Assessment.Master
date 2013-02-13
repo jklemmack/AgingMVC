@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MenuContent" runat="server">
     <nav>
         <ul id="menu">
-            <li><a href"#">&nbsp;</a></li>
+            <li><%: Html.ActionLink("Exit Assessment", "Index", "Home")%></li>
         </ul>
     </nav>
 </asp:Content>

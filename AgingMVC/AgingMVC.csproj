@@ -548,7 +548,6 @@
     <None Include="Content\Articulate\Medical\Overview\mobile\data.gz" />
     <Content Include="Views\Shared\Assessment.Master" />
     <Content Include="Views\Shared\Base.Master" />
-    <Content Include="Views\Shared\Menu.Master" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
