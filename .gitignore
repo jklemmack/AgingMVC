@@ -109,3 +109,6 @@ Backup*/
 UpgradeLog*.XML
 AgingMVC/bin/AgingMVC.*
 AgingMVC.suo
+AgingMVC.suo
+AgingMVC/bin/AgingMVC.dll
+AgingMVC/bin/AgingMVC.pdb
