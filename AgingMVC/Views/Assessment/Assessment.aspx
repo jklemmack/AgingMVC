@@ -88,10 +88,11 @@
             }
 
             $(".taskcompleted input:radio").change(function () {
-                var taskId = $(event.target).attr("taskid");
+                //var taskId = $(event.target).attr("taskid");
+                 var taskId = $(this).attr("taskid");
 
                 // Yes, they have completed, disable the timeline radio options
-                if (event.target.value == "Yes") {
+                if (this.value == "Yes") {
                     EnableTaskCompleted(taskId, true);
                 } else {
                     EnableTaskCompleted(taskId, false);

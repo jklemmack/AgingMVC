@@ -184,6 +184,7 @@ namespace AgingMVC.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public ActionResult Index(string Domain, string Parent, int? Page, FormCollection formData)
         {
             int DomainId = -1;
