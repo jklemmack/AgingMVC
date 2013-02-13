@@ -1,4 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<List<AgingMVC.Models.GetAssessment_Result>>" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Assessment.Master"
+    Inherits="System.Web.Mvc.ViewPage<List<AgingMVC.Models.GetAssessment_Result>>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     <%:ViewBag.Domain %>
@@ -23,7 +24,8 @@
             padding: 7px;
             position: relative;
             right: 200px;
-            width: 350px;
+            width: 500px;
+            height: 85px;
         }
         
         
@@ -35,7 +37,7 @@
             padding: 7px;
             position: relative;
             right: 200px;
-            width: 350px;
+            width: 500px;
         }
         div.taskcompleted
         {
@@ -43,6 +45,7 @@
             float: left;
             margin: 10px 0 0;
             padding: 7px;
+            padding-left: 20px;
             width: 100px;
         }
         div.tasktimeline
@@ -51,6 +54,7 @@
             float: left;
             margin: 10px 0 0;
             padding: 7px;
+            width: 200px;
         }
         
         
@@ -61,43 +65,63 @@
             padding: 0px;
             margin: 0px;
         }
+        
+        .disabled
+        {
+            color: #cccccc;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <script language="javascript" type="text/javascript">
-        $(document).ready(function () {
-
-        });
 
         $(function () {
 
-            function EnableTaskCompleted(taskId) {
-                var value = $('#TaskCompleted.' + taskId).value;
-                alert(value);
-                $('#TaskTimeline.' + taskId + ' > :input').attr('disabled', '');
+            function EnableTaskCompleted(taskId, disable) {
+                if (disable) {
+                    $('.timeline_' + taskId).attr('disabled', 'disabled').addClass('disabled');
+                } else {
+                    $('.timeline_' + taskId).removeAttr('disabled', '').removeClass('disabled');
+                }
             }
 
             $(".taskcompleted input:radio").change(function () {
-                if (event.target.value == "Yes") {
+                var taskId = $(event.target).attr("taskid");
 
+                // Yes, they have completed, disable the timeline radio options
+                if (event.target.value == "Yes") {
+                    EnableTaskCompleted(taskId, true);
                 } else {
+                    EnableTaskCompleted(taskId, false);
                 }
             });
 
-            $("#taskDetails").dialog
+            $(".dialoglink").click(function() {
+                var taskId = $(event.target).attr("taskid");
+                                
+                $("#dialog-message")
+                    .html(tasks[taskId].Description)
+                    .dialog({ 
+                        modal: true,
+                        width: 500,
+                        title: tasks[taskId].ShortText,
+                        resizable: false,
+                        buttons: {
+                                Ok: function() { $( this ).dialog( "close" );                                               }
+                                    }
+                          });
+            });
+
         });
 
+        var tasks = <%=ViewBag.TaskDescriptions%>
+
     </script>
-    <div class="heading">
-        <h1>
-            <%:ViewBag.Domain %>
-            Evaluation -
-            <%:ViewBag.ObjectiveHeader%></h1>
-    </div>
     <div>
         <div class="taskheader">
             <h2>
-                These are important tasks for you to complete.</h2>
+                These are important tasks that we have identified for you to complete. Please read
+                them carefully and answer the two following questions.</h2>
         </div>
         <div class="taskcompleted">
             <h2>
@@ -118,25 +142,25 @@
             <%=(ViewBag.IsSelf) ? task.PromptTextSelf : task.PromptText %>
             <br />
             <div style="font-size: smaller; display: inline-block; cursor: help;">
-                <a>Learn more about this task</a></div>
+                <a class="resource dialoglink" taskid="<%=task.TaskId %>">Learn more about this task</a></div>
         </div>
         <div class="taskcompleted">
-            <input type="radio" name="TaskCompleted.<%=task.TaskId %>" id="TaskCompleted.<%=task.TaskId %>"
-                value="Yes" <%:(task.Completed)?"checked='checked'":"" %> />Yes<br />
-            <input type="radio" name="TaskCompleted.<%=task.TaskId %>" id="TaskCompleted.<%=task.TaskId %>"
-                value="No" <%:(task.Completed)?"":"checked='checked'" %> />No
+            <input type="radio" name="TaskCompleted.<%=task.TaskId %>" taskid="<%=task.TaskId %>"
+                value="Yes" <%=(task.Completed)?"checked='checked'":"" %> />Yes<br />
+            <input type="radio" name="TaskCompleted.<%=task.TaskId %>" taskid="<%=task.TaskId %>"
+                value="No" <%=(task.Completed)?"":"checked='checked'" %> />No
         </div>
-        <div class="tasktimeline">
-            <input type="radio" name="TaskTimeline.<%=task.TaskId %>" id="TaskTimeline.<%=task.TaskId %>"
-                value="1" />Within 1 month<br />
-            <input type="radio" name="TaskTimeline.<%=task.TaskId %>" id="TaskTimeline.<%=task.TaskId %>"
-                value="2" />Within 3 months<br />
-            <input type="radio" name="TaskTimeline.<%=task.TaskId %>" id="TaskTimeline.<%=task.TaskId %>"
-                value="3" />Within 6 months<br />
-            <input type="radio" name="TaskTimeline.<%=task.TaskId %>" id="TaskTimeline.<%=task.TaskId %>"
-                value="4" />Within 12 months<br />
-            <input type="radio" name="TaskTimeline.<%=task.TaskId %>" id="TaskTimeline.<%=task.TaskId %>"
-                value="5" />12 months or longer
+        <div class="tasktimeline timeline_<%=task.TaskId %> <%=(task.Completed)?"disabled":"" %>">
+            <input type="radio" name="TaskTimeline.<%=task.TaskId %>" class="timeline_<%=task.TaskId %>"
+                value="1" <%=(task.Completed)?"disabled='disabled'":"" %> />Within 1 month<br />
+            <input type="radio" name="TaskTimeline.<%=task.TaskId %>" class="timeline_<%=task.TaskId %>"
+                value="2" <%=(task.Completed)?"disabled='disabled'":"" %> />Within 3 months<br />
+            <input type="radio" name="TaskTimeline.<%=task.TaskId %>" class="timeline_<%=task.TaskId %>"
+                value="3" <%=(task.Completed)?"disabled='disabled'":"" %> />Within 6 months<br />
+            <input type="radio" name="TaskTimeline.<%=task.TaskId %>" class="timeline_<%=task.TaskId %>"
+                value="4" <%=(task.Completed)?"disabled='disabled'":"" %> />Within 12 months<br />
+            <input type="radio" name="TaskTimeline.<%=task.TaskId %>" class="timeline_<%=task.TaskId %>"
+                value="5" <%=(task.Completed)?"disabled='disabled'":"" %> />12 months or longer
         </div>
     </div>
     <div style="visibility: hidden; height: 0px;" class="taskDetails" id="taskDetails.<%=task.TaskId %>">
@@ -156,4 +180,7 @@
         </div>
     </div>
     </form>
+    <div id="dialog-message" style="display: none;">
+        test
+    </div>
 </asp:Content>

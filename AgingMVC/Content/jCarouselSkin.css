@@ -12,7 +12,7 @@
 
 .jcarousel-skin-tango .jcarousel-container-horizontal {
  border: 0 none;
-    height: 150px;
+/*    height: 150px; */
     margin-bottom: 20px;
     padding: 20px 40px;
     width: 855px;
@@ -30,7 +30,7 @@
 
 .jcarousel-skin-tango .jcarousel-clip-horizontal {
     width:  855px;
-    height: 150px;
+/*    height: 150px;  */
 }
 
 .jcarousel-skin-tango .jcarousel-clip-vertical {
@@ -40,7 +40,7 @@
 
 .jcarousel-skin-tango .jcarousel-item {
     width: 140px;
-    height: 150px;
+/*    height: 150px; */
 }
 
 .jcarousel-skin-tango .jcarousel-item-horizontal {

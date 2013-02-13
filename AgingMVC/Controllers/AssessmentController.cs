@@ -121,7 +121,7 @@ namespace AgingMVC.Controllers
                                             select d).Single<Models.Domain>();
 
                     model = domain;
-                    ViewBag.VideoURL = string.Format("/Content/Articulate/{0}/Overview/story.html", domain.ShortName);
+                    ViewBag.DomainName = domain.Name;
 
                     break;
 
@@ -140,6 +140,20 @@ namespace AgingMVC.Controllers
                     model = db.GetAssessment(parentId, userId, pageInfo.ObjectiveId).ToList();
 
                     ViewBag.IsSelf = (string.Compare(Parent, "Myself") == 0);
+                    var tasks = ((IEnumerable<GetAssessment_Result>)model).Select(t => new TaskInfo()
+                    {
+                        TaskId = t.TaskId,
+                        ShortText = t.ShortText,
+                        PromptText = (ViewBag.IsSelf) ? t.PromptTextSelf : t.PromptText,
+                        Description = ((ViewBag.IsSelf) ? t.AssessmentTextSelf : t.AssessmentText).Replace("\n", "<p />")
+                    }).ToDictionary(k => k.TaskId, k => k);
+
+                    using (System.IO.TextWriter tw = new System.IO.StringWriter())
+                    {
+                        new Newtonsoft.Json.JsonSerializer().Serialize(tw, tasks);
+                        ViewBag.TaskDescriptions = tw.ToString();
+                    }
+
                     ViewBag.ObjectiveHeader = ObjectiveHeader(objective.ObjectiveOrder);
                     break;
 

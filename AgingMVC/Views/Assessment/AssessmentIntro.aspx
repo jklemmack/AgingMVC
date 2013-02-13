@@ -1,12 +1,14 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<AgingMVC.Models.Domain>" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Assessment.Master"
+    Inherits="System.Web.Mvc.ViewPage<AgingMVC.Models.Domain>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-    AssessmentIntro
+    <%:ViewBag.DomainName%>
+    Evaluation
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="heading">
         <h1>
-            Begin
+            Introduction to the
             <%:Model.Name %>
             Evaluation
         </h1>

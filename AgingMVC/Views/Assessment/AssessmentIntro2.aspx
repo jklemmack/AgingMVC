@@ -1,7 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<AgingMVC.Models.Domain>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-    AssessmentIntro
+    <%:ViewBag.DomainName%>
+    Evaluation
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="heading">
@@ -15,14 +16,14 @@
         <p>
             <%=Model.ObjectivesText %></p>
     </div>
-    <ul id="mycarousel" class="jcarousel-skin-name">
+    <ul id="mycarousel" class="jcarousel-skin-tango">
         <!-- Carousel of available videos-->
         <% foreach (var video in Model.Videos)
            { %>
         <li>
-            <img src="<%: Url.Content(video.ThumbImageURL) %>" alt="<%: video.ShortText %>" width="367"
-                height="109" />
-            <%:video.ShortText %>
+            <div>
+                <img src="<%: Url.Content(video.ThumbImageURL) %>" alt="<%: video.ShortText %>" width="367"
+                    height="109" />A video showing how a caregiver can be dropped abruptly into the task of caregiving without a dang lick of warning.  Totally suxors.<%:video.ShortText %></div>
         </li>
         <%} %>
     </ul>

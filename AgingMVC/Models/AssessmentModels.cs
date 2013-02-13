@@ -11,6 +11,13 @@ namespace AgingMVC.Models
         public int Page;
     }
 
+    public class TaskInfo
+    {
+        public int TaskId;
+        public string ShortText;
+        public string PromptText;
+        public string Description;
+    }
 
     //public class Survey
     //{
@@ -19,7 +26,7 @@ namespace AgingMVC.Models
     //    public int DomainId;
     //    public int TaskOrder;
     //    public string ShortText;
-        
+
     //    public string PromptText;
     //    public string AssessmentText;
 
