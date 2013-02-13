@@ -1,0 +1,1060 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="AgingModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="AgingModelStoreContainer">
+          <EntitySet Name="aspnet_Users" EntityType="AgingModel.Store.aspnet_Users" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Audit" EntityType="AgingModel.Store.Audit" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Domain" EntityType="AgingModel.Store.Domain" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Domain_Videos" EntityType="AgingModel.Store.Domain_Videos" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Objective" EntityType="AgingModel.Store.Objective" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Parent" EntityType="AgingModel.Store.Parent" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Resource" EntityType="AgingModel.Store.Resource" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="State" EntityType="AgingModel.Store.State" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Task" EntityType="AgingModel.Store.Task" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Task_Resources" EntityType="AgingModel.Store.Task_Resources" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TaskSurveyResponse" EntityType="AgingModel.Store.TaskSurveyResponse" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Video" EntityType="AgingModel.Store.Video" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="vw_ParentSummary" EntityType="AgingModel.Store.vw_ParentSummary" store:Type="Views" store:Schema="dbo" store:Name="vw_ParentSummary">
+            <DefiningQuery>SELECT 
+      [vw_ParentSummary].[UserID] AS [UserID], 
+      [vw_ParentSummary].[ParentID] AS [ParentID], 
+      [vw_ParentSummary].[FirstName] AS [FirstName], 
+      [vw_ParentSummary].[MedicalCompleted] AS [MedicalCompleted], 
+      [vw_ParentSummary].[MedicalTotal] AS [MedicalTotal], 
+      [vw_ParentSummary].[LegalCompleted] AS [LegalCompleted], 
+      [vw_ParentSummary].[LegalTotal] AS [LegalTotal], 
+      [vw_ParentSummary].[SocialCompleted] AS [SocialCompleted], 
+      [vw_ParentSummary].[SocialTotal] AS [SocialTotal], 
+      [vw_ParentSummary].[EmotionalCompleted] AS [EmotionalCompleted], 
+      [vw_ParentSummary].[EmotionalTotal] AS [EmotionalTotal], 
+      [vw_ParentSummary].[Completed] AS [Completed], 
+      [vw_ParentSummary].[Total] AS [Total]
+      FROM [dbo].[vw_ParentSummary] AS [vw_ParentSummary]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Domain_Videos_Domain" Association="AgingModel.Store.FK_Domain_Videos_Domain">
+            <End Role="Domain" EntitySet="Domain" />
+            <End Role="Domain_Videos" EntitySet="Domain_Videos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Domain_Videos_Video" Association="AgingModel.Store.FK_Domain_Videos_Video">
+            <End Role="Video" EntitySet="Video" />
+            <End Role="Domain_Videos" EntitySet="Domain_Videos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Objective_Domain" Association="AgingModel.Store.FK_Objective_Domain">
+            <End Role="Domain" EntitySet="Domain" />
+            <End Role="Objective" EntitySet="Objective" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Parent_aspnet_Users" Association="AgingModel.Store.FK_Parent_aspnet_Users">
+            <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+            <End Role="Parent" EntitySet="Parent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Parent_State" Association="AgingModel.Store.FK_Parent_State">
+            <End Role="State" EntitySet="State" />
+            <End Role="Parent" EntitySet="Parent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Resource_State" Association="AgingModel.Store.FK_Resource_State">
+            <End Role="State" EntitySet="State" />
+            <End Role="Resource" EntitySet="Resource" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Task_Domain" Association="AgingModel.Store.FK_Task_Domain">
+            <End Role="Domain" EntitySet="Domain" />
+            <End Role="Task" EntitySet="Task" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Task_Objective" Association="AgingModel.Store.FK_Task_Objective">
+            <End Role="Objective" EntitySet="Objective" />
+            <End Role="Task" EntitySet="Task" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Task_Resources_Resource" Association="AgingModel.Store.FK_Task_Resources_Resource">
+            <End Role="Resource" EntitySet="Resource" />
+            <End Role="Task_Resources" EntitySet="Task_Resources" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskSurveyResponse_aspnet_Users" Association="AgingModel.Store.FK_TaskSurveyResponse_aspnet_Users">
+            <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+            <End Role="TaskSurveyResponse" EntitySet="TaskSurveyResponse" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskSurveyResponse_Parent" Association="AgingModel.Store.FK_TaskSurveyResponse_Parent">
+            <End Role="Parent" EntitySet="Parent" />
+            <End Role="TaskSurveyResponse" EntitySet="TaskSurveyResponse" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="aspnet_Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="ApplicationId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="256" />
+          <Property Name="LoweredUserName" Type="nvarchar" Nullable="false" MaxLength="256" />
+          <Property Name="MobileAlias" Type="nvarchar" MaxLength="16" />
+          <Property Name="IsAnonymous" Type="bit" Nullable="false" />
+          <Property Name="LastActivityDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Audit">
+          <Key>
+            <PropertyRef Name="AuditId" />
+          </Key>
+          <Property Name="AuditId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="AuditDate" Type="datetime" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" />
+          <Property Name="Action" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Data1" Type="nvarchar" MaxLength="255" />
+          <Property Name="Data2" Type="nvarchar" MaxLength="255" />
+          <Property Name="Data3" Type="nvarchar" MaxLength="255" />
+          <Property Name="Data4" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Domain">
+          <Key>
+            <PropertyRef Name="DomainId" />
+          </Key>
+          <Property Name="DomainId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="ShortName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="SummaryText" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="DescriptionText" Type="nvarchar(max)" />
+          <Property Name="ObjectivesText" Type="nvarchar(max)" />
+          <Property Name="DomainOrder" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Domain_Videos">
+          <Key>
+            <PropertyRef Name="DomainId" />
+            <PropertyRef Name="VideoId" />
+          </Key>
+          <Property Name="DomainId" Type="int" Nullable="false" />
+          <Property Name="VideoId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Objective">
+          <Key>
+            <PropertyRef Name="ObjectiveId" />
+            <PropertyRef Name="DomainId" />
+          </Key>
+          <Property Name="ObjectiveId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="DomainId" Type="int" Nullable="false" />
+          <Property Name="ObjectiveText" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ObjectiveOrder" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Parent">
+          <Key>
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="ParentID" />
+          </Key>
+          <Property Name="UserID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ParentID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Relationship" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="FirstName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Age" Type="int" />
+          <Property Name="State" Type="char" MaxLength="2" />
+        </EntityType>
+        <EntityType Name="Resource">
+          <Key>
+            <PropertyRef Name="ResourceID" />
+          </Key>
+          <Property Name="ResourceID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="1000" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="ResourceState" Type="char" MaxLength="2" />
+          <Property Name="URL" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="State">
+          <Key>
+            <PropertyRef Name="StateCode" />
+          </Key>
+          <Property Name="StateCode" Type="char" Nullable="false" MaxLength="2" />
+          <Property Name="StateName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="SortOrder" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="TaskId" />
+          </Key>
+          <Property Name="TaskId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ObjectiveId" Type="int" Nullable="false" />
+          <Property Name="DomainId" Type="int" Nullable="false" />
+          <Property Name="TaskOrder" Type="int" Nullable="false" />
+          <Property Name="ShortText" Type="nvarchar" Nullable="false" MaxLength="250" />
+          <Property Name="PromptText" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="AssessmentText" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PromptTextSelf" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="AssessmentTextSelf" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Task_Resources">
+          <Key>
+            <PropertyRef Name="TaskID" />
+            <PropertyRef Name="ResourceID" />
+          </Key>
+          <Property Name="TaskID" Type="int" Nullable="false" />
+          <Property Name="ResourceID" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TaskSurveyResponse">
+          <Key>
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="ParentID" />
+            <PropertyRef Name="TaskID" />
+          </Key>
+          <Property Name="UserID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ParentID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TaskID" Type="int" Nullable="false" />
+          <Property Name="LastUpdated" Type="datetime" Nullable="false" />
+          <Property Name="Completed" Type="bit" Nullable="false" />
+          <Property Name="Timeline" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Video">
+          <Key>
+            <PropertyRef Name="VideoID" />
+          </Key>
+          <Property Name="VideoID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="URL" Type="nvarchar" Nullable="false" MaxLength="255" />
+          <Property Name="ShortText" Type="nvarchar" MaxLength="500" />
+          <Property Name="Description" Type="nvarchar" MaxLength="2000" />
+          <Property Name="Copyright" Type="nvarchar" MaxLength="200" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="ThumbImageURL" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'Aging2.dbo.vw_ParentSummary' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="vw_ParentSummary">
+          <Key>
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="ParentID" />
+            
+            
+            
+            
+            
+            
+          </Key>
+          <Property Name="UserID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ParentID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="MedicalCompleted" Type="int" Nullable="false" />
+          <Property Name="MedicalTotal" Type="int" />
+          <Property Name="LegalCompleted" Type="int" Nullable="false" />
+          <Property Name="LegalTotal" Type="int" />
+          <Property Name="SocialCompleted" Type="int" Nullable="false" />
+          <Property Name="SocialTotal" Type="int" />
+          <Property Name="EmotionalCompleted" Type="int" Nullable="false" />
+          <Property Name="EmotionalTotal" Type="int" />
+          <Property Name="Completed" Type="int" Nullable="false" />
+          <Property Name="Total" Type="int" />
+        </EntityType>
+        <Association Name="FK_Domain_Videos_Domain">
+          <End Role="Domain" Type="AgingModel.Store.Domain" Multiplicity="1" />
+          <End Role="Domain_Videos" Type="AgingModel.Store.Domain_Videos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Domain">
+              <PropertyRef Name="DomainId" />
+            </Principal>
+            <Dependent Role="Domain_Videos">
+              <PropertyRef Name="DomainId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Domain_Videos_Video">
+          <End Role="Video" Type="AgingModel.Store.Video" Multiplicity="1" />
+          <End Role="Domain_Videos" Type="AgingModel.Store.Domain_Videos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Video">
+              <PropertyRef Name="VideoID" />
+            </Principal>
+            <Dependent Role="Domain_Videos">
+              <PropertyRef Name="VideoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Objective_Domain">
+          <End Role="Domain" Type="AgingModel.Store.Domain" Multiplicity="1" />
+          <End Role="Objective" Type="AgingModel.Store.Objective" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Domain">
+              <PropertyRef Name="DomainId" />
+            </Principal>
+            <Dependent Role="Objective">
+              <PropertyRef Name="DomainId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Parent_aspnet_Users">
+          <End Role="aspnet_Users" Type="AgingModel.Store.aspnet_Users" Multiplicity="1" />
+          <End Role="Parent" Type="AgingModel.Store.Parent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Parent">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Parent_State">
+          <End Role="State" Type="AgingModel.Store.State" Multiplicity="0..1" />
+          <End Role="Parent" Type="AgingModel.Store.Parent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="StateCode" />
+            </Principal>
+            <Dependent Role="Parent">
+              <PropertyRef Name="State" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Resource_State">
+          <End Role="State" Type="AgingModel.Store.State" Multiplicity="0..1" />
+          <End Role="Resource" Type="AgingModel.Store.Resource" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="StateCode" />
+            </Principal>
+            <Dependent Role="Resource">
+              <PropertyRef Name="ResourceState" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Task_Domain">
+          <End Role="Domain" Type="AgingModel.Store.Domain" Multiplicity="1" />
+          <End Role="Task" Type="AgingModel.Store.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Domain">
+              <PropertyRef Name="DomainId" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="DomainId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Task_Objective">
+          <End Role="Objective" Type="AgingModel.Store.Objective" Multiplicity="1" />
+          <End Role="Task" Type="AgingModel.Store.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Objective">
+              <PropertyRef Name="ObjectiveId" />
+              <PropertyRef Name="DomainId" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="ObjectiveId" />
+              <PropertyRef Name="DomainId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Task_Resources_Resource">
+          <End Role="Resource" Type="AgingModel.Store.Resource" Multiplicity="1" />
+          <End Role="Task_Resources" Type="AgingModel.Store.Task_Resources" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resource">
+              <PropertyRef Name="ResourceID" />
+            </Principal>
+            <Dependent Role="Task_Resources">
+              <PropertyRef Name="ResourceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskSurveyResponse_aspnet_Users">
+          <End Role="aspnet_Users" Type="AgingModel.Store.aspnet_Users" Multiplicity="1" />
+          <End Role="TaskSurveyResponse" Type="AgingModel.Store.TaskSurveyResponse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="TaskSurveyResponse">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskSurveyResponse_Parent">
+          <End Role="Parent" Type="AgingModel.Store.Parent" Multiplicity="1" />
+          <End Role="TaskSurveyResponse" Type="AgingModel.Store.TaskSurveyResponse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parent">
+              <PropertyRef Name="UserID" />
+              <PropertyRef Name="ParentID" />
+            </Principal>
+            <Dependent Role="TaskSurveyResponse">
+              <PropertyRef Name="UserID" />
+              <PropertyRef Name="ParentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="GetAssessment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="parentId" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="userId" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="objectiveId" Type="int" Mode="In" />
+        </Function>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AgingModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="AgingEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Parents" EntityType="AgingModel.Parent" />
+          <EntitySet Name="States" EntityType="AgingModel.State" />
+          <EntitySet Name="TaskSurveyResponses" EntityType="AgingModel.TaskSurveyResponse" />
+          <AssociationSet Name="FK_Parent_State" Association="AgingModel.FK_Parent_State">
+            <End Role="State" EntitySet="States" />
+            <End Role="Parent" EntitySet="Parents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskSurveyResponse_Parent" Association="AgingModel.FK_TaskSurveyResponse_Parent">
+            <End Role="Parent" EntitySet="Parents" />
+            <End Role="TaskSurveyResponse" EntitySet="TaskSurveyResponses" />
+          </AssociationSet>
+          <EntitySet Name="User" EntityType="AgingModel.User" />
+          <AssociationSet Name="FK_Parent_aspnet_Users" Association="AgingModel.FK_Parent_aspnet_Users">
+            <End Role="aspnet_Users" EntitySet="User" />
+            <End Role="Parent" EntitySet="Parents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskSurveyResponse_aspnet_Users" Association="AgingModel.FK_TaskSurveyResponse_aspnet_Users">
+            <End Role="aspnet_Users" EntitySet="User" />
+            <End Role="TaskSurveyResponse" EntitySet="TaskSurveyResponses" />
+          </AssociationSet>
+          <EntitySet Name="Domains" EntityType="AgingModel.Domain" />
+          <EntitySet Name="Objectives" EntityType="AgingModel.Objective" />
+          <AssociationSet Name="FK_Objective_Domain" Association="AgingModel.FK_Objective_Domain">
+            <End Role="Domain" EntitySet="Domains" />
+            <End Role="Objective" EntitySet="Objectives" />
+          </AssociationSet>
+          <EntitySet Name="Audits" EntityType="AgingModel.Audit" />
+          <EntitySet Name="vw_ParentSummary" EntityType="AgingModel.vw_ParentSummary" />
+          <AssociationSet Name="Uservw_ParentSummary" Association="AgingModel.Uservw_ParentSummary">
+            <End Role="User" EntitySet="User" />
+            <End Role="vw_ParentSummary" EntitySet="vw_ParentSummary" />
+          </AssociationSet>
+          <FunctionImport Name="GetAssessment" ReturnType="Collection(AgingModel.GetAssessment_Result)">
+            <Parameter Name="parentId" Mode="In" Type="Guid" />
+            <Parameter Name="userId" Mode="In" Type="Guid" />
+            <Parameter Name="objectiveId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="Resources" EntityType="AgingModel.Resource" />
+          <EntitySet Name="Tasks" EntityType="AgingModel.Task" />
+          <EntitySet Name="Task_Resources" EntityType="AgingModel.Task_Resources" />
+          <AssociationSet Name="FK_Task_Domain" Association="AgingModel.FK_Task_Domain">
+            <End Role="Domain" EntitySet="Domains" />
+            <End Role="Task" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Task_Objective" Association="AgingModel.FK_Task_Objective">
+            <End Role="Objective" EntitySet="Objectives" />
+            <End Role="Task" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Resource_State" Association="AgingModel.FK_Resource_State">
+            <End Role="State" EntitySet="States" />
+            <End Role="Resource" EntitySet="Resources" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Task_Resources_Resource" Association="AgingModel.FK_Task_Resources_Resource">
+            <End Role="Resource" EntitySet="Resources" />
+            <End Role="Task_Resources" EntitySet="Task_Resources" />
+          </AssociationSet>
+          <AssociationSet Name="Task_ResourcesTask" Association="AgingModel.Task_ResourcesTask">
+            <End Role="Task_Resources" EntitySet="Task_Resources" />
+            <End Role="Task" EntitySet="Tasks" />
+          </AssociationSet>
+          <EntitySet Name="Videos" EntityType="AgingModel.Video" />
+          <AssociationSet Name="Domain_Videos" Association="AgingModel.Domain_Videos">
+            <End Role="Domain" EntitySet="Domains" />
+            <End Role="Video" EntitySet="Videos" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Parent">
+          <Key>
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="ParentID" />
+          </Key>
+          <Property Name="UserID" Type="Guid" Nullable="false" />
+          <Property Name="ParentID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Relationship" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Age" Type="Int32" />
+          <Property Name="State" Type="String" MaxLength="2" Unicode="false" FixedLength="true" />
+          <NavigationProperty Name="State1" Relationship="AgingModel.FK_Parent_State" FromRole="Parent" ToRole="State" />
+          <NavigationProperty Name="TaskSurveyResponses" Relationship="AgingModel.FK_TaskSurveyResponse_Parent" FromRole="Parent" ToRole="TaskSurveyResponse" />
+          <NavigationProperty Name="aspnet_Users" Relationship="AgingModel.FK_Parent_aspnet_Users" FromRole="Parent" ToRole="aspnet_Users" />
+        </EntityType>
+        <EntityType Name="State">
+          <Key>
+            <PropertyRef Name="StateCode" />
+          </Key>
+          <Property Name="StateCode" Type="String" Nullable="false" MaxLength="2" Unicode="false" FixedLength="true" />
+          <Property Name="StateName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="SortOrder" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Parents" Relationship="AgingModel.FK_Parent_State" FromRole="State" ToRole="Parent" />
+          <NavigationProperty Name="Resources" Relationship="AgingModel.FK_Resource_State" FromRole="State" ToRole="Resource" />
+        </EntityType>
+        <EntityType Name="TaskSurveyResponse">
+          <Key>
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="ParentID" />
+            <PropertyRef Name="TaskID" />
+          </Key>
+          <Property Name="UserID" Type="Guid" Nullable="false" />
+          <Property Name="ParentID" Type="Guid" Nullable="false" />
+          <Property Name="TaskID" Type="Int32" Nullable="false" />
+          <Property Name="LastUpdated" Type="DateTime" Nullable="false" />
+          <Property Name="Completed" Type="Boolean" Nullable="false" />
+          <Property Name="Timeline" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Parent" Relationship="AgingModel.FK_TaskSurveyResponse_Parent" FromRole="TaskSurveyResponse" ToRole="Parent" />
+          <NavigationProperty Name="aspnet_Users" Relationship="AgingModel.FK_TaskSurveyResponse_aspnet_Users" FromRole="TaskSurveyResponse" ToRole="aspnet_Users" />
+        </EntityType>
+        <Association Name="FK_Parent_State">
+          <End Role="State" Type="AgingModel.State" Multiplicity="0..1" />
+          <End Role="Parent" Type="AgingModel.Parent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="StateCode" />
+            </Principal>
+            <Dependent Role="Parent">
+              <PropertyRef Name="State" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskSurveyResponse_Parent">
+          <End Role="Parent" Type="AgingModel.Parent" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TaskSurveyResponse" Type="AgingModel.TaskSurveyResponse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parent">
+              <PropertyRef Name="UserID" />
+              <PropertyRef Name="ParentID" />
+            </Principal>
+            <Dependent Role="TaskSurveyResponse">
+              <PropertyRef Name="UserID" />
+              <PropertyRef Name="ParentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" Name="ApplicationId" a:SetterAccess="Private" Nullable="false" Type="Guid" a:GetterAccess="Private" />
+          <Property Type="Guid" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="LoweredUserName" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="MobileAlias" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="IsAnonymous" Nullable="false" />
+          <Property Type="DateTime" Name="LastActivityDate" Nullable="false" />
+          <NavigationProperty Name="Parents" Relationship="AgingModel.FK_Parent_aspnet_Users" FromRole="aspnet_Users" ToRole="Parent" />
+          <NavigationProperty Name="TaskSurveyResponses" Relationship="AgingModel.FK_TaskSurveyResponse_aspnet_Users" FromRole="aspnet_Users" ToRole="TaskSurveyResponse" />
+          <NavigationProperty Name="ParentSummaries" Relationship="AgingModel.Uservw_ParentSummary" FromRole="User" ToRole="vw_ParentSummary" />
+        </EntityType>
+        <Association Name="FK_Parent_aspnet_Users">
+          <End Type="AgingModel.User" Role="aspnet_Users" Multiplicity="1" >
+          </End>
+          <End Type="AgingModel.Parent" Role="Parent" Multiplicity="*" >
+          </End>
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Parent">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskSurveyResponse_aspnet_Users">
+          <End Type="AgingModel.User" Role="aspnet_Users" Multiplicity="1" />
+          <End Type="AgingModel.TaskSurveyResponse" Role="TaskSurveyResponse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="TaskSurveyResponse">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Domain">
+          <Key>
+            <PropertyRef Name="DomainId" />
+          </Key>
+          <Property Type="Int32" Name="DomainId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ShortName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="SummaryText" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="DescriptionText" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ObjectivesText" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="DomainOrder" Nullable="false" />
+          <NavigationProperty Name="Objectives" Relationship="AgingModel.FK_Objective_Domain" FromRole="Domain" ToRole="Objective" />
+          <NavigationProperty Name="Tasks" Relationship="AgingModel.FK_Task_Domain" FromRole="Domain" ToRole="Task" />
+          <NavigationProperty Name="Videos" Relationship="AgingModel.Domain_Videos" FromRole="Domain" ToRole="Video" />
+        </EntityType>
+        <EntityType Name="Objective">
+          <Key>
+            <PropertyRef Name="ObjectiveId" />
+            <PropertyRef Name="DomainId" />
+          </Key>
+          <Property Type="Int32" Name="ObjectiveId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="DomainId" Nullable="false" />
+          <Property Type="String" Name="ObjectiveText" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="ObjectiveOrder" Nullable="false" />
+          <NavigationProperty Name="Domain" Relationship="AgingModel.FK_Objective_Domain" FromRole="Objective" ToRole="Domain" />
+          <NavigationProperty Name="Tasks" Relationship="AgingModel.FK_Task_Objective" FromRole="Objective" ToRole="Task" />
+        </EntityType>
+        <Association Name="FK_Objective_Domain">
+          <End Type="AgingModel.Domain" Role="Domain" Multiplicity="1" />
+          <End Type="AgingModel.Objective" Role="Objective" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Domain">
+              <PropertyRef Name="DomainId" />
+            </Principal>
+            <Dependent Role="Objective">
+              <PropertyRef Name="DomainId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Audit">
+          <Key>
+            <PropertyRef Name="AuditId" />
+          </Key>
+          <Property Type="Guid" Name="AuditId" Nullable="false" />
+          <Property Type="DateTime" Name="AuditDate" Nullable="false" />
+          <Property Type="Guid" Name="UserId" />
+          <Property Type="String" Name="Action" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Data1" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Data2" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Data3" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Data4" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="vw_ParentSummary">
+          <Key>
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="ParentID" />
+          </Key>
+          <Property Type="Guid" Name="UserID" Nullable="false" />
+          <Property Type="Guid" Name="ParentID" Nullable="false" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="User" Relationship="AgingModel.Uservw_ParentSummary" FromRole="vw_ParentSummary" ToRole="User" />
+          <Property Type="Int32" Name="Completed" Nullable="false" />
+          <Property Type="Int32" Name="Total" Nullable="true" />
+          <Property Type="Int32" Name="MedicalCompleted" Nullable="false" />
+          <Property Type="Int32" Name="MedicalTotal" Nullable="false" />
+          <Property Type="Int32" Name="LegalCompleted" Nullable="false" />
+          <Property Type="Int32" Name="LegalTotal" Nullable="false" />
+          <Property Type="Int32" Name="EmotionalCompleted" Nullable="false" />
+          <Property Type="Int32" Name="EmotionalTotal" Nullable="false" />
+          <Property Type="Int32" Name="SocialCompleted" Nullable="false" />
+          <Property Type="Int32" Name="SocialTotal" Nullable="false" />
+        </EntityType>
+        <Association Name="Uservw_ParentSummary">
+          <End Type="AgingModel.User" Role="User" Multiplicity="1" />
+          <End Type="AgingModel.vw_ParentSummary" Role="vw_ParentSummary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="vw_ParentSummary">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="GetAssessment_Result">
+          <Property Type="Int32" Name="TaskId" Nullable="false" />
+          <Property Type="Int32" Name="ObjectiveId" Nullable="false" />
+          <Property Type="Int32" Name="DomainId" Nullable="false" />
+          <Property Type="Int32" Name="TaskOrder" Nullable="false" />
+          <Property Type="String" Name="ShortText" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="PromptText" Nullable="false" />
+          <Property Type="String" Name="AssessmentText" Nullable="false" />
+          <Property Type="String" Name="PromptTextSelf" Nullable="false" />
+          <Property Type="String" Name="AssessmentTextSelf" Nullable="false" />
+          <Property Type="DateTime" Name="LastUpdated" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="Completed" Nullable="false" />
+          <Property Type="Int32" Name="Timeline" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="Resource">
+          <Key>
+            <PropertyRef Name="ResourceID" />
+          </Key>
+          <Property Type="Guid" Name="ResourceID" Nullable="false" />
+          <Property Type="Boolean" Name="Active" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Description" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ResourceState" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="URL" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="State" Relationship="AgingModel.FK_Resource_State" FromRole="Resource" ToRole="State" />
+          <NavigationProperty Name="Task_Resources" Relationship="AgingModel.FK_Task_Resources_Resource" FromRole="Resource" ToRole="Task_Resources" />
+        </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="TaskId" />
+          </Key>
+          <Property Type="Int32" Name="TaskId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="ObjectiveId" Nullable="false" />
+          <Property Type="Int32" Name="DomainId" Nullable="false" />
+          <Property Type="Int32" Name="TaskOrder" Nullable="false" />
+          <Property Type="String" Name="ShortText" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="PromptText" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="AssessmentText" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="PromptTextSelf" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="AssessmentTextSelf" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Domain" Relationship="AgingModel.FK_Task_Domain" FromRole="Task" ToRole="Domain" />
+          <NavigationProperty Name="Objective" Relationship="AgingModel.FK_Task_Objective" FromRole="Task" ToRole="Objective" />
+          <NavigationProperty Name="Task_Resources" Relationship="AgingModel.Task_ResourcesTask" FromRole="Task" ToRole="Task_Resources" />
+        </EntityType>
+        <EntityType Name="Task_Resources">
+          <Key>
+            <PropertyRef Name="TaskID" />
+            <PropertyRef Name="ResourceID" />
+          </Key>
+          <Property Type="Int32" Name="TaskID" Nullable="false" />
+          <Property Type="Guid" Name="ResourceID" Nullable="false" />
+          <NavigationProperty Name="Resource" Relationship="AgingModel.FK_Task_Resources_Resource" FromRole="Task_Resources" ToRole="Resource" />
+          <NavigationProperty Name="Task" Relationship="AgingModel.Task_ResourcesTask" FromRole="Task_Resources" ToRole="Task" />
+        </EntityType>
+        <Association Name="FK_Task_Domain">
+          <End Type="AgingModel.Domain" Role="Domain" Multiplicity="1" />
+          <End Type="AgingModel.Task" Role="Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Domain">
+              <PropertyRef Name="DomainId" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="DomainId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Task_Objective">
+          <End Type="AgingModel.Objective" Role="Objective" Multiplicity="1" />
+          <End Type="AgingModel.Task" Role="Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Objective">
+              <PropertyRef Name="ObjectiveId" />
+              <PropertyRef Name="DomainId" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="ObjectiveId" />
+              <PropertyRef Name="DomainId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Resource_State">
+          <End Type="AgingModel.State" Role="State" Multiplicity="0..1" />
+          <End Type="AgingModel.Resource" Role="Resource" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="StateCode" />
+            </Principal>
+            <Dependent Role="Resource">
+              <PropertyRef Name="ResourceState" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Task_Resources_Resource">
+          <End Type="AgingModel.Resource" Role="Resource" Multiplicity="1" />
+          <End Type="AgingModel.Task_Resources" Role="Task_Resources" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resource">
+              <PropertyRef Name="ResourceID" />
+            </Principal>
+            <Dependent Role="Task_Resources">
+              <PropertyRef Name="ResourceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Task_ResourcesTask">
+          <End Type="AgingModel.Task_Resources" Role="Task_Resources" Multiplicity="*" />
+          <End Type="AgingModel.Task" Role="Task" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Task">
+              <PropertyRef Name="TaskId" />
+            </Principal>
+            <Dependent Role="Task_Resources">
+              <PropertyRef Name="TaskID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Video">
+          <Key>
+            <PropertyRef Name="VideoID" />
+          </Key>
+          <Property Type="Int32" Name="VideoID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="URL" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ShortText" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Description" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Copyright" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="Type" Nullable="false" />
+          <NavigationProperty Name="Domains" Relationship="AgingModel.Domain_Videos" FromRole="Video" ToRole="Domain" />
+          <Property Type="String" Name="ThumbImageURL" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="Domain_Videos">
+          <End Type="AgingModel.Domain" Role="Domain" Multiplicity="*" />
+          <End Type="AgingModel.Video" Role="Video" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AgingModelStoreContainer" CdmEntityContainer="AgingEntities">
+          <EntitySetMapping Name="Parents">
+            <EntityTypeMapping TypeName="AgingModel.Parent">
+              <MappingFragment StoreEntitySet="Parent">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+                <ScalarProperty Name="Relationship" ColumnName="Relationship" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="State" ColumnName="State" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="States">
+            <EntityTypeMapping TypeName="AgingModel.State">
+              <MappingFragment StoreEntitySet="State">
+                <ScalarProperty Name="StateCode" ColumnName="StateCode" />
+                <ScalarProperty Name="StateName" ColumnName="StateName" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TaskSurveyResponses">
+            <EntityTypeMapping TypeName="AgingModel.TaskSurveyResponse">
+              <MappingFragment StoreEntitySet="TaskSurveyResponse">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+                <ScalarProperty Name="TaskID" ColumnName="TaskID" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="Completed" ColumnName="Completed" />
+                <ScalarProperty Name="Timeline" ColumnName="Timeline" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="AgingModel.User">
+              <MappingFragment StoreEntitySet="aspnet_Users">
+                <ScalarProperty Name="LastActivityDate" ColumnName="LastActivityDate" />
+                <ScalarProperty Name="IsAnonymous" ColumnName="IsAnonymous" />
+                <ScalarProperty Name="MobileAlias" ColumnName="MobileAlias" />
+                <ScalarProperty Name="LoweredUserName" ColumnName="LoweredUserName" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Domains">
+            <EntityTypeMapping TypeName="AgingModel.Domain">
+              <MappingFragment StoreEntitySet="Domain">
+                <ScalarProperty Name="DomainOrder" ColumnName="DomainOrder" />
+                <ScalarProperty Name="ObjectivesText" ColumnName="ObjectivesText" />
+                <ScalarProperty Name="DescriptionText" ColumnName="DescriptionText" />
+                <ScalarProperty Name="SummaryText" ColumnName="SummaryText" />
+                <ScalarProperty Name="ShortName" ColumnName="ShortName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DomainId" ColumnName="DomainId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Objectives">
+            <EntityTypeMapping TypeName="AgingModel.Objective">
+              <MappingFragment StoreEntitySet="Objective">
+                <ScalarProperty Name="ObjectiveOrder" ColumnName="ObjectiveOrder" />
+                <ScalarProperty Name="ObjectiveText" ColumnName="ObjectiveText" />
+                <ScalarProperty Name="DomainId" ColumnName="DomainId" />
+                <ScalarProperty Name="ObjectiveId" ColumnName="ObjectiveId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Audits">
+            <EntityTypeMapping TypeName="AgingModel.Audit">
+              <MappingFragment StoreEntitySet="Audit">
+                <ScalarProperty Name="Data4" ColumnName="Data4" />
+                <ScalarProperty Name="Data3" ColumnName="Data3" />
+                <ScalarProperty Name="Data2" ColumnName="Data2" />
+                <ScalarProperty Name="Data1" ColumnName="Data1" />
+                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="AuditDate" ColumnName="AuditDate" />
+                <ScalarProperty Name="AuditId" ColumnName="AuditId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_ParentSummary">
+            <EntityTypeMapping TypeName="IsTypeOf(AgingModel.vw_ParentSummary)">
+              <MappingFragment StoreEntitySet="vw_ParentSummary">
+                <ScalarProperty Name="SocialTotal" ColumnName="SocialTotal" />
+                <ScalarProperty Name="SocialCompleted" ColumnName="SocialCompleted" />
+                <ScalarProperty Name="EmotionalTotal" ColumnName="EmotionalTotal" />
+                <ScalarProperty Name="EmotionalCompleted" ColumnName="EmotionalCompleted" />
+                <ScalarProperty Name="LegalTotal" ColumnName="LegalTotal" />
+                <ScalarProperty Name="LegalCompleted" ColumnName="LegalCompleted" />
+                <ScalarProperty Name="MedicalTotal" ColumnName="MedicalTotal" />
+                <ScalarProperty Name="MedicalCompleted" ColumnName="MedicalCompleted" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Completed" ColumnName="Completed" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetAssessment" FunctionName="AgingModel.Store.GetAssessment">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AgingModel.GetAssessment_Result">
+                <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+                <ScalarProperty Name="ObjectiveId" ColumnName="ObjectiveId" />
+                <ScalarProperty Name="DomainId" ColumnName="DomainId" />
+                <ScalarProperty Name="TaskOrder" ColumnName="TaskOrder" />
+                <ScalarProperty Name="ShortText" ColumnName="ShortText" />
+                <ScalarProperty Name="PromptText" ColumnName="PromptText" />
+                <ScalarProperty Name="AssessmentText" ColumnName="AssessmentText" />
+                <ScalarProperty Name="PromptTextSelf" ColumnName="PromptTextSelf" />
+                <ScalarProperty Name="AssessmentTextSelf" ColumnName="AssessmentTextSelf" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="Completed" ColumnName="Completed" />
+                <ScalarProperty Name="Timeline" ColumnName="Timeline" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="Resources">
+            <EntityTypeMapping TypeName="AgingModel.Resource">
+              <MappingFragment StoreEntitySet="Resource">
+                <ScalarProperty Name="URL" ColumnName="URL" />
+                <ScalarProperty Name="ResourceState" ColumnName="ResourceState" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="ResourceID" ColumnName="ResourceID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tasks">
+            <EntityTypeMapping TypeName="AgingModel.Task">
+              <MappingFragment StoreEntitySet="Task">
+                <ScalarProperty Name="AssessmentTextSelf" ColumnName="AssessmentTextSelf" />
+                <ScalarProperty Name="PromptTextSelf" ColumnName="PromptTextSelf" />
+                <ScalarProperty Name="AssessmentText" ColumnName="AssessmentText" />
+                <ScalarProperty Name="PromptText" ColumnName="PromptText" />
+                <ScalarProperty Name="ShortText" ColumnName="ShortText" />
+                <ScalarProperty Name="TaskOrder" ColumnName="TaskOrder" />
+                <ScalarProperty Name="DomainId" ColumnName="DomainId" />
+                <ScalarProperty Name="ObjectiveId" ColumnName="ObjectiveId" />
+                <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Task_Resources">
+            <EntityTypeMapping TypeName="AgingModel.Task_Resources">
+              <MappingFragment StoreEntitySet="Task_Resources">
+                <ScalarProperty Name="ResourceID" ColumnName="ResourceID" />
+                <ScalarProperty Name="TaskID" ColumnName="TaskID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Videos">
+            <EntityTypeMapping TypeName="AgingModel.Video">
+              <MappingFragment StoreEntitySet="Video">
+                <ScalarProperty Name="ThumbImageURL" ColumnName="ThumbImageURL" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Copyright" ColumnName="Copyright" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ShortText" ColumnName="ShortText" />
+                <ScalarProperty Name="URL" ColumnName="URL" />
+                <ScalarProperty Name="VideoID" ColumnName="VideoID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Domain_Videos" TypeName="AgingModel.Domain_Videos" StoreEntitySet="Domain_Videos">
+            <EndProperty Name="Video">
+              <ScalarProperty Name="VideoID" ColumnName="VideoId" />
+            </EndProperty>
+            <EndProperty Name="Domain">
+              <ScalarProperty Name="DomainId" ColumnName="DomainId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="AgingModel" ZoomLevel="64">
+        <EntityTypeShape EntityType="AgingModel.Parent" Width="1.5" PointX="3.625" PointY="1" Height="2.7494921874999996" IsExpanded="true" />
+        <EntityTypeShape EntityType="AgingModel.State" Width="1.5" PointX="1.375" PointY="5.375" Height="1.9802864583333317" IsExpanded="true" />
+        <EntityTypeShape EntityType="AgingModel.TaskSurveyResponse" Width="1.75" PointX="5.875" PointY="1" Height="2.5571907552083335" IsExpanded="true" />
+        <AssociationConnector Association="AgingModel.FK_Parent_State" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.875" PointY="5.375" />
+          <ConnectorPoint PointX="3.25" PointY="5" />
+          <ConnectorPoint PointX="3.25" PointY="2.8328855805588309" />
+          <ConnectorPoint PointX="3.625" PointY="2.8328855805588309" />
+        </AssociationConnector>
+        <AssociationConnector Association="AgingModel.FK_TaskSurveyResponse_Parent" ManuallyRouted="false">
+          <ConnectorPoint PointX="5.125" PointY="2.278595377759387" />
+          <ConnectorPoint PointX="5.875" PointY="2.278595377759387" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="AgingModel.User" Width="2.125" PointX="0.75" PointY="1" Height="2.7494921875" />
+        <AssociationConnector Association="AgingModel.FK_Parent_aspnet_Users" >
+          <ConnectorPoint PointX="2.875" PointY="1.8531037069706511" />
+          <ConnectorPoint PointX="3.625" PointY="1.8531037069706511" />
+        </AssociationConnector>
+        <AssociationConnector Association="AgingModel.FK_TaskSurveyResponse_aspnet_Users" >
+          <ConnectorPoint PointX="2.875" PointY="3.8768929036458331" />
+          <ConnectorPoint PointX="3.1666666666666665" PointY="3.8768929036458326" />
+          <ConnectorPoint PointX="3.3333333333333335" PointY="3.8768929036458331" />
+          <ConnectorPoint PointX="6.75" PointY="3.8768929036458331" />
+          <ConnectorPoint PointX="6.75" PointY="3.5571907552083335" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="AgingModel.Domain" Width="1.5" PointX="3.75" PointY="5" Height="2.7494921874999996" />
+        <EntityTypeShape EntityType="AgingModel.Objective" Width="1.5" PointX="6" PointY="5.25" Height="2.1725878906250031" />
+        <AssociationConnector Association="AgingModel.FK_Objective_Domain" >
+          <ConnectorPoint PointX="5.25" PointY="6.3362939453125016" />
+          <ConnectorPoint PointX="6" PointY="6.3362939453125016" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="AgingModel.Audit" Width="1.5" PointX="12.375" PointY="2.75" Height="2.5571907552083353" />
+        <EntityTypeShape EntityType="AgingModel.vw_ParentSummary" Width="2.75" PointX="8.875" PointY="0.625" Height="3.7109993489583326" />
+        <AssociationConnector Association="AgingModel.Uservw_ParentSummary">
+          <ConnectorPoint PointX="2.875" PointY="3.8796772351762816" />
+          <ConnectorPoint PointX="3.1910744349011213" PointY="4.195751670077402" />
+          <ConnectorPoint PointX="3.3089255650988791" PointY="4.31360280027516" />
+          <ConnectorPoint PointX="3.5625" PointY="4.5671772351762812" />
+          <ConnectorPoint PointX="3.5625" PointY="4.7109993489583335" />
+          <ConnectorPoint PointX="8.5" PointY="4.7109993489583335" />
+          <ConnectorPoint PointX="8.875" PointY="4.3359993489583335" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="AgingModel.Survey2" Width="2.125" PointX="15.125" PointY="3" Height="3.3263964843749996" />
+        <EntityTypeShape EntityType="AgingModel.Resource" Width="2.125" PointX="2" PointY="10.125" Height="2.5571907552083317" />
+        <EntityTypeShape EntityType="AgingModel.Task" Width="2.125" PointX="8.25" PointY="5.75" Height="3.1340950520833335" />
+        <EntityTypeShape EntityType="AgingModel.Task_Resources" Width="2.125" PointX="8.125" PointY="10" Height="1.5956835937499996" />
+        <AssociationConnector Association="AgingModel.FK_Task_Domain" >
+          <ConnectorPoint PointX="5.25" PointY="7.7134407552083344" />
+          <ConnectorPoint PointX="8.25" PointY="7.7134407552083344" />
+        </AssociationConnector>
+        <AssociationConnector Association="AgingModel.FK_Task_Objective" >
+          <ConnectorPoint PointX="7.5" PointY="6.5862939453125" />
+          <ConnectorPoint PointX="8.25" PointY="6.5862939453125" />
+        </AssociationConnector>
+        <AssociationConnector Association="AgingModel.FK_Resource_State" >
+          <ConnectorPoint PointX="2.4375" PointY="7.3552864583333317" />
+          <ConnectorPoint PointX="2.4375" PointY="10.125" />
+        </AssociationConnector>
+        <AssociationConnector Association="AgingModel.FK_Task_Resources_Resource" >
+          <ConnectorPoint PointX="4.125" PointY="11.232687174479167" />
+          <ConnectorPoint PointX="8.125" PointY="11.232687174479167" />
+        </AssociationConnector>
+        <AssociationConnector Association="AgingModel.Task_ResourcesTask">
+          <ConnectorPoint PointX="9.25" PointY="10" />
+          <ConnectorPoint PointX="9.25" PointY="9.076396484375" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="AgingModel.Video" Width="1.5" PointX="6" PointY="8.25" Height="2.3648893229166656" />
+        <AssociationConnector Association="AgingModel.Domain_Videos" >
+          <ConnectorPoint PointX="4.71875" PointY="7.9417936197916656" />
+          <ConnectorPoint PointX="4.71875" PointY="9.15625" />
+          <ConnectorPoint PointX="6" PointY="9.15625" />
+        </AssociationConnector>
+        </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>
