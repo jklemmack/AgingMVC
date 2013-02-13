@@ -25,6 +25,18 @@
             right: 200px;
             width: 350px;
         }
+        
+        
+        div.taskheader
+        {
+            float: left;
+            left: 5px;
+            margin: 10px 0 10px 0px;
+            padding: 7px;
+            position: relative;
+            right: 200px;
+            width: 350px;
+        }
         div.taskcompleted
         {
             position: relative;
@@ -33,14 +45,6 @@
             padding: 7px;
             width: 100px;
         }
-                div.taskcompleted h2
-        {
-            color: #000;
-            font-size: 16px;
-            padding: 0px;
-            margin: 0px;
-        }
-        
         div.tasktimeline
         {
             position: relative;
@@ -49,17 +53,8 @@
             padding: 7px;
         }
         
-        div.taskheader
-        {
-            position: relative;
-            float: left;
-            margin: 10px 0 0;
-            padding: 7px;
-            width: 100px;
-        }
-
         
-        div.tasktimeline h2
+        h2
         {
             color: #000;
             font-size: 16px;
