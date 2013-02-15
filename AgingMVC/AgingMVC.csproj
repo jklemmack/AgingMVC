@@ -350,6 +350,7 @@
     <Content Include="Content\Images\prev-vertical.png" />
     <Content Include="Content\Images\Social.png" />
     <Content Include="Content\Images\videothumbs\Medical.png" />
+    <Content Include="Content\Images\videothumbs\novideo.png" />
     <Content Include="Content\jCarouselSkin.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
@@ -424,7 +425,6 @@
     <Content Include="jwplayer\jwplayer.flash.swf" />
     <Content Include="jwplayer\jwplayer.html5.js" />
     <Content Include="jwplayer\jwplayer.js" />
-    <Content Include="jwplayer\README.html" />
     <Content Include="Scripts\jquery-1.8.2-vsdoc.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
@@ -548,6 +548,17 @@
     <None Include="Content\Articulate\Medical\Overview\mobile\data.gz" />
     <Content Include="Views\Shared\Assessment.Master" />
     <Content Include="Views\Shared\Base.Master" />
+    <Content Include="Content\Videos\Dad1.f4v" />
+    <Content Include="Content\Videos\Dad2.f4v" />
+    <Content Include="Content\Videos\Dad3.f4v" />
+    <Content Include="Content\Videos\Dad4.f4v" />
+    <Content Include="Content\Videos\Dad5.f4v" />
+    <Content Include="Content\Videos\Dad6.f4v" />
+    <Content Include="Content\Videos\Dad7.f4v" />
+    <Content Include="Content\Videos\Dad8.f4v" />
+    <Content Include="Content\Videos\DrivingDaisy1.f4v" />
+    <Content Include="Content\Videos\DrivingDaisy2.f4v" />
+    <Content Include="Content\Videos\DrivingDaisy3.f4v" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

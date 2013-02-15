@@ -121,6 +121,31 @@ namespace AgingMVC.Controllers
                                             where d.DomainId == DomainId
                                             select d).Single<Models.Domain>();
 
+                    foreach (Video v in domain.Videos)
+                    {
+                        if (v.ThumbImageURL == null)
+                            v.ThumbImageURL = "/Content/Images/videothumbs/novideo.png";
+                    }
+
+                    var videos = domain.Videos.Select((v, index) => new VideoInfo()
+                    {
+                        Index = index,
+                        VideoID = v.VideoID,
+                        Copyright = v.Copyright,
+                        Description = v.Description,
+                        ShortText = v.ShortText,
+                        ThumbImageURL = v.ThumbImageURL,
+                        Type = v.Type,
+                        URL = v.URL
+                    }).ToDictionary(k => k.Index, v => v);
+
+                    using (System.IO.TextWriter tw = new System.IO.StringWriter())
+                    {
+                        new Newtonsoft.Json.JsonSerializer().Serialize(tw, videos);
+                        ViewBag.VideoDescriptions = tw.ToString();
+                    }
+                    ViewBag.Videos = videos.Select(kvp => kvp.Value);
+
                     model = domain;
                     ViewBag.DomainName = domain.Name;
 

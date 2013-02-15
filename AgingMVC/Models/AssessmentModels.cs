@@ -19,6 +19,18 @@ namespace AgingMVC.Models
         public string Description;
     }
 
+    public class VideoInfo
+    {
+        public int Index;
+        public int VideoID;
+        public string ShortText;
+        public string Description;
+        public string Copyright;
+        public string ThumbImageURL;
+        public int Type;
+        public string URL;
+    }
+
     //public class Survey
     //{
     //    public int TaskId;

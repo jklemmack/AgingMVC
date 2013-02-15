@@ -110,9 +110,7 @@
                         width: 500,
                         title: tasks[taskId].ShortText,
                         resizable: false,
-                        buttons: {
-                                Ok: function() { $( this ).dialog( "close" );                                               }
-                                    }
+                        buttons: { Ok: function() { $( this ).dialog( "close" ); } }
                           });
             });
 
