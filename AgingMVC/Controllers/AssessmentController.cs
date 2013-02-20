@@ -67,9 +67,9 @@ namespace AgingMVC.Controllers
             //family.Add(new PageInfo() { Order = 1, ObjectiveId = 7, View = "ObjectiveIntro" });
             family.Add(new PageInfo() { Order = 2, ObjectiveId = 7, View = "Assessment" });
             //family.Add(new PageInfo() { Order = 3, ObjectiveId = 8, View = "ObjectiveIntro" });
-            family.Add(new PageInfo() { Order = 4, ObjectiveId = 8, View = "Assessment" });
+            //family.Add(new PageInfo() { Order = 4, ObjectiveId = 8, View = "Assessment" });
             //family.Add(new PageInfo() { Order = 5, ObjectiveId = 9, View = "ObjectiveIntro" });
-            family.Add(new PageInfo() { Order = 6, ObjectiveId = 9, View = "Assessment" });
+            //family.Add(new PageInfo() { Order = 6, ObjectiveId = 9, View = "Assessment" });
             family.Add(new PageInfo() { Order = 7, ObjectiveId = 1, View = "AssessmentEnd" });
             _views.Add(3, family);
             #endregion
@@ -78,12 +78,17 @@ namespace AgingMVC.Controllers
             List<PageInfo> emotional = new List<PageInfo>();
             emotional.Add(new PageInfo() { Order = 0, ObjectiveId = 1, View = "AssessmentIntro" });
             //emotional.Add(new PageInfo() { Order = 1, ObjectiveId = 10, View = "ObjectiveIntro" });
-            emotional.Add(new PageInfo() { Order = 2, ObjectiveId = 10, View = "Assessment" });
+            emotional.Add(new PageInfo() { Order = 1, ObjectiveId = 10, View = "Assessment" });
             //emotional.Add(new PageInfo() { Order = 3, ObjectiveId = 11, View = "ObjectiveIntro" });
-            emotional.Add(new PageInfo() { Order = 4, ObjectiveId = 11, View = "Assessment" });
+            emotional.Add(new PageInfo() { Order = 2, ObjectiveId = 11, View = "Assessment" });
             //emotional.Add(new PageInfo() { Order = 5, ObjectiveId = 12, View = "ObjectiveIntro" });
-            emotional.Add(new PageInfo() { Order = 6, ObjectiveId = 12, View = "Assessment" });
-            emotional.Add(new PageInfo() { Order = 7, ObjectiveId = 1, View = "AssessmentEnd" });
+            emotional.Add(new PageInfo() { Order = 3, ObjectiveId = 12, View = "Assessment" });
+            emotional.Add(new PageInfo() { Order = 4, ObjectiveId = 13, View = "Assessment" });
+            emotional.Add(new PageInfo() { Order = 5, ObjectiveId = 14, View = "Assessment" });
+            emotional.Add(new PageInfo() { Order = 6, ObjectiveId = 15, View = "Assessment" });
+            emotional.Add(new PageInfo() { Order = 7, ObjectiveId = 16, View = "Assessment" });
+            emotional.Add(new PageInfo() { Order = 8, ObjectiveId = 17, View = "Assessment" });
+            emotional.Add(new PageInfo() { Order = 9, ObjectiveId = 1, View = "AssessmentEnd" });
             _views.Add(4, emotional);
             #endregion
 

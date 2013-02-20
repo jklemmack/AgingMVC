@@ -27,7 +27,7 @@
            { %>
         <li class="carouselitem" videoindex="<%:video.Index%>" style="cursor: pointer;">
             <div align="center">
-                <img src="<%: Url.Content(video.ThumbImageURL) %>" alt="<%: video.ShortText %>" width="367"
+                <img src="<%: Url.Content(video.ThumbImageURL) %>" alt="<%: (string) video.ShortText %>" width="367"
                     height="109" /><br />
                 <%:video.Description%></div>
         </li>
@@ -67,7 +67,6 @@
                         title: videos[videoindex].ShortText 
                     }];
 
-                alert(videos[videoindex].URL);
                 jwplayer("videoContainer").load(item);
 
                 $("#videodescription").html(videos[videoindex].Description);
