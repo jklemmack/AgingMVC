@@ -133,12 +133,14 @@
         </div>
     </div>
     <form action="/Assessment/<%:ViewBag.Domain %>/<%: ViewBag.Parent %>/<%: ViewBag.Page %>"
-    method="post">
+    method="post"><div id="taskgroup">
     <% foreach (var task in Model)
        {            
     %>
     <div class="task">
         <div class="tasktext">
+                <div style="padding-bottom: 5px;">                    
+                <b><%=task.ShortText %></b></div>
             <%=(ViewBag.IsSelf) ? task.PromptTextSelf : task.PromptText %>
             <br />
             <div style="font-size: smaller; display: inline-block; cursor: help;">

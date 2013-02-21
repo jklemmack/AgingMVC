@@ -51,43 +51,37 @@ namespace AgingMVC.Controllers
             #region Legal
             List<PageInfo> legal = new List<PageInfo>();
             legal.Add(new PageInfo() { Order = 0, ObjectiveId = 1, View = "AssessmentIntro2" });
-            //legal.Add(new PageInfo() { Order = 1, ObjectiveId = 4, View = "ObjectiveIntro" });
-            legal.Add(new PageInfo() { Order = 2, ObjectiveId = 4, View = "Assessment" });
-            //legal.Add(new PageInfo() { Order = 3, ObjectiveId = 5, View = "ObjectiveIntro" });
-            legal.Add(new PageInfo() { Order = 4, ObjectiveId = 5, View = "Assessment" });
-            //legal.Add(new PageInfo() { Order = 5, ObjectiveId = 6, View = "ObjectiveIntro" });
-            legal.Add(new PageInfo() { Order = 6, ObjectiveId = 6, View = "Assessment" });
-            legal.Add(new PageInfo() { Order = 7, ObjectiveId = 1, View = "AssessmentEnd" });
+            legal.Add(new PageInfo() { Order = 1, ObjectiveId = 4, View = "Assessment2" });
+            legal.Add(new PageInfo() { Order = 2, ObjectiveId = 5, View = "Assessment2" });
+            legal.Add(new PageInfo() { Order = 3, ObjectiveId = 6, View = "Assessment2" });
+            legal.Add(new PageInfo() { Order = 4, ObjectiveId = 1, View = "AssessmentEnd" });
             _views.Add(2, legal);
             #endregion
 
             #region Family
             List<PageInfo> family = new List<PageInfo>();
-            family.Add(new PageInfo() { Order = 0, ObjectiveId = 1, View = "AssessmentIntro" });
+            family.Add(new PageInfo() { Order = 0, ObjectiveId = 1, View = "AssessmentIntro2" });
             //family.Add(new PageInfo() { Order = 1, ObjectiveId = 7, View = "ObjectiveIntro" });
-            family.Add(new PageInfo() { Order = 2, ObjectiveId = 7, View = "Assessment" });
+            family.Add(new PageInfo() { Order = 1, ObjectiveId = 7, View = "Assessment" });
             //family.Add(new PageInfo() { Order = 3, ObjectiveId = 8, View = "ObjectiveIntro" });
             //family.Add(new PageInfo() { Order = 4, ObjectiveId = 8, View = "Assessment" });
             //family.Add(new PageInfo() { Order = 5, ObjectiveId = 9, View = "ObjectiveIntro" });
             //family.Add(new PageInfo() { Order = 6, ObjectiveId = 9, View = "Assessment" });
-            family.Add(new PageInfo() { Order = 7, ObjectiveId = 1, View = "AssessmentEnd" });
+            family.Add(new PageInfo() { Order = 2, ObjectiveId = 1, View = "AssessmentEnd" });
             _views.Add(3, family);
             #endregion
 
             #region Emotional
             List<PageInfo> emotional = new List<PageInfo>();
-            emotional.Add(new PageInfo() { Order = 0, ObjectiveId = 1, View = "AssessmentIntro" });
-            //emotional.Add(new PageInfo() { Order = 1, ObjectiveId = 10, View = "ObjectiveIntro" });
-            emotional.Add(new PageInfo() { Order = 1, ObjectiveId = 10, View = "Assessment" });
-            //emotional.Add(new PageInfo() { Order = 3, ObjectiveId = 11, View = "ObjectiveIntro" });
-            emotional.Add(new PageInfo() { Order = 2, ObjectiveId = 11, View = "Assessment" });
-            //emotional.Add(new PageInfo() { Order = 5, ObjectiveId = 12, View = "ObjectiveIntro" });
-            emotional.Add(new PageInfo() { Order = 3, ObjectiveId = 12, View = "Assessment" });
-            emotional.Add(new PageInfo() { Order = 4, ObjectiveId = 13, View = "Assessment" });
-            emotional.Add(new PageInfo() { Order = 5, ObjectiveId = 14, View = "Assessment" });
-            emotional.Add(new PageInfo() { Order = 6, ObjectiveId = 15, View = "Assessment" });
-            emotional.Add(new PageInfo() { Order = 7, ObjectiveId = 16, View = "Assessment" });
-            emotional.Add(new PageInfo() { Order = 8, ObjectiveId = 17, View = "Assessment" });
+            emotional.Add(new PageInfo() { Order = 0, ObjectiveId = 1, View = "AssessmentIntro2" });
+            emotional.Add(new PageInfo() { Order = 1, ObjectiveId = 10, View = "Assessment3" });
+            emotional.Add(new PageInfo() { Order = 2, ObjectiveId = 11, View = "Assessment3" });
+            emotional.Add(new PageInfo() { Order = 3, ObjectiveId = 12, View = "Assessment3" });
+            emotional.Add(new PageInfo() { Order = 4, ObjectiveId = 13, View = "Assessment3" });
+            emotional.Add(new PageInfo() { Order = 5, ObjectiveId = 14, View = "Assessment3" });
+            emotional.Add(new PageInfo() { Order = 6, ObjectiveId = 15, View = "Assessment3" });
+            emotional.Add(new PageInfo() { Order = 7, ObjectiveId = 16, View = "Assessment3" });
+            emotional.Add(new PageInfo() { Order = 8, ObjectiveId = 17, View = "Assessment3" });
             emotional.Add(new PageInfo() { Order = 9, ObjectiveId = 1, View = "AssessmentEnd" });
             _views.Add(4, emotional);
             #endregion
@@ -115,6 +109,7 @@ namespace AgingMVC.Controllers
 
             //load model
             PageInfo pageInfo = _views[DomainId][Page.Value];
+            Models.Domain domain = null;
             object model = null;
 
             switch (pageInfo.View)
@@ -122,7 +117,7 @@ namespace AgingMVC.Controllers
                 case "AssessmentIntro":
                 case "AssessmentIntro2":
 
-                    Models.Domain domain = (from d in db.Domains.Include("Videos")
+                    domain = (from d in db.Domains.Include("Videos")
                                             where d.DomainId == DomainId
                                             select d).Single<Models.Domain>();
 
@@ -155,8 +150,17 @@ namespace AgingMVC.Controllers
                     ViewBag.DomainName = domain.Name;
 
                     break;
+                case "AssessmentEnd":
+                    domain = (from d in db.Domains.Include("Videos")
+                                            where d.DomainId == DomainId
+                                            select d).Single<Models.Domain>();
+                    model = domain;
+                    ViewBag.DomainName = domain.Name;
+                    break;
 
                 case "Assessment":
+                case "Assessment2":
+                case "Assessment3":
 
                     Models.Objective objective = (from o in db.Objectives
                                                   where o.ObjectiveId == pageInfo.ObjectiveId
@@ -185,7 +189,9 @@ namespace AgingMVC.Controllers
                         ViewBag.TaskDescriptions = tw.ToString();
                     }
 
-                    ViewBag.ObjectiveHeader = ObjectiveHeader(objective.ObjectiveOrder);
+                    //ViewBag.ObjectiveHeader = ObjectiveHeader(objective.ObjectiveOrder);
+                    ViewBag.ObjectiveHeader = string.Format("Legal Evaluation Page {0} of 3", objective.ObjectiveOrder);
+                    ViewBag.TaskHeader = string.Format("Emotional & Spiritual Evaluation Question {0} of 8", objective.ObjectiveOrder);
                     break;
 
                 case "ObjectiveIntro":

@@ -27,9 +27,10 @@
            { %>
         <li class="carouselitem" videoindex="<%:video.Index%>" style="cursor: pointer;">
             <div align="center">
-                <img src="<%: Url.Content(video.ThumbImageURL) %>" alt="<%: (string) video.ShortText %>" width="367"
+                <img src="<%: Url.Content(video.ThumbImageURL) %>" 
+                alt="<%: (string) video.ShortText %>" width="367"
                     height="109" /><br />
-                <%:video.Description%></div>
+                <%: (string) video.ShortText %></div>
         </li>
         <%} %>
     </ul>
@@ -72,7 +73,7 @@
                 $("#videodescription").html(videos[videoindex].Description);
 
                 $("#videoDialog ").dialog({ modal: true,
-                    title: videos[videoindex].ShortText,
+                    //title: videos[videoindex].ShortText,
                     resizable: false,
                     width: 520,
                     height: "auto",

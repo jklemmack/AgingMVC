@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<AgingMVC.Models.Domain>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     AssessmentEnd
@@ -8,6 +8,15 @@
         <h1>
             <%:Model.ShortName %>
             Evaluation Completed</h1>
+    </div>
+    <div>
+        <p>
+            This concludes the
+            <%:Model.ShortName %>
+            evaluation and we have determined the most important tasks for you to complete first.
+            Use the link below to return to the main page, where you can now find links to national
+            and state-specific resources that will help identify resource so you can complete
+            these tasks.</p>
     </div>
     <div>
         <div>

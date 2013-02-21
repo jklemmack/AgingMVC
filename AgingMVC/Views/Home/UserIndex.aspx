@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<AgingMVC.Models.User>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-    Parent Care Readiness : Home
+    AgeReady : Home
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="HeaderContent" runat="server">
     <style type="text/css">
@@ -191,8 +191,8 @@
                 Just like entering puberty or having children, caring for an elderly loved one is
                 a predictable life-stage event that can be anticipated and planned for.</p>
             <p>
-                The PCRP Can Help<br />
-                The Parent Care Readiness Program, or PCRP, is designed using the transtheoretical
+                The AgeReady Program Can Help<br />
+                The AgeReady Program is designed using the transtheoretical
                 model of change, a proven model that helps people become informed, formulate a strategy,
                 and act on a new, better behavior.</p>
         </fieldset>

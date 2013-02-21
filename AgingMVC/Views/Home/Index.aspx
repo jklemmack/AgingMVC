@@ -85,7 +85,7 @@
             <p>
                 Please
                 <%: Html.ActionLink("Log On", "LogOn", "Account") %>
-                to access the Parent Care Readiness Assessment. If you do not have an account, you
+                to access the AgeReady Assessment. If you do not have an account, you
                 can
                 <%: Html.ActionLink("Register", "Register", "Account") %>
                 if your institution is a participating member.
