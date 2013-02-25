@@ -148,6 +148,7 @@ namespace AgingMVC.Controllers
 
                     model = domain;
                     ViewBag.DomainName = domain.Name;
+                    ViewBag.ShortName = domain.ShortName;
 
                     break;
                 case "AssessmentEnd":
@@ -156,6 +157,7 @@ namespace AgingMVC.Controllers
                                             select d).Single<Models.Domain>();
                     model = domain;
                     ViewBag.DomainName = domain.Name;
+                    ViewBag.ShortName = domain.ShortName;
                     break;
 
                 case "Assessment":
@@ -168,6 +170,7 @@ namespace AgingMVC.Controllers
                                                   select o).Single<Models.Objective>();
 
                     ViewBag.DomainName = objective.Domain.Name;
+                    ViewBag.ShortName = objective.Domain.ShortName;
                     Guid userId = db.User.Include("Parents").First(u => u.UserName == this.User.Identity.Name).UserId;
                     Guid parentId = db.Parents.First(p => p.UserID == userId
                         && p.FirstName.Equals(Parent, StringComparison.InvariantCultureIgnoreCase)).ParentID;
@@ -204,6 +207,7 @@ namespace AgingMVC.Controllers
                     objective2.Tasks.Load();
                     ViewBag.VideoURL = string.Format("/Content/Articulate/{0}/Objective{1:00}/story.html", objective2.Domain.ShortName, objective2.ObjectiveOrder);
                     ViewBag.DomainName = objective2.Domain.Name;
+                    ViewBag.ShortName = objective2.Domain.ShortName;
                     ViewBag.ObjectiveHeader = ObjectiveHeader(objective2.ObjectiveOrder);
                     model = objective2;
 

@@ -117,16 +117,15 @@
         });
 
     </script>
-    <div class="<%:ViewBag.ShortName %>heading">
+    <div class="heading">
         <h1>
-            <%:ViewBag.DomainName %>
-        </h1>
+            <%:ViewBag.TaskHeader%></h1>
     </div>
     <div>
         <div class="taskheader">
             <h2>
-                These are important tasks that experts have identified for you to complete. Please
-                read them carefully and answer the following questions.</h2>
+                These are important tasks that experts have identified for you to complete. Please read
+                them carefully and answer the following questions.</h2>
         </div>
         <div class="taskcompleted">
             <h2>

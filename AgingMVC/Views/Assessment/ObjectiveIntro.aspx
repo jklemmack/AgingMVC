@@ -6,7 +6,12 @@
     Evaluation
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <p>
+    <div class="<%:ViewBag.ShortName %>heading">
+        <h1>
+            <%:ViewBag.DomainName %>
+            </h1>
+    </div>
+        <p>
         <%=Model.ObjectiveText %></p>
     <iframe src="<%:ViewBag.VideoURL %>" width="950" height="650"></iframe>
     <div>

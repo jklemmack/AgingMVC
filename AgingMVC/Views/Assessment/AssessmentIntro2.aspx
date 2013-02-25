@@ -6,10 +6,10 @@
     Evaluation
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="heading">
+    <div class="<%:ViewBag.ShortName %>heading">
         <h1>
             Begin
-            <%:Model.ShortName %>
+            <%:Model.Name %>
             Evaluation</h1>
     </div>
     <div>

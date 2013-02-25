@@ -117,16 +117,15 @@
         });
 
     </script>
-    <div class="<%:ViewBag.ShortName %>heading">
+    <div class="heading">
         <h1>
-            <%:ViewBag.DomainName %>
-        </h1>
+            <%:ViewBag.ObjectiveHeader%></h1>
     </div>
     <div>
         <div class="taskheader">
             <h2>
-                These are important tasks that experts have identified for you to complete. Please
-                read them carefully and answer the following questions.</h2>
+                These are important tasks that experts have identified for you to complete. Please read
+                them carefully and answer the following questions.</h2>
         </div>
         <div class="taskcompleted">
             <h2>
@@ -151,7 +150,8 @@
                 <%=(ViewBag.IsSelf) ? task.PromptTextSelf : task.PromptText %>
                 <br />
                 <div style="font-size: smaller; display: inline-block; cursor: help;">
-                    <a class="resource dialoglink" taskid="<%=task.TaskId %>">Learn more about this task</a></div>
+                    <a class="resource dialoglink" taskid="<%=task.TaskId %>">
+                        Learn more about this task</a></div>
             </div>
             <div class="taskcompleted">
                 <input type="radio" name="TaskCompleted.<%=task.TaskId %>" taskid="<%=task.TaskId %>"
@@ -172,22 +172,22 @@
                     value="5" <%=(task.Completed)?"disabled='disabled'":"" %> />12 months or longer
             </div>
         </div>
-        <div style="visibility: hidden; height: 0px;" class="taskDetails" id="taskDetails.<%=task.TaskId %>">
-            <%=(ViewBag.IsSelf) ? task.AssessmentTextSelf : task.AssessmentText %>
+    <div style="visibility: hidden; height: 0px;" class="taskDetails" id="taskDetails.<%=task.TaskId %>">
+        <%=(ViewBag.IsSelf) ? task.AssessmentTextSelf : task.AssessmentText %>
+    </div>
+    <%} // End looping through tasks %>
+    <div>
+        <div style="clear: both;">
         </div>
-        <%} // End looping through tasks %>
-        <div>
-            <div style="clear: both;">
-            </div>
-            <div class="bottom_nav">
-                <div style="float: left;">
-                    <a href="/Assessment/<%:ViewBag.Domain %>/<%: ViewBag.Parent %>/<%: ViewBag.Page - 1 %>"
-                        class="back">Back</a></div>
-                <div class="rightnav">
-                    <input style="cursor: pointer;" type="submit" value="Save and Continue" />
-                </div>
+        <div class="bottom_nav">
+            <div style="float: left;">
+                <a href="/Assessment/<%:ViewBag.Domain %>/<%: ViewBag.Parent %>/<%: ViewBag.Page - 1 %>"
+                    class="back">Back</a></div>
+            <div class="rightnav">
+                <input style="cursor: pointer;" type="submit" value="Save and Continue" />
             </div>
         </div>
+    </div>
     </form>
     <div id="dialog-message" style="display: none;">
         test
