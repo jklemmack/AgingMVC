@@ -16,20 +16,19 @@
             height: 100%;
         }
         
-        
         #overview
         {
-        height: 100%;
-    margin-bottom: 0;
-    margin-left: 200px;
+            height: 100%;
+            margin-bottom: 0;
+            margin-left: 200px;
         }
         
         #domains
         {
-           height: 150px;
-    margin-bottom: 20px;
-    margin-left: 190px;
-    width: 700px;
+            height: 150px;
+            margin-bottom: 20px;
+            margin-left: 190px;
+            width: 700px;
         }
         
         div .domain
@@ -37,23 +36,23 @@
             width: 140px;
             height: 200px;
             float: left;
-			text-align:center;
+            text-align: center;
             margin: 5px;
         }
         
         .carerecipientselected
         {
-             background-color: #961200;
-    border-radius: 5px 5px 5px 5px;
-    color: White;
-    margin: 10px 0;
-    padding: 10px;
+            background-color: #961200;
+            border-radius: 5px 5px 5px 5px;
+            color: White;
+            margin: 10px 0;
+            padding: 10px;
         }
         
         div .bardivs
         {
             position: relative;
-			 margin-bottom: 10px;
+            margin-bottom: 10px;
         }
         
         div .progresstext
@@ -146,7 +145,6 @@
             });
         }
 
-
     </script>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
@@ -192,9 +190,9 @@
                 a predictable life-stage event that can be anticipated and planned for.</p>
             <p>
                 The AgeReady Program Can Help<br />
-                The AgeReady Program is designed using the transtheoretical
-                model of change, a proven model that helps people become informed, formulate a strategy,
-                and act on a new, better behavior.</p>
+                The AgeReady Program is designed using the transtheoretical model of change, a proven
+                model that helps people become informed, formulate a strategy, and act on a new,
+                better behavior.</p>
         </fieldset>
     </div>
     <div id="domains">
@@ -207,7 +205,7 @@
                 </div>
             </div>
             <a name="Medical" id="Medical" href="/">
-            <img src="/images/home_thumb_medical.jpg" width="116" alt="Link to Medical Assessment" /><br />
+                <img src="/images/home_thumb_medical.jpg" width="116" alt="Link to Medical Assessment" /><br />
                 Enter Medical Assessment</a>
         </div>
         <div class="domain">
@@ -219,7 +217,7 @@
                 </div>
             </div>
             <a name="Legal" id="Legal" href="/">
-            <img src="/images/home_thumb_legal.jpg" width="116" /><br />
+                <img src="/images/home_thumb_legal.jpg" width="116" /><br />
                 Enter Legal Assessment</a></div>
         <div class="domain" style="text-align: center;">
             <div class="bardivs">
@@ -230,7 +228,7 @@
                 </div>
             </div>
             <a name="Social" id="Social" href="/">
-        <img src="/images/home_thumb_family.jpg" width="115" /><br />
+                <img src="/images/home_thumb_family.jpg" width="115" /><br />
                 Enter Social Assessment</a></div>
         <div class="domain">
             <div class="bardivs">
@@ -241,7 +239,7 @@
                 </div>
             </div>
             <a name="Emotional" id="Emotional" href="/">
-            <img src="/images/home_thumb_emotional.jpg" width="115" /><br />
+                <img src="/images/home_thumb_emotional.jpg" width="115" /><br />
                 Enter Emotional Assessment</a></div>
     </div>
 </asp:Content>

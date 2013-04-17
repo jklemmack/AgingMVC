@@ -25,31 +25,38 @@ namespace AgingMVC.Controllers
                                                orderby pi.FirstName
                                                select new
                                                {
-                                                   ParentId = pi.ParentID,
+                                                   //ParentId = pi.ParentID,
                                                    Name = pi.FirstName,
 
                                                    pi.MedicalCompleted,
                                                    pi.MedicalTotal,
                                                    MedicalProgress = 100 * pi.MedicalCompleted / pi.MedicalTotal,
+                                                   MedicalText = "",
 
                                                    pi.LegalCompleted,
                                                    pi.LegalTotal,
                                                    LegalProgress = 100 * pi.LegalCompleted / pi.LegalTotal,
+                                                   LegalText = "",
 
                                                    pi.SocialCompleted,
                                                    pi.SocialTotal,
                                                    SocialProgress = 100 * pi.SocialCompleted / pi.SocialTotal,
+                                                   SocialText = "",
 
                                                    pi.EmotionalCompleted,
                                                    pi.EmotionalTotal,
                                                    EmotionalProgress = 100 * pi.EmotionalCompleted / pi.EmotionalTotal,
+                                                   EmotionalText = "",
 
                                                };
 
-                    var parentSummaries = parentSummariesQuery.ToDictionary(k => k.Name, v => v);
-                    ViewBag.FirstParent = parentSummaries.Keys.FirstOrDefault();
+                    
+                    var parentSummariesDict = parentSummariesQuery.ToDictionary(k => k.Name, v => v);
 
-                    string parentInfo = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(parentSummaries);
+
+                    ViewBag.FirstParent = parentSummariesDict.Keys.FirstOrDefault();
+
+                    string parentInfo = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(parentSummariesDict);
                     ViewBag.ParentData = parentInfo;
                 }
 
@@ -59,7 +66,7 @@ namespace AgingMVC.Controllers
                 ViewBag.EmotionalProgress = 100;
 
 
-                return View("UserIndex", user);
+                return View("UserIndex2", user);
             }
 
             return View("Index");

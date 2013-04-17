@@ -102,6 +102,8 @@
         jQuery(document).ready(function () {
             jQuery('#mycarousel').jcarousel({
                 // Configuration goes here
+                buttonNextHTML: null,
+                buttonPrevHTML: null
             });
 
             jwplayer().key = "mp6SILGik5i77LMmvhRE9W+LQOAFMt0tPRJH3w==";

@@ -4,10 +4,126 @@
     Home Page
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+	<script src="http://gsgd.co.uk/sandbox/jquery/easing/jquery.easing.1.3.js"></script>
+	<script src="Scripts/slides.min.jquery.js"></script>
+	<script>
+		$(function(){
+      $("#slides").slides({
+        fadeSpeed: 350,
+		effect: 'fade',
+		        play: 5000,
+				        crossfade: true
+      });
+    });
+	</script>
+    
+    <style>
+	
+
+#slides {
+margin: -30px 0 0 -44px;
+    position: absolute;
+
+}
+
+/*
+	Slides container
+	Important:
+	Set the width of your slides container
+	Set to display none, prevents content flash
+*/
+
+.slides_container {
+	width:1022px;
+	position:relative;
+	display:none;
+}
+
+/*
+	Each slide
+	Important:
+	Set the width of your slides
+	If height not specified height will be set by the slide content
+	Set to display block
+*/
+
+.slides_container a {
+	width:1022px;
+	height:362px;
+	display:block;
+}
+
+.slides_container a img {
+	display:block;
+}
+
+/*
+	Next/prev buttons
+*/
+
+#slides .next,#slides .prev {
+	position:absolute;
+	top:107px;
+	left:-39px;
+	width:24px;
+	height:43px;
+	display:block;
+	z-index:101;
+}
+
+#slides .next {
+	left:585px;
+}
+
+/*
+	Pagination
+*/
+
+.pagination {
+	margin:26px auto 0;
+	width:100px;
+}
+
+.pagination li {
+	float:left;
+	margin:0 1px;
+	list-style:none;
+}
+
+.pagination li a {
+	display:block;
+	width:12px;
+	height:0;
+	padding-top:12px;
+	background-image:url(../img/pagination.png);
+	background-position:0 0;
+	float:left;
+	overflow:hidden;
+}
+
+.pagination li.current a {
+	background-position:0 -12px;
+}
+
+/*
+	Footer
+*/
+
+</style>
     <div style="height: 340px;">
-        <div style="position: absolute;">
-            <img src="/images/home_photo.jpg" style="margin: -30px 0px 0px -45px;">
+    
+    <div id="slides">
+				<div class="slides_container">
+           <a href=""><img src="/images/home_photo1.jpg"></a>
+      
+            <a href=""><img src="/images/home_photo2.jpg"></a>
+        
+            <a href=""><img src="/images/home_photo3.jpg"></a>
         </div>
+        
+        
+        
+      </div>
         <div class="login_box">
             <script src="/Scripts/jquery.validate.min.js" type="text/javascript"></script>
             <script src="/Scripts/jquery.validate.unobtrusive.min.js" type="text/javascript"></script>
@@ -78,18 +194,13 @@
                 <img src="../../images/home_thumb_emotional.jpg" width="115" height="130" /></p>
         </div>
         <div class="home_right">
-            <img src="/images/video_filler.jpg" width="367" height="109" /><br />
-            <br />
-            <img src="/images/video_filler.jpg" width="367" height="109" /><br />
-            <br />
-            <p>
-                Please
-                <%: Html.ActionLink("Log On", "LogOn", "Account") %>
-                to access the AgeReady Assessment. If you do not have an account, you
-                can
-                <%: Html.ActionLink("Register", "Register", "Account") %>
-                if your institution is a participating member.
-            </p>
+            <div class="video_box"><img src="/images/video_thumb2.jpg" width="140" height="98" align="left" style="padding:0px 10px 0px 0px;" />
+          Most adult children assume care giving duties for a parent after a health event. In the movie "Dad", Jack Lemmon's wife, his primary care giver, suffers a heart attack and thrusts both of his adult children into caregiving duties - duties for which his son, played by Ted Danson, is totally unprepared. This video emphasizes the importance of being prepared for caring for an aging parent.<br />
+         
+          <br />
+          </div>
+<div class="video_box" style="clear:both;"><img src="/images/video_thumb1.jpg" alt="" width="140" height="98" align="left" style="padding:0px 10px 0px 0px;"/>
+          Dr. Michael Parker, selected by the Hartford Foundation and  Gerontological Society of America as one of the top 10 geriatric  scholars in the United States, explains the importance of completing the  AgeReady Assessment.</div>
         </div>
         <div style="clear: both;">
         </div>

@@ -342,6 +342,7 @@
     <Content Include="Content\Articulate\Medical\Objective03\story_html5.html" />
     <Content Include="Content\Articulate\Medical\Objective03\story_unsupported.html" />
     <Content Include="Content\Images\Emotional.png" />
+    <Content Include="Content\Images\LearnMore.png" />
     <Content Include="Content\Images\Legal.png" />
     <Content Include="Content\Images\Medical.png" />
     <Content Include="Content\Images\next-horizontal.png" />
@@ -349,8 +350,12 @@
     <Content Include="Content\Images\prev-horizontal.png" />
     <Content Include="Content\Images\prev-vertical.png" />
     <Content Include="Content\Images\Social.png" />
-    <Content Include="Content\Images\videothumbs\Medical.png" />
+    <Content Include="Content\Images\videothumbs\FamilyDomain.png" />
+    <Content Include="Content\Images\videothumbs\IntroParentCare.png" />
+    <Content Include="Content\Images\videothumbs\LegalMedical.png" />
+    <Content Include="Content\Images\videothumbs\MedicalDomain.png" />
     <Content Include="Content\Images\videothumbs\novideo.png" />
+    <Content Include="Content\Images\videothumbs\SpiritualDomain.png" />
     <Content Include="Content\jCarouselSkin.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
@@ -409,8 +414,11 @@
     <Content Include="Content\Videos\FamilyDomain.mov.mp4" />
     <Content Include="Content\Videos\IntroParentCare.mp4" />
     <Content Include="Content\Videos\legalmedical.mov.flv" />
+    <Content Include="Content\Videos\legalmedical.mp4" />
     <Content Include="Content\Videos\MedicalDomain.flv" />
+    <Content Include="Content\Videos\MedicalDomain.mp4" />
     <Content Include="Content\Videos\SpiritualDomain.flv" />
+    <Content Include="Content\Videos\SpiritualDomain.mp4" />
     <Content Include="Global.asax" />
     <Content Include="Images\background.gif" />
     <Content Include="Images\header_background.jpg" />
@@ -487,9 +495,12 @@
     <Content Include="Content\Articulate\Medical\Overview\story_html5.html" />
     <Content Include="Content\Articulate\Medical\Overview\story_unsupported.html" />
     <Content Include="Views\Assessment\AssessmentIntro2.aspx" />
+    <Content Include="Views\Assessment\Assessment2.aspx" />
+    <Content Include="Views\Assessment\Assessment3.aspx" />
     <Content Include="Views\Assessment\ObjectiveIntro.aspx" />
     <Content Include="Views\Home\ContactUs.aspx" />
     <Content Include="Views\Home\AboutUs.aspx" />
+    <Content Include="Views\Home\UserIndex2.aspx" />
     <Content Include="Views\Resource\TasksByDomain.aspx" />
     <Content Include="Views\Resource\TaskDetails.aspx" />
     <Content Include="Views\Home\UserIndex.aspx" />
