@@ -33,7 +33,7 @@
         
         div .domain
         {
-            width: 140px;
+            width: 160px;
             height: 200px;
             float: left;
             text-align: center;
@@ -67,8 +67,8 @@
         {
             padding-top: 10px;
         }
-        
     </style>
+    <link href="/Content/jquery.loadmask.css" rel="stylesheet" type="text/css" />
     <script language="javascript" type="text/javascript">
         
         var parentData = <%=ViewBag.ParentData %>
@@ -84,13 +84,19 @@
         function NavigateToParent(parent, element) {
             window.location.hash = parent;
             selectedParent = parent;
-            SetParentLinks(parent);
+
+            // Do loading delay:
+            $("#domains").mask("Loading ...")
+            window.setTimeout(function() {
+                    SetParentLinks(parent)
+                    $("#domains").unmask();
+                    $('.carerecipientselected').each(function() { 
+                        $(this).removeClass('carerecipientselected'); 
+                        });
+                    $('#carerecipient[parent=' + parent + ']').addClass('carerecipientselected');
+                }, 1000);
 
             // Update the visible selected parent - removing the selection on any existing ones first
-            $('.carerecipientselected').each(function() { 
-                $(this).removeClass('carerecipientselected'); 
-                });
-            $('#carerecipient[parent=' + parent + ']').addClass('carerecipientselected');
         }
 
         function SetParentLinks(parent) {
@@ -179,6 +185,7 @@
         }
 
     </script>
+    <script src="/Scripts/jquery.loadmask.min.js" type="text/javascript"></script>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
     <div class="heading">
@@ -246,8 +253,8 @@
             <a name="Medical" id="Medical" href="/">
                 <img src="/images/home_thumb_medical.jpg" width="116" alt="Link to Medical Assessment" /><br />
             </a>
-            <div id="MedicalStatus" >
-               Assessment not completed</div>
+            <div id="MedicalStatus">
+                Assessment not completed</div>
             <div class="assessmentlink">
                 <a href="#" id="MedicalLink">Continue Medical Evaluation</a></div>
         </div>
@@ -282,5 +289,4 @@
                 <a href="#" id="EmotionalLink">Continue Spiritual & Emotional Evaluation</a></div>
         </div>
     </div>
-    <a href="
 </asp:Content>
