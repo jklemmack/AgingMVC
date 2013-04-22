@@ -3160,29 +3160,39 @@ namespace AgingMVC.Models
         /// <param name="parentID">Initial value of the ParentID property.</param>
         /// <param name="firstName">Initial value of the FirstName property.</param>
         /// <param name="completed">Initial value of the Completed property.</param>
-        /// <param name="medicalCompleted">Initial value of the MedicalCompleted property.</param>
+        /// <param name="total">Initial value of the Total property.</param>
         /// <param name="medicalTotal">Initial value of the MedicalTotal property.</param>
-        /// <param name="legalCompleted">Initial value of the LegalCompleted property.</param>
         /// <param name="legalTotal">Initial value of the LegalTotal property.</param>
-        /// <param name="emotionalCompleted">Initial value of the EmotionalCompleted property.</param>
         /// <param name="emotionalTotal">Initial value of the EmotionalTotal property.</param>
-        /// <param name="socialCompleted">Initial value of the SocialCompleted property.</param>
         /// <param name="socialTotal">Initial value of the SocialTotal property.</param>
-        public static vw_ParentSummary Createvw_ParentSummary(global::System.Guid userID, global::System.Guid parentID, global::System.String firstName, global::System.Int32 completed, global::System.Int32 medicalCompleted, global::System.Int32 medicalTotal, global::System.Int32 legalCompleted, global::System.Int32 legalTotal, global::System.Int32 emotionalCompleted, global::System.Int32 emotionalTotal, global::System.Int32 socialCompleted, global::System.Int32 socialTotal)
+        /// <param name="medicalAssessmentCompleted">Initial value of the MedicalAssessmentCompleted property.</param>
+        /// <param name="medicalTaskCompleted">Initial value of the MedicalTaskCompleted property.</param>
+        /// <param name="legalAssessmentCompleted">Initial value of the LegalAssessmentCompleted property.</param>
+        /// <param name="legalTaskCompleted">Initial value of the LegalTaskCompleted property.</param>
+        /// <param name="socialAssessmentCompleted">Initial value of the SocialAssessmentCompleted property.</param>
+        /// <param name="socialTaskCompleted">Initial value of the SocialTaskCompleted property.</param>
+        /// <param name="emotionalAssessmentCompleted">Initial value of the EmotionalAssessmentCompleted property.</param>
+        /// <param name="emotionalTaskCompleted">Initial value of the EmotionalTaskCompleted property.</param>
+        public static vw_ParentSummary Createvw_ParentSummary(global::System.Guid userID, global::System.Guid parentID, global::System.String firstName, global::System.Int32 completed, global::System.Int32 total, global::System.Int32 medicalTotal, global::System.Int32 legalTotal, global::System.Int32 emotionalTotal, global::System.Int32 socialTotal, global::System.Int32 medicalAssessmentCompleted, global::System.Int32 medicalTaskCompleted, global::System.Int32 legalAssessmentCompleted, global::System.Int32 legalTaskCompleted, global::System.Int32 socialAssessmentCompleted, global::System.Int32 socialTaskCompleted, global::System.Int32 emotionalAssessmentCompleted, global::System.Int32 emotionalTaskCompleted)
         {
             vw_ParentSummary vw_ParentSummary = new vw_ParentSummary();
             vw_ParentSummary.UserID = userID;
             vw_ParentSummary.ParentID = parentID;
             vw_ParentSummary.FirstName = firstName;
             vw_ParentSummary.Completed = completed;
-            vw_ParentSummary.MedicalCompleted = medicalCompleted;
+            vw_ParentSummary.Total = total;
             vw_ParentSummary.MedicalTotal = medicalTotal;
-            vw_ParentSummary.LegalCompleted = legalCompleted;
             vw_ParentSummary.LegalTotal = legalTotal;
-            vw_ParentSummary.EmotionalCompleted = emotionalCompleted;
             vw_ParentSummary.EmotionalTotal = emotionalTotal;
-            vw_ParentSummary.SocialCompleted = socialCompleted;
             vw_ParentSummary.SocialTotal = socialTotal;
+            vw_ParentSummary.MedicalAssessmentCompleted = medicalAssessmentCompleted;
+            vw_ParentSummary.MedicalTaskCompleted = medicalTaskCompleted;
+            vw_ParentSummary.LegalAssessmentCompleted = legalAssessmentCompleted;
+            vw_ParentSummary.LegalTaskCompleted = legalTaskCompleted;
+            vw_ParentSummary.SocialAssessmentCompleted = socialAssessmentCompleted;
+            vw_ParentSummary.SocialTaskCompleted = socialTaskCompleted;
+            vw_ParentSummary.EmotionalAssessmentCompleted = emotionalAssessmentCompleted;
+            vw_ParentSummary.EmotionalTaskCompleted = emotionalTaskCompleted;
             return vw_ParentSummary;
         }
 
@@ -3295,9 +3305,9 @@ namespace AgingMVC.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int32> Total
+        public global::System.Int32 Total
         {
             get
             {
@@ -3312,33 +3322,9 @@ namespace AgingMVC.Models
                 OnTotalChanged();
             }
         }
-        private Nullable<global::System.Int32> _Total;
-        partial void OnTotalChanging(Nullable<global::System.Int32> value);
+        private global::System.Int32 _Total;
+        partial void OnTotalChanging(global::System.Int32 value);
         partial void OnTotalChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 MedicalCompleted
-        {
-            get
-            {
-                return _MedicalCompleted;
-            }
-            set
-            {
-                OnMedicalCompletedChanging(value);
-                ReportPropertyChanging("MedicalCompleted");
-                _MedicalCompleted = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("MedicalCompleted");
-                OnMedicalCompletedChanged();
-            }
-        }
-        private global::System.Int32 _MedicalCompleted;
-        partial void OnMedicalCompletedChanging(global::System.Int32 value);
-        partial void OnMedicalCompletedChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -3369,30 +3355,6 @@ namespace AgingMVC.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int32 LegalCompleted
-        {
-            get
-            {
-                return _LegalCompleted;
-            }
-            set
-            {
-                OnLegalCompletedChanging(value);
-                ReportPropertyChanging("LegalCompleted");
-                _LegalCompleted = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("LegalCompleted");
-                OnLegalCompletedChanged();
-            }
-        }
-        private global::System.Int32 _LegalCompleted;
-        partial void OnLegalCompletedChanging(global::System.Int32 value);
-        partial void OnLegalCompletedChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
         public global::System.Int32 LegalTotal
         {
             get
@@ -3411,30 +3373,6 @@ namespace AgingMVC.Models
         private global::System.Int32 _LegalTotal;
         partial void OnLegalTotalChanging(global::System.Int32 value);
         partial void OnLegalTotalChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 EmotionalCompleted
-        {
-            get
-            {
-                return _EmotionalCompleted;
-            }
-            set
-            {
-                OnEmotionalCompletedChanging(value);
-                ReportPropertyChanging("EmotionalCompleted");
-                _EmotionalCompleted = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("EmotionalCompleted");
-                OnEmotionalCompletedChanged();
-            }
-        }
-        private global::System.Int32 _EmotionalCompleted;
-        partial void OnEmotionalCompletedChanging(global::System.Int32 value);
-        partial void OnEmotionalCompletedChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -3465,30 +3403,6 @@ namespace AgingMVC.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int32 SocialCompleted
-        {
-            get
-            {
-                return _SocialCompleted;
-            }
-            set
-            {
-                OnSocialCompletedChanging(value);
-                ReportPropertyChanging("SocialCompleted");
-                _SocialCompleted = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("SocialCompleted");
-                OnSocialCompletedChanged();
-            }
-        }
-        private global::System.Int32 _SocialCompleted;
-        partial void OnSocialCompletedChanging(global::System.Int32 value);
-        partial void OnSocialCompletedChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
         public global::System.Int32 SocialTotal
         {
             get
@@ -3507,6 +3421,222 @@ namespace AgingMVC.Models
         private global::System.Int32 _SocialTotal;
         partial void OnSocialTotalChanging(global::System.Int32 value);
         partial void OnSocialTotalChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 MedicalAssessmentCompleted
+        {
+            get
+            {
+                return _MedicalAssessmentCompleted;
+            }
+            set
+            {
+                if (_MedicalAssessmentCompleted != value)
+                {
+                    OnMedicalAssessmentCompletedChanging(value);
+                    ReportPropertyChanging("MedicalAssessmentCompleted");
+                    _MedicalAssessmentCompleted = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("MedicalAssessmentCompleted");
+                    OnMedicalAssessmentCompletedChanged();
+                }
+            }
+        }
+        private global::System.Int32 _MedicalAssessmentCompleted;
+        partial void OnMedicalAssessmentCompletedChanging(global::System.Int32 value);
+        partial void OnMedicalAssessmentCompletedChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 MedicalTaskCompleted
+        {
+            get
+            {
+                return _MedicalTaskCompleted;
+            }
+            set
+            {
+                if (_MedicalTaskCompleted != value)
+                {
+                    OnMedicalTaskCompletedChanging(value);
+                    ReportPropertyChanging("MedicalTaskCompleted");
+                    _MedicalTaskCompleted = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("MedicalTaskCompleted");
+                    OnMedicalTaskCompletedChanged();
+                }
+            }
+        }
+        private global::System.Int32 _MedicalTaskCompleted;
+        partial void OnMedicalTaskCompletedChanging(global::System.Int32 value);
+        partial void OnMedicalTaskCompletedChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 LegalAssessmentCompleted
+        {
+            get
+            {
+                return _LegalAssessmentCompleted;
+            }
+            set
+            {
+                if (_LegalAssessmentCompleted != value)
+                {
+                    OnLegalAssessmentCompletedChanging(value);
+                    ReportPropertyChanging("LegalAssessmentCompleted");
+                    _LegalAssessmentCompleted = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("LegalAssessmentCompleted");
+                    OnLegalAssessmentCompletedChanged();
+                }
+            }
+        }
+        private global::System.Int32 _LegalAssessmentCompleted;
+        partial void OnLegalAssessmentCompletedChanging(global::System.Int32 value);
+        partial void OnLegalAssessmentCompletedChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 LegalTaskCompleted
+        {
+            get
+            {
+                return _LegalTaskCompleted;
+            }
+            set
+            {
+                if (_LegalTaskCompleted != value)
+                {
+                    OnLegalTaskCompletedChanging(value);
+                    ReportPropertyChanging("LegalTaskCompleted");
+                    _LegalTaskCompleted = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("LegalTaskCompleted");
+                    OnLegalTaskCompletedChanged();
+                }
+            }
+        }
+        private global::System.Int32 _LegalTaskCompleted;
+        partial void OnLegalTaskCompletedChanging(global::System.Int32 value);
+        partial void OnLegalTaskCompletedChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 SocialAssessmentCompleted
+        {
+            get
+            {
+                return _SocialAssessmentCompleted;
+            }
+            set
+            {
+                if (_SocialAssessmentCompleted != value)
+                {
+                    OnSocialAssessmentCompletedChanging(value);
+                    ReportPropertyChanging("SocialAssessmentCompleted");
+                    _SocialAssessmentCompleted = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("SocialAssessmentCompleted");
+                    OnSocialAssessmentCompletedChanged();
+                }
+            }
+        }
+        private global::System.Int32 _SocialAssessmentCompleted;
+        partial void OnSocialAssessmentCompletedChanging(global::System.Int32 value);
+        partial void OnSocialAssessmentCompletedChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 SocialTaskCompleted
+        {
+            get
+            {
+                return _SocialTaskCompleted;
+            }
+            set
+            {
+                if (_SocialTaskCompleted != value)
+                {
+                    OnSocialTaskCompletedChanging(value);
+                    ReportPropertyChanging("SocialTaskCompleted");
+                    _SocialTaskCompleted = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("SocialTaskCompleted");
+                    OnSocialTaskCompletedChanged();
+                }
+            }
+        }
+        private global::System.Int32 _SocialTaskCompleted;
+        partial void OnSocialTaskCompletedChanging(global::System.Int32 value);
+        partial void OnSocialTaskCompletedChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 EmotionalAssessmentCompleted
+        {
+            get
+            {
+                return _EmotionalAssessmentCompleted;
+            }
+            set
+            {
+                if (_EmotionalAssessmentCompleted != value)
+                {
+                    OnEmotionalAssessmentCompletedChanging(value);
+                    ReportPropertyChanging("EmotionalAssessmentCompleted");
+                    _EmotionalAssessmentCompleted = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("EmotionalAssessmentCompleted");
+                    OnEmotionalAssessmentCompletedChanged();
+                }
+            }
+        }
+        private global::System.Int32 _EmotionalAssessmentCompleted;
+        partial void OnEmotionalAssessmentCompletedChanging(global::System.Int32 value);
+        partial void OnEmotionalAssessmentCompletedChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 EmotionalTaskCompleted
+        {
+            get
+            {
+                return _EmotionalTaskCompleted;
+            }
+            set
+            {
+                if (_EmotionalTaskCompleted != value)
+                {
+                    OnEmotionalTaskCompletedChanging(value);
+                    ReportPropertyChanging("EmotionalTaskCompleted");
+                    _EmotionalTaskCompleted = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("EmotionalTaskCompleted");
+                    OnEmotionalTaskCompletedChanged();
+                }
+            }
+        }
+        private global::System.Int32 _EmotionalTaskCompleted;
+        partial void OnEmotionalTaskCompletedChanging(global::System.Int32 value);
+        partial void OnEmotionalTaskCompletedChanged();
 
         #endregion
 

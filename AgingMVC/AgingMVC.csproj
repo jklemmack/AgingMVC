@@ -49,6 +49,12 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="PoliteCaptcha">
+      <HintPath>..\packages\PoliteCaptcha.0.4.0.1\lib\net40\PoliteCaptcha.dll</HintPath>
+    </Reference>
+    <Reference Include="Recaptcha">
+      <HintPath>..\packages\recaptcha.1.0.5.0\lib\.NetFramework 4.0\Recaptcha.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -433,9 +439,9 @@
     <Content Include="jwplayer\jwplayer.flash.swf" />
     <Content Include="jwplayer\jwplayer.html5.js" />
     <Content Include="jwplayer\jwplayer.js" />
-    <Content Include="Scripts\jquery-1.8.2-vsdoc.js" />
-    <Content Include="Scripts\jquery-1.8.2.js" />
-    <Content Include="Scripts\jquery-1.8.2.min.js" />
+    <Content Include="Scripts\jquery-2.0.0-vsdoc.js" />
+    <Content Include="Scripts\jquery-2.0.0.js" />
+    <Content Include="Scripts\jquery-2.0.0.min.js" />
     <Content Include="Scripts\jquery-ui-1.8.24.js" />
     <Content Include="Scripts\jquery-ui-1.8.24.min.js" />
     <Content Include="Scripts\jquery.jcarousel.min.js" />
@@ -500,6 +506,7 @@
     <Content Include="Views\Assessment\ObjectiveIntro.aspx" />
     <Content Include="Views\Home\ContactUs.aspx" />
     <Content Include="Views\Home\AboutUs.aspx" />
+    <Content Include="Views\Home\Help.aspx" />
     <Content Include="Views\Home\UserIndex2.aspx" />
     <Content Include="Views\Resource\TasksByDomain.aspx" />
     <Content Include="Views\Resource\TaskDetails.aspx" />
@@ -570,6 +577,7 @@
     <Content Include="Content\Videos\DrivingDaisy1.f4v" />
     <Content Include="Content\Videos\DrivingDaisy2.f4v" />
     <Content Include="Content\Videos\DrivingDaisy3.f4v" />
+    <None Include="Scripts\jquery-2.0.0.min.map" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

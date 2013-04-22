@@ -62,65 +62,107 @@
             top: 5px;
             text-align: center;
         }
+        
+        div .assessmentlink
+        {
+            padding-top: 10px;
+        }
+        
     </style>
     <script language="javascript" type="text/javascript">
         
         var parentData = <%=ViewBag.ParentData %>
-        var selectedParent = '';
+        var selectedParent = null;
 
         $(document).ready(function () {
-
-            SetParentLinks($("#Parent").val());
-
             SetProgressBars();
-
-            $("#Parent").change(function () {
-                var parent = $("#Parent").val();
-                SetParentLinks(parent);
-            });
-            
             <% if (ViewBag.FirstParent != null)
                  Response.Write(string.Format("NavigateToParent('{0}');", ViewBag.FirstParent));
             %>
         });
 
-        function NavigateToParent(parent) {
+        function NavigateToParent(parent, element) {
             window.location.hash = parent;
             selectedParent = parent;
             SetParentLinks(parent);
+
+            // Update the visible selected parent - removing the selection on any existing ones first
             $('.carerecipientselected').each(function() { 
                 $(this).removeClass('carerecipientselected'); 
                 });
             $('#carerecipient[parent=' + parent + ']').addClass('carerecipientselected');
-
-
-            var p = parentData[parent];
-            $("#MedicalProgress").attr("progress", p.MedicalProgress);
-            $("#LegalProgress").attr("progress", p.LegalProgress);
-            $("#SocialProgress").attr("progress", p.SocialProgress);
-            $("#EmotionalProgress").attr("progress", p.EmotionalProgress);
-
-            SetProgressBars();
-            SetProgressText();
         }
 
         function SetParentLinks(parent) {
-            $("#Medical").attr("href", "/Assessment/Medical/" + parent);
-            $("#Legal").attr("href", "/Assessment/Legal/" + parent);
-            $("#Social").attr("href", "/Assessment/Social/" + parent);
-            $("#Emotional").attr("href", "/Assessment/Emotional/" + parent);
+            var data = parentData[parent];
 
-            $("#MedicalResources").click(function() { window.location = "/Resources/" + selectedParent + "/Medical"; });
-            $("#MedicalResources").css('cursor', 'pointer');
 
-            $("#LegallResources").click(function() { window.location = "/Resources/" + selectedParent + "/Legal"; });
-            $("#LegallResources").css('cursor', 'pointer');
+            /*** MEDICAL *********************************************************/
+            if (data.MedicalAssessmentCompleted == data.MedicalTotal)
+            {
+                $("#MedicalStatus").text(data.MedicalTaskCompleted + " of " + data.MedicalTotal + " tasks completed");
+                $("#MedicalLink").attr("href", "/Resources/" + selectedParent + "/Medical");
+                $("#MedicalLink").text("View Important Medical Tasks and Resources");
+            } else  {
+                $("#MedicalStatus").text("Assessment not completed");
+                if (data.MedicalAssessmentCompleted == 0)
+                    $("#MedicalLink").text("Begin the Medical Assessment");
+                else 
+                    $("#MedicalLink").text("Continue the Medical Assessment");
 
-            $("#SocialResources").click(function() { window.location = "/Resources/" + selectedParent + "/Social"; });
-            $("#SociallResources").css('cursor', 'pointer');
+                $("#MedicalLink").attr("href", "/Assessment/Medical/" + parent);
+            }
 
-            $("#EmotionalResources").click(function() { window.location = "/Resources/" + selectedParent + "/Emotional"; });
-            $("#EmotionalResources").css('cursor', 'pointer');
+
+            /*** LEGAL *********************************************************/
+            if (data.LegalAssessmentCompleted == data.LegalTotal)
+            {
+                $("#LegalStatus").text(data.LegalTaskCompleted + " of " + data.LegalTotal + " tasks completed");
+                $("#LegalLink").attr("href", "/Resources/" + selectedParent + "/Legal");
+                $("#LegalLink").text("View Important Legal Tasks and Resources");
+            } else  {
+                $("#LegalStatus").text("Assessment not completed");
+                if (data.LegalAssessmentCompleted == 0)
+                    $("#LegalLink").text("Begin the Legal Assessment");
+                else 
+                    $("#LegalLink").text("Continue the Legal Assessment");
+
+                $("#LegalLink").attr("href", "/Assessment/Legal/" + parent);
+            }
+
+            /*** SOCIAL *********************************************************/
+            if (data.SocialAssessmentCompleted == data.SocialTotal)
+            {
+                $("#SocialStatus").text(data.SocialTaskCompleted + " of " + data.SocialTotal + " tasks completed");
+                $("#SocialLink").attr("href", "/Resources/" + selectedParent + "/Social");
+                $("#SocialLink").text("View Important Social Tasks and Resources");
+            } else  {
+                $("#SocialStatus").text("Assessment not completed");
+                if (data.SocialAssessmentCompleted == 0)
+                    $("#SocialLink").text("Begin the Social Assessment");
+                else 
+                    $("#SocialLink").text("Continue the Social Assessment");
+
+                $("#SocialLink").attr("href", "/Assessment/Social/" + parent);
+            }
+
+            /*** EMOTIONAL *********************************************************/
+            if (data.EmotionalAssessmentCompleted == data.EmotionalTotal)
+            {
+                $("#EmotionalStatus").text(data.EmotionalTaskCompleted + " of " + data.EmotionalTotal + " tasks completed");
+                $("#EmotionalLink").attr("href", "/Resources/" + selectedParent + "/Emotional");
+                $("#EmotionalLink").text("View Important Emotional Tasks and Resources");
+            } else  {
+                $("#EmotionalStatus").text("Assessment not completed");
+                if (data.EmotionalAssessmentCompleted == 0)
+                    $("#EmotionalLink").text("Begin the Emotional Assessment");
+                else 
+                    $("#EmotionalLink").text("Continue the Emotional Assessment");
+
+                $("#EmotionalLink").attr("href", "/Assessment/Emotional/" + parent);
+            }
+
+
         }
 
         function SetProgressBars() {
@@ -131,18 +173,9 @@
             });
         }
 
-        function SetProgressText(){
-            $('.bardivs').each(function () {
-                var value = parseInt($(this).find('.progressbar').attr('progress'));
-                if (value == 100)
-                {
-                    //$(this).find('.progresstext').show();
-                    $(this).find('.progresstext').html('View Resources');
-                } else {
-                    //$(this).find('.progresstext').hide();
-                    $(this).find('.progresstext').html('Enter assessment');
-                }
-            });
+        function CreateNewParent()
+        {
+            window.location = "/Parent/Create";
         }
 
     </script>
@@ -150,92 +183,104 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
     <div class="heading">
         <h1>
-            Overview</h1>
+            Home</h1>
     </div>
     <div id="topwrapper">
-        <div id="carerecipientlist">
-            Step 1: Step 2: Step 3:
+        <fieldset id="carerecipientlist" style="min-height: 300px;">
+            <p>
+                <span style="font-weight: 700;">Step 1: </span>
+                <br />
+                Select a care recipient, or create a new one.
+            </p>
+            <p>
+                <span style="font-weight: 700;">Step 2: </span>
+                <br />
+                Complete the evaluation for this person in each of the four domains.
+            </p>
+            <p>
+                <span style="font-weight: 700;">Step 3: </span>
+                <br />
+                Access resources to help you complete the most important tasks that were identified
+                in each domain.
+            </p>
+        </fieldset>
+        <div style="width: 700px; margin-left: 190px; min-height: 50px;">
+            <p>
+                The AgeReady Program is designed using the transtheoretical model of change, a proven
+                model that helps people become informed, formulate a strategy, and act on a new,
+                better behavior.
+            </p>
+            <p>
+                To begin, just follow the three steps you see on the left.</p>
         </div>
-        <div id="overview">
-            <div style="margin-bottom: 5px;">
-                I am the model of a modern major general.</div>
-            <div id="carerecipient" class="display-field" style="cursor: pointer; dispaly: inline-block;
-                float: left; margin: 0 15px 25px 0; width: 130px; height: 100px;">
-                David
+        <div style="width: 700px; margin-left: 190px; min-height: 150px;">
+            <%foreach (AgingMVC.Models.vw_ParentSummary parent in Model.ParentSummaries)
+              {%>
+            <div id="carerecipient" class="display-field" style="cursor: pointer; display: inline-block;
+                float: left; margin: 0 15px 25px 0; width: 130px; height: 100px;" parent="<%:parent.FirstName %>"
+                onclick="NavigateToParent('<%:parent.FirstName %>', this)">
+                <%:parent.FirstName %>
                 <div style="position: relative;">
-                    <div class="progressbar" progress="10">
+                    <div class="progressbar" progress="<%: Math.Round( 100.0 * parent.Completed / parent.Total ) %>">
                     </div>
                     <div style="width: 100%;">
-                        <a href="/Parent/Edit/David" style="color: White; font-size: small; margin-top: 5px;
-                            text-align: center;">Recipient details</a></div>
-                    <div style="width: 100%;">
-                    </div>
-                </div>
-            </div>
-            <div id="carerecipient" class="display-field" style="cursor: pointer; dispaly: inline-block;
-                float: left; margin: 0 15px 25px 0; width: 130px; height: 100px;">
-                David
-                <div style="position: relative;">
-                    <div class="progressbar" progress="10">
-                    </div>
-                    <div style="width: 100%;">
-                        <a href="/Parent/Edit/David" style="color: White; font-size: small; margin-top: 5px;
-                            text-align: center;">Recipient details</a></div>
+                        <a href="/Parent/Edit/<%:parent.FirstName %>" style="color: White; font-size: small;
+                            margin-top: 5px; text-align: center;">Recipient details</a></div>
                     <div style="width: 100%;">
                     </div>
                 </div>
             </div>
-            <div id="Div1" class="display-field" style="cursor: pointer; dispaly: inline-block;
-                float: left; margin: 0 15px 25px 0; width: 130px; height: 100px;">
-                <div style="position: relative; vertical-align: middle; text-align: center;">
-                    Create a new care recipient
-                </div>
+            <%} %>
+            <%if (ViewBag.CanAddParent)
+              {%>
+            <div id="Div1" class="display-field" style="cursor: pointer; display: inline-block;
+                float: left; margin: 0 15px 25px 0; width: 130px; height: 100px;" onclick="CreateNewParent();">
+                Add New Care Recipient
             </div>
+            <%} %>
         </div>
     </div>
-    <div id="domains" style="clear: both;">
-        <div style="background-color: #961200; border-radius: 5px 5px 5px 5px; min-height: 225px;">
-            <div class="domain">
-                <a name="Medical" id="Medical" href="/">
-                    <img src="/images/home_thumb_medical.jpg" width="116" alt="Link to Medical Assessment" /><br />
-                </a>
-                <div>
-                    8 of 17 tasks completed</div>
-                <div>
-                    <a href="#">View Important Medical Tasks and Resources</a></div>
+    <div id="domains" style="border-color: #edeae5; border-width: medium; border-style: solid;
+        min-height: 250px;">
+        <div class="domain">
+            <a name="Medical" id="Medical" href="/">
+                <img src="/images/home_thumb_medical.jpg" width="116" alt="Link to Medical Assessment" /><br />
+            </a>
+            <div id="MedicalStatus" >
+               Assessment not completed</div>
+            <div class="assessmentlink">
+                <a href="#" id="MedicalLink">Continue Medical Evaluation</a></div>
+        </div>
+        <div class="domain">
+            <a name="Legal" id="Legal" href="/">
+                <img src="/images/home_thumb_legal.jpg" width="116" /><br />
+            </a>
+            <div id="LegalStatus">
+                Assessment not completed
             </div>
-            <div class="domain">
-                <a name="Legal" id="Legal" href="/">
-                    <img src="/images/home_thumb_legal.jpg" width="116" /><br />
-                </a>
-                <div>
-                    Assessment not completed
-                </div>
-                <div>
-                    <a href="#">Continue Legal & Financial Evaluation</a></div>
+            <div class="assessmentlink">
+                <a href="#" id="LegalLink">Continue Legal & Financial Evaluation</a></div>
+        </div>
+        <div class="domain">
+            <a name="Social" id="A1" href="/">
+                <img src="/images/home_thumb_family.jpg" width="116" /><br />
+            </a>
+            <div id="SocialStatus">
+                Assessment not completed
             </div>
-            <div class="domain" style="text-align: center;">
-                <div class="bardivs">
-                    <div class="progressbar" id="SocialProgress">
-                    </div>
-                    <div class="progresstext">
-                        View Resources
-                    </div>
-                </div>
-                <a name="Social" id="Social" href="/">
-                    <img src="/images/home_thumb_family.jpg" width="115" /><br />
-                    Enter Social Assessment</a></div>
-            <div class="domain">
-                <div class="bardivs">
-                    <div class="progressbar" id="EmotionalProgress">
-                    </div>
-                    <div class="progresstext">
-                        View Resources
-                    </div>
-                </div>
-                <a name="Emotional" id="Emotional" href="/">
-                    <img src="/images/home_thumb_emotional.jpg" width="115" /><br />
-                    Enter Emotional Assessment</a></div>
+            <div class="assessmentlink">
+                <a href="#" id="SocialLink">Continue Family & Social Evaluation</a></div>
+        </div>
+        <div class="domain">
+            <a name="Emotional" id="A2" href="/">
+                <img src="/images/home_thumb_emotional.jpg" width="116" /><br />
+            </a>
+            <div id="EmotionalStatus">
+                Assessment not completed
+            </div>
+            <div class="assessmentlink">
+                <a href="#" id="EmotionalLink">Continue Spiritual & Emotional Evaluation</a></div>
         </div>
     </div>
+    <a href="
 </asp:Content>

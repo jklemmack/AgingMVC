@@ -23,13 +23,17 @@
       [vw_ParentSummary].[UserID] AS [UserID], 
       [vw_ParentSummary].[ParentID] AS [ParentID], 
       [vw_ParentSummary].[FirstName] AS [FirstName], 
-      [vw_ParentSummary].[MedicalCompleted] AS [MedicalCompleted], 
+      [vw_ParentSummary].[MedicalAssessmentCompleted] AS [MedicalAssessmentCompleted], 
+      [vw_ParentSummary].[MedicalTaskCompleted] AS [MedicalTaskCompleted], 
       [vw_ParentSummary].[MedicalTotal] AS [MedicalTotal], 
-      [vw_ParentSummary].[LegalCompleted] AS [LegalCompleted], 
+      [vw_ParentSummary].[LegalAssessmentCompleted] AS [LegalAssessmentCompleted], 
+      [vw_ParentSummary].[LegalTaskCompleted] AS [LegalTaskCompleted], 
       [vw_ParentSummary].[LegalTotal] AS [LegalTotal], 
-      [vw_ParentSummary].[SocialCompleted] AS [SocialCompleted], 
+      [vw_ParentSummary].[SocialAssessmentCompleted] AS [SocialAssessmentCompleted], 
+      [vw_ParentSummary].[SocialTaskCompleted] AS [SocialTaskCompleted], 
       [vw_ParentSummary].[SocialTotal] AS [SocialTotal], 
-      [vw_ParentSummary].[EmotionalCompleted] AS [EmotionalCompleted], 
+      [vw_ParentSummary].[EmotionalAssessmentCompleted] AS [EmotionalAssessmentCompleted], 
+      [vw_ParentSummary].[EmotionalTaskCompleted] AS [EmotionalTaskCompleted], 
       [vw_ParentSummary].[EmotionalTotal] AS [EmotionalTotal], 
       [vw_ParentSummary].[Completed] AS [Completed], 
       [vw_ParentSummary].[Total] AS [Total]
@@ -221,22 +225,30 @@
             <PropertyRef Name="UserID" />
             <PropertyRef Name="ParentID" />
             
-            
-            
-            
-            
+            <PropertyRef Name="MedicalAssessmentCompleted" />
+            <PropertyRef Name="MedicalTaskCompleted" />
+            <PropertyRef Name="LegalAssessmentCompleted" />
+            <PropertyRef Name="LegalTaskCompleted" />
+            <PropertyRef Name="SocialAssessmentCompleted" />
+            <PropertyRef Name="SocialTaskCompleted" />
+            <PropertyRef Name="EmotionalAssessmentCompleted" />
+            <PropertyRef Name="EmotionalTaskCompleted" />
             
           </Key>
           <Property Name="UserID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="ParentID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="FirstName" Type="nvarchar" Nullable="false" MaxLength="50" />
-          <Property Name="MedicalCompleted" Type="int" Nullable="false" />
+          <Property Name="MedicalAssessmentCompleted" Type="int" Nullable="false" />
+          <Property Name="MedicalTaskCompleted" Type="int" Nullable="false" />
           <Property Name="MedicalTotal" Type="int" />
-          <Property Name="LegalCompleted" Type="int" Nullable="false" />
+          <Property Name="LegalAssessmentCompleted" Type="int" Nullable="false" />
+          <Property Name="LegalTaskCompleted" Type="int" Nullable="false" />
           <Property Name="LegalTotal" Type="int" />
-          <Property Name="SocialCompleted" Type="int" Nullable="false" />
+          <Property Name="SocialAssessmentCompleted" Type="int" Nullable="false" />
+          <Property Name="SocialTaskCompleted" Type="int" Nullable="false" />
           <Property Name="SocialTotal" Type="int" />
-          <Property Name="EmotionalCompleted" Type="int" Nullable="false" />
+          <Property Name="EmotionalAssessmentCompleted" Type="int" Nullable="false" />
+          <Property Name="EmotionalTaskCompleted" Type="int" Nullable="false" />
           <Property Name="EmotionalTotal" Type="int" />
           <Property Name="Completed" Type="int" Nullable="false" />
           <Property Name="Total" Type="int" />
@@ -618,21 +630,33 @@
           <Key>
             <PropertyRef Name="UserID" />
             <PropertyRef Name="ParentID" />
+            <PropertyRef Name="MedicalAssessmentCompleted" />
+            <PropertyRef Name="MedicalTaskCompleted" />
+            <PropertyRef Name="LegalAssessmentCompleted" />
+            <PropertyRef Name="LegalTaskCompleted" />
+            <PropertyRef Name="SocialAssessmentCompleted" />
+            <PropertyRef Name="SocialTaskCompleted" />
+            <PropertyRef Name="EmotionalAssessmentCompleted" />
+            <PropertyRef Name="EmotionalTaskCompleted" />
           </Key>
           <Property Type="Guid" Name="UserID" Nullable="false" />
           <Property Type="Guid" Name="ParentID" Nullable="false" />
           <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="User" Relationship="AgingModel.Uservw_ParentSummary" FromRole="vw_ParentSummary" ToRole="User" />
           <Property Type="Int32" Name="Completed" Nullable="false" />
-          <Property Type="Int32" Name="Total" Nullable="true" />
-          <Property Type="Int32" Name="MedicalCompleted" Nullable="false" />
+          <Property Type="Int32" Name="Total" Nullable="false" />
           <Property Type="Int32" Name="MedicalTotal" Nullable="false" />
-          <Property Type="Int32" Name="LegalCompleted" Nullable="false" />
           <Property Type="Int32" Name="LegalTotal" Nullable="false" />
-          <Property Type="Int32" Name="EmotionalCompleted" Nullable="false" />
           <Property Type="Int32" Name="EmotionalTotal" Nullable="false" />
-          <Property Type="Int32" Name="SocialCompleted" Nullable="false" />
           <Property Type="Int32" Name="SocialTotal" Nullable="false" />
+          <Property Type="Int32" Name="MedicalAssessmentCompleted" Nullable="false" />
+          <Property Type="Int32" Name="MedicalTaskCompleted" Nullable="false" />
+          <Property Type="Int32" Name="LegalAssessmentCompleted" Nullable="false" />
+          <Property Type="Int32" Name="LegalTaskCompleted" Nullable="false" />
+          <Property Type="Int32" Name="SocialAssessmentCompleted" Nullable="false" />
+          <Property Type="Int32" Name="SocialTaskCompleted" Nullable="false" />
+          <Property Type="Int32" Name="EmotionalAssessmentCompleted" Nullable="false" />
+          <Property Type="Int32" Name="EmotionalTaskCompleted" Nullable="false" />
         </EntityType>
         <Association Name="Uservw_ParentSummary">
           <End Type="AgingModel.User" Role="User" Multiplicity="1" />
@@ -871,14 +895,18 @@
           <EntitySetMapping Name="vw_ParentSummary">
             <EntityTypeMapping TypeName="IsTypeOf(AgingModel.vw_ParentSummary)">
               <MappingFragment StoreEntitySet="vw_ParentSummary">
+                <ScalarProperty Name="EmotionalTaskCompleted" ColumnName="EmotionalTaskCompleted" />
+                <ScalarProperty Name="EmotionalAssessmentCompleted" ColumnName="EmotionalAssessmentCompleted" />
+                <ScalarProperty Name="SocialTaskCompleted" ColumnName="SocialTaskCompleted" />
+                <ScalarProperty Name="SocialAssessmentCompleted" ColumnName="SocialAssessmentCompleted" />
+                <ScalarProperty Name="LegalTaskCompleted" ColumnName="LegalTaskCompleted" />
+                <ScalarProperty Name="LegalAssessmentCompleted" ColumnName="LegalAssessmentCompleted" />
+                <ScalarProperty Name="MedicalTaskCompleted" ColumnName="MedicalTaskCompleted" />
+                <ScalarProperty Name="MedicalAssessmentCompleted" ColumnName="MedicalAssessmentCompleted" />
                 <ScalarProperty Name="SocialTotal" ColumnName="SocialTotal" />
-                <ScalarProperty Name="SocialCompleted" ColumnName="SocialCompleted" />
                 <ScalarProperty Name="EmotionalTotal" ColumnName="EmotionalTotal" />
-                <ScalarProperty Name="EmotionalCompleted" ColumnName="EmotionalCompleted" />
                 <ScalarProperty Name="LegalTotal" ColumnName="LegalTotal" />
-                <ScalarProperty Name="LegalCompleted" ColumnName="LegalCompleted" />
                 <ScalarProperty Name="MedicalTotal" ColumnName="MedicalTotal" />
-                <ScalarProperty Name="MedicalCompleted" ColumnName="MedicalCompleted" />
                 <ScalarProperty Name="Total" ColumnName="Total" />
                 <ScalarProperty Name="Completed" ColumnName="Completed" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
@@ -988,8 +1016,8 @@
         <AssociationConnector Association="AgingModel.FK_Parent_State" ManuallyRouted="false">
           <ConnectorPoint PointX="2.875" PointY="5.375" />
           <ConnectorPoint PointX="3.25" PointY="5" />
-          <ConnectorPoint PointX="3.25" PointY="2.8328855805588309" />
-          <ConnectorPoint PointX="3.625" PointY="2.8328855805588309" />
+          <ConnectorPoint PointX="3.25" PointY="2.832549947235325" />
+          <ConnectorPoint PointX="3.625" PointY="2.832549947235325" />
         </AssociationConnector>
         <AssociationConnector Association="AgingModel.FK_TaskSurveyResponse_Parent" ManuallyRouted="false">
           <ConnectorPoint PointX="5.125" PointY="2.278595377759387" />
@@ -1014,15 +1042,13 @@
           <ConnectorPoint PointX="6" PointY="6.3362939453125016" />
         </AssociationConnector>
         <EntityTypeShape EntityType="AgingModel.Audit" Width="1.5" PointX="12.375" PointY="2.75" Height="2.5571907552083353" />
-        <EntityTypeShape EntityType="AgingModel.vw_ParentSummary" Width="2.75" PointX="8.875" PointY="0.625" Height="3.7109993489583326" />
+        <EntityTypeShape EntityType="AgingModel.vw_ParentSummary" Width="2.75" PointX="9.25" PointY="0.5" Height="4.4802050781249987" />
         <AssociationConnector Association="AgingModel.Uservw_ParentSummary">
-          <ConnectorPoint PointX="2.875" PointY="3.8796772351762816" />
-          <ConnectorPoint PointX="3.1910744349011213" PointY="4.195751670077402" />
-          <ConnectorPoint PointX="3.3089255650988791" PointY="4.31360280027516" />
-          <ConnectorPoint PointX="3.5625" PointY="4.5671772351762812" />
-          <ConnectorPoint PointX="3.5625" PointY="4.7109993489583335" />
-          <ConnectorPoint PointX="8.5" PointY="4.7109993489583335" />
-          <ConnectorPoint PointX="8.875" PointY="4.3359993489583335" />
+          <ConnectorPoint PointX="1.8125" PointY="3.9417936197916665" />
+          <ConnectorPoint PointX="1.8125" PointY="4.4609998489583322" />
+          <ConnectorPoint PointX="3.1666666666666665" PointY="4.4609998489583313" />
+          <ConnectorPoint PointX="3.3333333333333335" PointY="4.4609998489583322" />
+          <ConnectorPoint PointX="9.25" PointY="4.4609998489583322" />
         </AssociationConnector>
         <EntityTypeShape EntityType="AgingModel.Survey2" Width="2.125" PointX="15.125" PointY="3" Height="3.3263964843749996" />
         <EntityTypeShape EntityType="AgingModel.Resource" Width="2.125" PointX="2" PointY="10.125" Height="2.5571907552083317" />

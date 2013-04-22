@@ -11,8 +11,6 @@ namespace AgingMVC.Controllers
         //[CacheControl(HttpCacheability.NoCache)]
         public ActionResult Index()
         {
-            //ViewBag.Message = "Welcome to Parent Care Readiness";
-
             if (Request.IsAuthenticated)
             {
                 AgingMVC.Models.User user = null;
@@ -21,6 +19,8 @@ namespace AgingMVC.Controllers
                     user = context.User.Include("ParentSummaries").First(u => u.UserName == this.User.Identity.Name);
                     //user.Parents.Load();
 
+
+                    // Do I need to do the reselect?  Aren't I just using the naked values?  Trims up what is in the JSON...
                     var parentSummariesQuery = from pi in user.ParentSummaries
                                                orderby pi.FirstName
                                                select new
@@ -28,43 +28,39 @@ namespace AgingMVC.Controllers
                                                    //ParentId = pi.ParentID,
                                                    Name = pi.FirstName,
 
-                                                   pi.MedicalCompleted,
+                                                   pi.MedicalAssessmentCompleted,
+                                                   pi.MedicalTaskCompleted,
                                                    pi.MedicalTotal,
-                                                   MedicalProgress = 100 * pi.MedicalCompleted / pi.MedicalTotal,
-                                                   MedicalText = "",
 
-                                                   pi.LegalCompleted,
+                                                   pi.LegalAssessmentCompleted,
+                                                   pi.LegalTaskCompleted,
                                                    pi.LegalTotal,
-                                                   LegalProgress = 100 * pi.LegalCompleted / pi.LegalTotal,
-                                                   LegalText = "",
 
-                                                   pi.SocialCompleted,
+                                                   pi.SocialAssessmentCompleted,
+                                                   pi.SocialTaskCompleted,
                                                    pi.SocialTotal,
-                                                   SocialProgress = 100 * pi.SocialCompleted / pi.SocialTotal,
-                                                   SocialText = "",
 
-                                                   pi.EmotionalCompleted,
+                                                   pi.EmotionalAssessmentCompleted,
+                                                   pi.EmotionalTaskCompleted,
                                                    pi.EmotionalTotal,
-                                                   EmotionalProgress = 100 * pi.EmotionalCompleted / pi.EmotionalTotal,
-                                                   EmotionalText = "",
+
+                                                   pi.Completed,
+                                                   pi.Total
 
                                                };
 
-                    
+
                     var parentSummariesDict = parentSummariesQuery.ToDictionary(k => k.Name, v => v);
 
 
                     ViewBag.FirstParent = parentSummariesDict.Keys.FirstOrDefault();
-
+                    ViewBag.CanAddParent = (parentSummariesDict.Count < 4);
                     string parentInfo = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(parentSummariesDict);
                     ViewBag.ParentData = parentInfo;
                 }
 
-                ViewBag.MedicalProgress = 37;
-                ViewBag.LegalProgress = 80;
-                ViewBag.SocialProgress = 0;
-                ViewBag.EmotionalProgress = 100;
-
+                if (Request.QueryString["old"] != null)
+                    return View("UserIndex", user);
 
                 return View("UserIndex2", user);
             }
@@ -76,6 +72,7 @@ namespace AgingMVC.Controllers
         {
             return View();
         }
+
         public ActionResult AboutUs()
         {
             return View();
@@ -85,5 +82,12 @@ namespace AgingMVC.Controllers
         {
             return View();
         }
+
+        public ActionResult Help()
+        {
+            return View("Help");
+        }
+
+        //private string StatusString(int )
     }
 }

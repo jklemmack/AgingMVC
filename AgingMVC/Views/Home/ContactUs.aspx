@@ -5,7 +5,7 @@
 </asp:Content>
 
 <asp:Content ID="aboutContent" ContentPlaceHolderID="MainContent" runat="server">
-    <h2>About</h2>
+    <div class="heading"><h1>About</h1></div>
     <p>
         E-mail or for with CAPTCHA
     </p>
