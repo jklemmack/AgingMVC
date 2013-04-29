@@ -6,14 +6,18 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="heading">
         <h1> 
-        Here are your most important tasks for the
-        <%:ViewBag.DomainShortName%></h1></div>
+        Your Most Important 
+        <%:ViewBag.DomainName%> </h1></div>
+        <div style="width: 900px; margin-bottom: 20px;" >
+        Below are your most important <%:ViewBag.DomainName %>.  Select one of the tasks to learn more about it, then use the <i>View Resources</i> link at the bottom of the description to access local and national resources to help you complete that task.
+        </div>
     <div style="width: 450px; clear:tasks; float: left;">
         <%foreach (var task in Model)
           { %>
         <div class="Task" style="cursor: pointer" taskid="<%: task.TaskId %>">
             <%: task.ShortText %></div>
         <%} %>
+        <a href="#"></a>
     </div>
     <div style="width: 450px; float: right; ">
         <div id="resourceheader">

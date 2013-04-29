@@ -38,6 +38,7 @@ namespace AgingMVC.Controllers
 
                 ViewBag.TaskData = taskInfo;
                 ViewBag.DomainShortName = domain.ShortName;
+                ViewBag.DomainName = domain.Name;
                 ViewBag.Parent = Parent;
 
                 return View("TasksByDomain", model.ToList());

@@ -74,7 +74,6 @@ namespace AgingMVC.Models
         [Display(Name = "Security Answer")]
         public string SecurityAnswer { get; set; }
 
-        [Required]
         [DataType(DataType.Text)]
         [Display(Name = "Group Code")]
         public string GroupCode { get; set; }

@@ -38,6 +38,20 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ParentCareProduction|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisLogFile>bin\AgingMVC.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.4.1.10331.0\lib\EntityFramework.dll</HintPath>
@@ -102,7 +116,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Views\Account\AccountController.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AssessmentController.cs" />
     <Compile Include="Controllers\Code\CacheControlAttribute.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -429,25 +443,42 @@
     <Content Include="Images\background.gif" />
     <Content Include="Images\header_background.jpg" />
     <Content Include="Images\home_photo.jpg" />
+    <Content Include="Images\home_photo1.jpg" />
+    <Content Include="Images\home_photo2.jpg" />
+    <Content Include="Images\home_photo3.jpg" />
     <Content Include="Images\home_thumb_emotional.gif" />
+    <Content Include="Images\home_thumb_emotional.jpg" />
     <Content Include="Images\home_thumb_family.gif" />
+    <Content Include="Images\home_thumb_family.jpg" />
     <Content Include="Images\home_thumb_legal.gif" />
+    <Content Include="Images\home_thumb_legal.jpg" />
     <Content Include="Images\home_thumb_medical.gif" />
+    <Content Include="Images\home_thumb_medical.jpg" />
+    <Content Include="Images\loading.gif" />
     <Content Include="Images\logo.gif" />
     <Content Include="Images\university_logo.gif" />
     <Content Include="Images\video_filler.jpg" />
+    <Content Include="Images\video_thumb1.jpg" />
+    <Content Include="Images\video_thumb2.jpg" />
     <Content Include="jwplayer\jwplayer.flash.swf" />
     <Content Include="jwplayer\jwplayer.html5.js" />
     <Content Include="jwplayer\jwplayer.js" />
     <Content Include="Scripts\jquery-2.0.0-vsdoc.js" />
     <Content Include="Scripts\jquery-2.0.0.js" />
     <Content Include="Scripts\jquery-2.0.0.min.js" />
+    <Content Include="Scripts\jquery-migrate-1.1.1.js" />
+    <Content Include="Scripts\jquery-migrate-1.1.1.min.js" />
     <Content Include="Scripts\jquery-ui-1.8.24.js" />
     <Content Include="Scripts\jquery-ui-1.8.24.min.js" />
     <Content Include="Scripts\jquery.jcarousel.min.js" />
+    <Content Include="Content\jquery.loadmask.css" />
+    <Content Include="Scripts\jquery.loadmask.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\slides.min.jquery.js" />
+    <Content Include="Scripts\spin.js" />
+    <Content Include="Scripts\spin.min.js" />
     <Content Include="Views\Assessment\Assessment.aspx" />
     <Content Include="Views\Assessment\AssessmentEnd.aspx" />
     <Content Include="Views\Assessment\AssessmentIntro.aspx" />
@@ -578,6 +609,9 @@
     <Content Include="Content\Videos\DrivingDaisy2.f4v" />
     <Content Include="Content\Videos\DrivingDaisy3.f4v" />
     <None Include="Scripts\jquery-2.0.0.min.map" />
+    <Content Include="Web.ParentCareProduction.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
