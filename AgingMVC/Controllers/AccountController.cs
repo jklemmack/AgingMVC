@@ -41,10 +41,10 @@ namespace AgingMVC.Controllers
                         return RedirectToAction("Index", "Home");
                     }
                 }
-                else
-                {
-                    ModelState.AddModelError("", "The user name or password provided is incorrect.");
-                }
+                //else
+                //{
+                //    ModelState.AddModelError("", "The user name or password provided is incorrect.");
+                //}
             }
 
             // If we got this far, something failed, redisplay form

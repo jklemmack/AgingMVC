@@ -104,6 +104,8 @@
 
 
             /*** MEDICAL *********************************************************/
+            $("medicalImageLink").attr("href", "/Assessment/Medical/" + parent);
+
             if (data.MedicalAssessmentCompleted == data.MedicalTotal)
             {
                 $("#MedicalStatus").text(data.MedicalTaskCompleted + " of " + data.MedicalTotal + " tasks completed");
@@ -121,6 +123,7 @@
 
 
             /*** LEGAL *********************************************************/
+            $("legalImageLink").attr("href", "/Assessment/Legal/" + parent);
             if (data.LegalAssessmentCompleted == data.LegalTotal)
             {
                 $("#LegalStatus").text(data.LegalTaskCompleted + " of " + data.LegalTotal + " tasks completed");
@@ -137,6 +140,7 @@
             }
 
             /*** SOCIAL *********************************************************/
+            $("socialImageLink").attr("href", "/Assessment/Social/" + parent);
             if (data.SocialAssessmentCompleted == data.SocialTotal)
             {
                 $("#SocialStatus").text(data.SocialTaskCompleted + " of " + data.SocialTotal + " tasks completed");
@@ -153,6 +157,7 @@
             }
 
             /*** EMOTIONAL *********************************************************/
+            $("emotionalImageLink").attr("href", "/Assessment/Emotional/" + parent);
             if (data.EmotionalAssessmentCompleted == data.EmotionalTotal)
             {
                 $("#EmotionalStatus").text(data.EmotionalTaskCompleted + " of " + data.EmotionalTotal + " tasks completed");
@@ -250,7 +255,7 @@
     <div id="domains" style="border-color: #edeae5; border-width: medium; border-style: solid;
         min-height: 250px;">
         <div class="domain">
-            <a name="Medical" id="Medical" href="/">
+            <a name="Medical" id="medicalImageLink" href="/">
                 <img src="/images/home_thumb_medical.jpg" width="116" alt="Link to Medical Assessment" /><br />
             </a>
             <div id="MedicalStatus">
@@ -259,7 +264,7 @@
                 <a href="#" id="MedicalLink">Continue Medical Evaluation</a></div>
         </div>
         <div class="domain">
-            <a name="Legal" id="Legal" href="/">
+            <a name="Legal" id="legalImageLink" href="/">
                 <img src="/images/home_thumb_legal.jpg" width="116" /><br />
             </a>
             <div id="LegalStatus">
@@ -269,7 +274,7 @@
                 <a href="#" id="LegalLink">Continue Legal & Financial Evaluation</a></div>
         </div>
         <div class="domain">
-            <a name="Social" id="A1" href="/">
+            <a name="Social" id="socialImageLink" href="/">
                 <img src="/images/home_thumb_family.jpg" width="116" /><br />
             </a>
             <div id="SocialStatus">
@@ -279,7 +284,7 @@
                 <a href="#" id="SocialLink">Continue Family & Social Evaluation</a></div>
         </div>
         <div class="domain">
-            <a name="Emotional" id="A2" href="/">
+            <a name="Emotional" id="emotionalImageLink" href="/">
                 <img src="/images/home_thumb_emotional.jpg" width="116" /><br />
             </a>
             <div id="EmotionalStatus">

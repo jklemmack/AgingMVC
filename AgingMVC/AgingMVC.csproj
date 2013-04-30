@@ -63,12 +63,6 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="PoliteCaptcha">
-      <HintPath>..\packages\PoliteCaptcha.0.4.0.1\lib\net40\PoliteCaptcha.dll</HintPath>
-    </Reference>
-    <Reference Include="Recaptcha">
-      <HintPath>..\packages\recaptcha.1.0.5.0\lib\.NetFramework 4.0\Recaptcha.dll</HintPath>
-    </Reference>
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -377,6 +371,7 @@
     <Content Include="Content\Images\videothumbs\novideo.png" />
     <Content Include="Content\Images\videothumbs\SpiritualDomain.png" />
     <Content Include="Content\jCarouselSkin.css" />
+    <Content Include="Content\themes\base\images\animated-overlay.gif" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -399,12 +394,16 @@
     <Content Include="Content\themes\base\jquery.ui.core.css" />
     <Content Include="Content\themes\base\jquery.ui.datepicker.css" />
     <Content Include="Content\themes\base\jquery.ui.dialog.css" />
+    <Content Include="Content\themes\base\jquery.ui.menu.css" />
     <Content Include="Content\themes\base\jquery.ui.progressbar.css" />
     <Content Include="Content\themes\base\jquery.ui.resizable.css" />
     <Content Include="Content\themes\base\jquery.ui.selectable.css" />
     <Content Include="Content\themes\base\jquery.ui.slider.css" />
+    <Content Include="Content\themes\base\jquery.ui.spinner.css" />
     <Content Include="Content\themes\base\jquery.ui.tabs.css" />
     <Content Include="Content\themes\base\jquery.ui.theme.css" />
+    <Content Include="Content\themes\base\jquery.ui.tooltip.css" />
+    <Content Include="Content\themes\base\minified\images\animated-overlay.gif" />
     <Content Include="Content\themes\base\minified\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\minified\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\minified\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -425,12 +424,15 @@
     <Content Include="Content\themes\base\minified\jquery.ui.core.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.datepicker.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.dialog.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.menu.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.progressbar.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.resizable.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.selectable.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.spinner.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.tooltip.min.css" />
     <Content Include="Content\Videos\FamilyDomain.mov.mp4" />
     <Content Include="Content\Videos\IntroParentCare.mp4" />
     <Content Include="Content\Videos\legalmedical.mov.flv" />
@@ -463,16 +465,15 @@
     <Content Include="jwplayer\jwplayer.flash.swf" />
     <Content Include="jwplayer\jwplayer.html5.js" />
     <Content Include="jwplayer\jwplayer.js" />
-    <Content Include="Scripts\jquery-2.0.0-vsdoc.js" />
-    <Content Include="Scripts\jquery-2.0.0.js" />
-    <Content Include="Scripts\jquery-2.0.0.min.js" />
-    <Content Include="Scripts\jquery-migrate-1.1.1.js" />
-    <Content Include="Scripts\jquery-migrate-1.1.1.min.js" />
-    <Content Include="Scripts\jquery-ui-1.8.24.js" />
-    <Content Include="Scripts\jquery-ui-1.8.24.min.js" />
+    <Content Include="Scripts\jquery-1.8.3-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.8.3.js" />
+    <Content Include="Scripts\jquery-1.8.3.min.js" />
+    <Content Include="Scripts\jquery-ui-1.10.2.js" />
+    <Content Include="Scripts\jquery-ui-1.10.2.min.js" />
     <Content Include="Scripts\jquery.jcarousel.min.js" />
     <Content Include="Content\jquery.loadmask.css" />
     <Content Include="Scripts\jquery.loadmask.min.js" />
+    <Content Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
@@ -608,7 +609,6 @@
     <Content Include="Content\Videos\DrivingDaisy1.f4v" />
     <Content Include="Content\Videos\DrivingDaisy2.f4v" />
     <Content Include="Content\Videos\DrivingDaisy3.f4v" />
-    <None Include="Scripts\jquery-2.0.0.min.map" />
     <Content Include="Web.ParentCareProduction.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
