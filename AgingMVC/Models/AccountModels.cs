@@ -27,6 +27,24 @@ namespace AgingMVC.Models
         public string ConfirmPassword { get; set; }
     }
 
+    public class ForgotPasswordModel
+    {
+        [Required]
+        [Display(Name= "User name")]
+        public string UserName { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "Security Question")]
+        public string SecurityQuestion { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "Security Answer")]
+        public string SecurityAnswer { get; set; }
+    }
+
+
     public class LogOnModel
     {
         [Required]
@@ -79,5 +97,6 @@ namespace AgingMVC.Models
         public string GroupCode { get; set; }
 
     }
+
 
 }

@@ -4,9 +4,10 @@
     Home Page
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-    <script src="Scripts/slides.min.jquery.js"></script>
-    <script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"
+        type="text/javascript"></script>
+    <script src="Scripts/slides.min.jquery.js" type="text/javascript"></script>
+    <script type="text/javascript">
         $(function () {
             $("#slides").slides({
                 fadeSpeed: 350,
@@ -193,7 +194,7 @@
                 <img src="../../images/home_thumb_emotional.jpg" width="115" height="130" /></p>
         </div>
         <div class="home_right">
-            <div class="video_box">
+            <div class="video_box" id="introvideo" style="cursor: pointer">
                 <img src="/images/video_thumb2.jpg" width="140" height="98" align="left" style="padding: 0px 10px 0px 0px;" />
                 Most adult children assume care giving duties for a parent after a health event.
                 In the movie "Dad", Jack Lemmon's wife, his primary care giver, suffers a heart
@@ -202,7 +203,7 @@
                 the importance of being prepared for caring for an aging parent.<br />
                 <br />
             </div>
-            <div class="video_box" style="clear: both;">
+            <div class="video_box" id="mikevideo" style="cursor: pointer; clear: both;">
                 <img src="/images/video_thumb1.jpg" alt="" width="140" height="98" align="left" style="padding: 0px 10px 0px 0px;" />
                 Dr. Michael Parker, selected by the Hartford Foundation and Gerontological Society
                 of America as one of the top 10 geriatric scholars in the United States, explains
@@ -211,4 +212,60 @@
         <div style="clear: both;">
         </div>
     </div>
+    <div id="videoDialog1" style="display: none;">
+        <% Html.RenderPartial("/Views/Shared/VideoPlayer.ascx",
+               new AgingMVC.Models.VideoModel() { ID = "video1", Video = "/Content/Videos/IntroParentCare.mp4" }); %>
+        <div id="videodescription1">
+            Most adult children assume care giving duties for a parent after a health event.
+            In the movie "Dad", Jack Lemmon's wife, his primary care giver, suffers a heart
+            attack and thrusts both of his adult children into caregiving duties - duties for
+            which his son, played by Ted Danson, is totally unprepared. This video emphasizes
+            the importance of being prepared for caring for an aging parent.
+        </div>
+    </div>
+    <div id="videoDialog2" style="display: none;">
+        <% Html.RenderPartial("/Views/Shared/VideoPlayer.ascx",
+               new AgingMVC.Models.VideoModel() { ID = "video2", Video = "/Content/Videos/IntroParentCare.mp4" }); %>
+        <div id="videodescription2">
+            Dr. Michael Parker, selected by the Hartford Foundation and Gerontological Society
+            of America as one of the top 10 geriatric scholars in the United States, explains
+            the importance of completing the AgeReady Assessment.
+        </div>
+    </div>
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="HeaderContent" runat="server">
+    <script src="/jaris/jarisflvplayer.js" type="text/javascript"></script>
+    <script language="javascript" type="text/javascript">
+        var player1, player2;
+
+        $(function () {
+            player1 = new JarisFLVPlayer("video1");
+
+            $("#introvideo").click(function () {
+
+                $("#videoDialog1").dialog({
+                    modal: true,
+                    resizable: false,
+                    width: 595,
+                    height: "auto",
+                    buttons: { Ok: function () { $(this).dialog("close"); } }
+                });
+
+            });
+
+            player2 = new JarisFLVPlayer("video2");
+
+            $("#mikevideo").click(function () {
+
+                $("#videoDialog2").dialog({
+                    modal: true,
+                    resizable: false,
+                    width: 595,
+                    height: "auto",
+                    buttons: { Ok: function () { $(this).dialog("close"); } }
+                });
+
+            });
+        });
+    </script>
 </asp:Content>

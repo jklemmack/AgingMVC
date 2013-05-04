@@ -38,6 +38,7 @@
             float: left;
             text-align: center;
             margin: 5px;
+            position: relative;
         }
         
         .carerecipientselected
@@ -104,8 +105,8 @@
 
 
             /*** MEDICAL *********************************************************/
-            $("medicalImageLink").attr("href", "/Assessment/Medical/" + parent);
-
+            $("#medicalImageLink").attr("href", "/Assessment/Medical/" + parent);
+            $("#MedicalStatus").attr("href", "/Assessment/Medical/" + parent);
             if (data.MedicalAssessmentCompleted == data.MedicalTotal)
             {
                 $("#MedicalStatus").text(data.MedicalTaskCompleted + " of " + data.MedicalTotal + " tasks completed");
@@ -123,7 +124,8 @@
 
 
             /*** LEGAL *********************************************************/
-            $("legalImageLink").attr("href", "/Assessment/Legal/" + parent);
+            $("#legalImageLink").attr("href", "/Assessment/Legal/" + parent);
+            $("#LegalStatus").attr("href", "/Assessment/Medical/" + parent);
             if (data.LegalAssessmentCompleted == data.LegalTotal)
             {
                 $("#LegalStatus").text(data.LegalTaskCompleted + " of " + data.LegalTotal + " tasks completed");
@@ -140,7 +142,8 @@
             }
 
             /*** SOCIAL *********************************************************/
-            $("socialImageLink").attr("href", "/Assessment/Social/" + parent);
+            $("#socialImageLink").attr("href", "/Assessment/Social/" + parent);
+            $("#SocialStatus").attr("href", "/Assessment/Medical/" + parent);
             if (data.SocialAssessmentCompleted == data.SocialTotal)
             {
                 $("#SocialStatus").text(data.SocialTaskCompleted + " of " + data.SocialTotal + " tasks completed");
@@ -157,7 +160,8 @@
             }
 
             /*** EMOTIONAL *********************************************************/
-            $("emotionalImageLink").attr("href", "/Assessment/Emotional/" + parent);
+            $("#emotionalImageLink").attr("href", "/Assessment/Emotional/" + parent);
+            $("#EmotionalStatus").attr("href", "/Assessment/Medical/" + parent);
             if (data.EmotionalAssessmentCompleted == data.EmotionalTotal)
             {
                 $("#EmotionalStatus").text(data.EmotionalTaskCompleted + " of " + data.EmotionalTotal + " tasks completed");
@@ -258,8 +262,10 @@
             <a name="Medical" id="medicalImageLink" href="/">
                 <img src="/images/home_thumb_medical.jpg" width="116" alt="Link to Medical Assessment" /><br />
             </a>
-            <div id="MedicalStatus">
-                Assessment not completed</div>
+            <div>
+                <a href="#" id="MedicalStatus" style="position: absolute; top: 171px;">Assessment not
+                    completed</a>
+            </div>
             <div class="assessmentlink">
                 <a href="#" id="MedicalLink">Continue Medical Evaluation</a></div>
         </div>
@@ -267,8 +273,9 @@
             <a name="Legal" id="legalImageLink" href="/">
                 <img src="/images/home_thumb_legal.jpg" width="116" /><br />
             </a>
-            <div id="LegalStatus">
-                Assessment not completed
+            <div>
+                <a href="#" id="LegalStatus" style="position: absolute; top: 171px;">Assessment not
+                    completed</a>
             </div>
             <div class="assessmentlink">
                 <a href="#" id="LegalLink">Continue Legal & Financial Evaluation</a></div>
@@ -277,8 +284,9 @@
             <a name="Social" id="socialImageLink" href="/">
                 <img src="/images/home_thumb_family.jpg" width="116" /><br />
             </a>
-            <div id="SocialStatus">
-                Assessment not completed
+            <div>
+                <a href="#" id="SpcialStatus" style="position: absolute; top: 171px;">Assessment not
+                    completed</a>
             </div>
             <div class="assessmentlink">
                 <a href="#" id="SocialLink">Continue Family & Social Evaluation</a></div>
@@ -287,8 +295,9 @@
             <a name="Emotional" id="emotionalImageLink" href="/">
                 <img src="/images/home_thumb_emotional.jpg" width="116" /><br />
             </a>
-            <div id="EmotionalStatus">
-                Assessment not completed
+            <div>
+                <a href="#" id="EmotionalStatus" style="position: absolute; top: 171px;">Assessment
+                    not completed</a>
             </div>
             <div class="assessmentlink">
                 <a href="#" id="EmotionalLink">Continue Spiritual & Emotional Evaluation</a></div>
