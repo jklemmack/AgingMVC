@@ -263,8 +263,7 @@
                 <img src="/images/home_thumb_medical.jpg" width="116" alt="Link to Medical Assessment" /><br />
             </a>
             <div>
-                <a href="#" id="MedicalStatus" style="position: absolute; top: 171px;">Assessment not
-                    completed</a>
+                <a href="#" id="MedicalStatus">Assessment not completed</a>
             </div>
             <div class="assessmentlink">
                 <a href="#" id="MedicalLink">Continue Medical Evaluation</a></div>
@@ -274,8 +273,7 @@
                 <img src="/images/home_thumb_legal.jpg" width="116" /><br />
             </a>
             <div>
-                <a href="#" id="LegalStatus" style="position: absolute; top: 171px;">Assessment not
-                    completed</a>
+                <a href="#" id="LegalStatus">Assessment not completed</a>
             </div>
             <div class="assessmentlink">
                 <a href="#" id="LegalLink">Continue Legal & Financial Evaluation</a></div>
@@ -285,8 +283,7 @@
                 <img src="/images/home_thumb_family.jpg" width="116" /><br />
             </a>
             <div>
-                <a href="#" id="SpcialStatus" style="position: absolute; top: 171px;">Assessment not
-                    completed</a>
+                <a href="#" id="SpcialStatus">Assessment not completed</a>
             </div>
             <div class="assessmentlink">
                 <a href="#" id="SocialLink">Continue Family & Social Evaluation</a></div>
@@ -296,8 +293,7 @@
                 <img src="/images/home_thumb_emotional.jpg" width="116" /><br />
             </a>
             <div>
-                <a href="#" id="EmotionalStatus" style="position: absolute; top: 171px;">Assessment
-                    not completed</a>
+                <a href="#" id="EmotionalStatus">Assessment not completed</a>
             </div>
             <div class="assessmentlink">
                 <a href="#" id="EmotionalLink">Continue Spiritual & Emotional Evaluation</a></div>

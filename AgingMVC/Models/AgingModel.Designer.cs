@@ -1944,8 +1944,11 @@ namespace AgingMVC.Models
         partial void OnDomainIdChanged();
     
         /// <summary>
-        /// No Metadata Documentation available.
+        /// Order
         /// </summary>
+        /// <LongDescription>
+        /// The position of the task within its domain
+        /// </LongDescription>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.Int32 TaskOrder

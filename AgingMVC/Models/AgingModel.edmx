@@ -704,7 +704,12 @@
           <Property Type="Int32" Name="TaskId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="Int32" Name="ObjectiveId" Nullable="false" />
           <Property Type="Int32" Name="DomainId" Nullable="false" />
-          <Property Type="Int32" Name="TaskOrder" Nullable="false" />
+          <Property Type="Int32" Name="TaskOrder" Nullable="false" >
+            <Documentation>
+              <Summary>Order</Summary>
+              <LongDescription>The position of the task within its domain</LongDescription>
+            </Documentation>
+          </Property>
           <Property Type="String" Name="ShortText" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="PromptText" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="AssessmentText" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />

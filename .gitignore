@@ -112,3 +112,9 @@ AgingMVC/bin/AgingMVC.*
 # Big big binaries that make GIT suck eggs
 *.f4v
 *.mp4
+AgingMVC/jaris/jaris-intro.flv
+AgingMVC/AgingMVC.csproj
+AgingMVC/AgingMVC.csproj
+AgingMVC/AgingMVC.Publish.xml
+AgingMVC/bin/AgingMVC.dll
+AgingMVC/bin/AgingMVC.pdb

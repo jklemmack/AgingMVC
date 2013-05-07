@@ -9,6 +9,8 @@
                     <li><%: Html.ActionLink("Contact Us", "ContactUs", "Home")%></li>
                     <% if (Request.IsAuthenticated)
                        { %><li><%: Html.ActionLink("Help", "Help", "Home")%></li> <%} %>
+                    <% if (HttpContext.Current.User.IsInRole("Admin"))
+                       { %><li><%: Html.ActionLink("Admin", "Index", "Admin")%></li> <%} %>
                 </ul>
             </nav>
 </asp:Content>
