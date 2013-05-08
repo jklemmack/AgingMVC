@@ -19,19 +19,19 @@ namespace AgingMVC.Models
 
 
         [DataType(DataType.Text)]
-        [Display(Name = "Summary for self")]
+        [Display(Name = "Summary for other")]
         public string PromptText;
 
         [DataType(DataType.MultilineText)]
-        [Display(Name = "Details for self")]
+        [Display(Name = "Details for other")]
         public string AssessmentText;
 
         [DataType(DataType.Text)]
-        [Display(Name = "Summary for other")]
+        [Display(Name = "Summary for self")]
         public string PromptTextSelf;
 
         [DataType(DataType.MultilineText)]
-        [Display(Name = "Details for other")]
+        [Display(Name = "Details for self")]
         public string AssessmentTextSelf;
 
     }
