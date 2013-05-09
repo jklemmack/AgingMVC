@@ -125,7 +125,7 @@
 
             /*** LEGAL *********************************************************/
             $("#legalImageLink").attr("href", "/Assessment/Legal/" + parent);
-            $("#LegalStatus").attr("href", "/Assessment/Medical/" + parent);
+            $("#LegalStatus").attr("href", "/Assessment/Legal/" + parent);
             if (data.LegalAssessmentCompleted == data.LegalTotal)
             {
                 $("#LegalStatus").text(data.LegalTaskCompleted + " of " + data.LegalTotal + " tasks completed");
@@ -143,7 +143,7 @@
 
             /*** SOCIAL *********************************************************/
             $("#socialImageLink").attr("href", "/Assessment/Social/" + parent);
-            $("#SocialStatus").attr("href", "/Assessment/Medical/" + parent);
+            $("#SocialStatus").attr("href", "/Assessment/Social/" + parent);
             if (data.SocialAssessmentCompleted == data.SocialTotal)
             {
                 $("#SocialStatus").text(data.SocialTaskCompleted + " of " + data.SocialTotal + " tasks completed");
@@ -161,7 +161,7 @@
 
             /*** EMOTIONAL *********************************************************/
             $("#emotionalImageLink").attr("href", "/Assessment/Emotional/" + parent);
-            $("#EmotionalStatus").attr("href", "/Assessment/Medical/" + parent);
+            $("#EmotionalStatus").attr("href", "/Assessment/Emotional/" + parent);
             if (data.EmotionalAssessmentCompleted == data.EmotionalTotal)
             {
                 $("#EmotionalStatus").text(data.EmotionalTaskCompleted + " of " + data.EmotionalTotal + " tasks completed");
@@ -283,7 +283,7 @@
                 <img src="/images/home_thumb_family.jpg" width="116" /><br />
             </a>
             <div>
-                <a href="#" id="SpcialStatus">Assessment not completed</a>
+                <a href="#" id="SocialStatus">Assessment not completed</a>
             </div>
             <div class="assessmentlink">
                 <a href="#" id="SocialLink">Continue Family & Social Evaluation</a></div>
