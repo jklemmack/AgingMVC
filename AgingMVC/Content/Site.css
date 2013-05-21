@@ -478,7 +478,8 @@ position:absolute;
 background:#333;
 width:400px;
 height:290px;
- margin: 0 0 0 578px;	
+ margin: 0 0 0 578px;
+  z-index: 2147483647;	
 }
 
 .school_logo{
