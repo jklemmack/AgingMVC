@@ -8,7 +8,7 @@
         <h1>
             About Age Ready Now</h1>
     </div>
-    <p>
+      <img src="../../images/about_photo.jpg" width="500" height="333" hspace="10" align="right" /><p>
         Most often adults with elderly parents enter into caregiving with an abrupt, often
         medical-related, event such as a fall, stroke, or heart-attack. The caregivers are
         then caught between two lives: one where they respect and care for their elderly
