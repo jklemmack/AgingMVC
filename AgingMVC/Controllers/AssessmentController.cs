@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Profile;
+
 using AgingMVC.Models;
 
 namespace AgingMVC.Controllers
 {
     public class AssessmentController : Controller
     {
-        static Dictionary<int, List<PageInfo>> _views;
+        static Dictionary<string, List<PageInfo>> _views;
         static Dictionary<string, int> _domains;
 
 
@@ -33,7 +35,7 @@ namespace AgingMVC.Controllers
 
         static AssessmentController()
         {
-            _views = new Dictionary<int, List<PageInfo>>();
+            _views = new Dictionary<string, List<PageInfo>>();
 
             #region Medical
             List<PageInfo> medical = new List<PageInfo>();
@@ -45,7 +47,30 @@ namespace AgingMVC.Controllers
             medical.Add(new PageInfo() { Order = 5, ObjectiveId = 3, View = "ObjectiveIntro" });
             medical.Add(new PageInfo() { Order = 6, ObjectiveId = 3, View = "Assessment" });
             medical.Add(new PageInfo() { Order = 7, ObjectiveId = 3, View = "AssessmentEnd", Flags = PageFlags.LastPage });
-            _views.Add(1, medical);
+            _views.Add("medical", medical);
+            #endregion
+
+            #region MedicalA - identical to A
+            List<PageInfo> medicalA = new List<PageInfo>();
+            medicalA.Add(new PageInfo() { Order = 0, ObjectiveId = 1, View = "AssessmentIntro2", Flags = PageFlags.FirstPage });
+            medicalA.Add(new PageInfo() { Order = 1, ObjectiveId = 1, View = "ObjectiveIntro" });
+            medicalA.Add(new PageInfo() { Order = 2, ObjectiveId = 1, View = "Assessment" });
+            medicalA.Add(new PageInfo() { Order = 3, ObjectiveId = 2, View = "ObjectiveIntro" });
+            medicalA.Add(new PageInfo() { Order = 4, ObjectiveId = 2, View = "Assessment" });
+            medicalA.Add(new PageInfo() { Order = 5, ObjectiveId = 3, View = "ObjectiveIntro" });
+            medicalA.Add(new PageInfo() { Order = 6, ObjectiveId = 3, View = "Assessment" });
+            medicalA.Add(new PageInfo() { Order = 7, ObjectiveId = 3, View = "AssessmentEnd", Flags = PageFlags.LastPage });
+            _views.Add("medicalA", medicalA);
+            #endregion
+
+            #region MedicalB - no articulate (objective intros)
+            List<PageInfo> medicalB = new List<PageInfo>();
+            medicalB.Add(new PageInfo() { Order = 0, ObjectiveId = 1, View = "AssessmentIntro2", Flags = PageFlags.FirstPage });
+            medicalB.Add(new PageInfo() { Order = 1, ObjectiveId = 1, View = "Assessment" });
+            medicalB.Add(new PageInfo() { Order = 2, ObjectiveId = 2, View = "Assessment" });
+            medicalB.Add(new PageInfo() { Order = 3, ObjectiveId = 3, View = "Assessment" });
+            medicalB.Add(new PageInfo() { Order = 4, ObjectiveId = 3, View = "AssessmentEnd", Flags = PageFlags.LastPage });
+            _views.Add("medicalB", medicalB);
             #endregion
 
             #region Legal
@@ -55,7 +80,7 @@ namespace AgingMVC.Controllers
             legal.Add(new PageInfo() { Order = 2, ObjectiveId = 5, View = "Assessment2" });
             legal.Add(new PageInfo() { Order = 3, ObjectiveId = 6, View = "Assessment2" });
             legal.Add(new PageInfo() { Order = 4, ObjectiveId = 1, View = "AssessmentEnd" });
-            _views.Add(2, legal);
+            _views.Add("legal", legal);
             #endregion
 
             #region Family
@@ -68,7 +93,7 @@ namespace AgingMVC.Controllers
             //family.Add(new PageInfo() { Order = 5, ObjectiveId = 9, View = "ObjectiveIntro" });
             //family.Add(new PageInfo() { Order = 6, ObjectiveId = 9, View = "Assessment" });
             family.Add(new PageInfo() { Order = 2, ObjectiveId = 1, View = "AssessmentEnd" });
-            _views.Add(3, family);
+            _views.Add("family", family);
             #endregion
 
             #region Emotional
@@ -83,7 +108,7 @@ namespace AgingMVC.Controllers
             emotional.Add(new PageInfo() { Order = 7, ObjectiveId = 16, View = "Assessment3" });
             emotional.Add(new PageInfo() { Order = 8, ObjectiveId = 17, View = "Assessment3" });
             emotional.Add(new PageInfo() { Order = 9, ObjectiveId = 1, View = "AssessmentEnd" });
-            _views.Add(4, emotional);
+            _views.Add("emotional", emotional);
             #endregion
 
             _domains = new Dictionary<string, int>();
@@ -108,7 +133,8 @@ namespace AgingMVC.Controllers
                 Page = 0;
 
             //load model
-            PageInfo pageInfo = _views[DomainId][Page.Value];
+
+            PageInfo pageInfo = GetPage(Domain, Page);
             Models.Domain domain = null;
             object model = null;
 
@@ -118,8 +144,8 @@ namespace AgingMVC.Controllers
                 case "AssessmentIntro2":
 
                     domain = (from d in db.Domains.Include("Videos")
-                                            where d.DomainId == DomainId
-                                            select d).Single<Models.Domain>();
+                              where d.DomainId == DomainId
+                              select d).Single<Models.Domain>();
 
                     foreach (Video v in domain.Videos)
                     {
@@ -153,8 +179,8 @@ namespace AgingMVC.Controllers
                     break;
                 case "AssessmentEnd":
                     domain = (from d in db.Domains.Include("Videos")
-                                            where d.DomainId == DomainId
-                                            select d).Single<Models.Domain>();
+                              where d.DomainId == DomainId
+                              select d).Single<Models.Domain>();
                     model = domain;
                     ViewBag.DomainName = domain.Name;
                     ViewBag.ShortName = domain.ShortName;
@@ -227,14 +253,16 @@ namespace AgingMVC.Controllers
         [Authorize]
         public ActionResult Index(string Domain, string Parent, int? Page, FormCollection formData)
         {
-            int DomainId = -1;
-            if (!_domains.TryGetValue(Domain, out DomainId))
-            {
-                //return error...
-                throw new ArgumentOutOfRangeException("Unknown domain");
-            }
+            //int DomainId = -1;
+            //if (!_domains.TryGetValue(Domain, out DomainId))
+            //{
+            //    //return error...
+            //    throw new ArgumentOutOfRangeException("Unknown domain");
+            //}
+            ProfileBase profile = ProfileBase.Create(HttpContext.User.Identity.Name);
 
-            PageInfo pageInfo = _views[DomainId].Single(pi => pi.Order == Page.Value);
+            //PageInfo pageInfo = _views[Domain.ToLower() + GetUserAB()].Single(pi => pi.Order == Page.Value);
+            PageInfo pageInfo = GetPage(Domain, Page);
 
             Guid userId = db.User.First(u => u.UserName == this.User.Identity.Name).UserId;
             Guid parentId = db.Parents.First(p => p.UserID == userId
@@ -295,6 +323,26 @@ namespace AgingMVC.Controllers
 
             }
             return string.Format(format, display);
+        }
+
+        private PageInfo GetPage(string Domain, int? Page)
+        {
+            List<PageInfo> list;
+            if (_views.TryGetValue(Domain.ToLower() + GetUserAB(), out list))
+                return list[Page.Value];
+
+            return _views[Domain][Page.Value];
+        }
+
+        private string GetUserAB()
+        {
+            ProfileBase profile = ProfileBase.Create(HttpContext.User.Identity.Name);
+            string code = (string)profile.GetPropertyValue("groupCode");
+            if (code == "111111")
+                return "A";
+            else if (code == "222222")
+                return "B";
+            return "";
         }
     }
 }
