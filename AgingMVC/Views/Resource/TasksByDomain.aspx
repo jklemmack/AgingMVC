@@ -32,6 +32,7 @@
         <div id="resourcetext">
         </div>
         <div id="resourcefooter">
+            <br />
             <a href="#" id="resourcelink">View Resources to help you complete this task.</a>
         </div>
     </div>
@@ -71,7 +72,7 @@
         $("#resourceheader").html('<b>' + task.PromptText + '</b>');
         $("#resourcetext").html(task.AssessmentText);
         $("#resourcelink").attr("href", "/Resources/<%:ViewBag.Parent %>/<%:ViewBag.DomainShortName %>/" + taskID);
-        
+
         $('.Task').each(function() { 
             $(this).removeClass('selected'); 
             });
