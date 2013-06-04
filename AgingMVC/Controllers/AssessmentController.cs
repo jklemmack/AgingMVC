@@ -83,31 +83,28 @@ namespace AgingMVC.Controllers
             _views.Add("legal", legal);
             #endregion
 
-            #region Family
-            List<PageInfo> family = new List<PageInfo>();
-            family.Add(new PageInfo() { Order = 0, ObjectiveId = 1, View = "AssessmentIntro2" });
-            //family.Add(new PageInfo() { Order = 1, ObjectiveId = 7, View = "ObjectiveIntro" });
-            family.Add(new PageInfo() { Order = 1, ObjectiveId = 7, View = "Assessment" });
-            //family.Add(new PageInfo() { Order = 3, ObjectiveId = 8, View = "ObjectiveIntro" });
-            //family.Add(new PageInfo() { Order = 4, ObjectiveId = 8, View = "Assessment" });
-            //family.Add(new PageInfo() { Order = 5, ObjectiveId = 9, View = "ObjectiveIntro" });
-            //family.Add(new PageInfo() { Order = 6, ObjectiveId = 9, View = "Assessment" });
-            family.Add(new PageInfo() { Order = 2, ObjectiveId = 1, View = "AssessmentEnd" });
-            _views.Add("family", family);
+            #region Social
+            List<PageInfo> social = new List<PageInfo>();
+            social.Add(new PageInfo() { Order = 0, ObjectiveId = 1, View = "AssessmentIntro2" });
+            social.Add(new PageInfo() { Order = 1, ObjectiveId = 7, View = "Assessment" });
+            //social.Add(new PageInfo() { Order = 2, ObjectiveId = 8, View = "Assessment" });
+            //social.Add(new PageInfo() { Order = 3, ObjectiveId = 9, View = "Assessment" });
+            social.Add(new PageInfo() { Order = 2, ObjectiveId = 1, View = "AssessmentEnd" });
+            _views.Add("social", social);
             #endregion
 
             #region Emotional
             List<PageInfo> emotional = new List<PageInfo>();
             emotional.Add(new PageInfo() { Order = 0, ObjectiveId = 1, View = "AssessmentIntro2" });
             emotional.Add(new PageInfo() { Order = 1, ObjectiveId = 10, View = "Assessment3" });
-            emotional.Add(new PageInfo() { Order = 2, ObjectiveId = 11, View = "Assessment3" });
-            emotional.Add(new PageInfo() { Order = 3, ObjectiveId = 12, View = "Assessment3" });
-            emotional.Add(new PageInfo() { Order = 4, ObjectiveId = 13, View = "Assessment3" });
-            emotional.Add(new PageInfo() { Order = 5, ObjectiveId = 14, View = "Assessment3" });
-            emotional.Add(new PageInfo() { Order = 6, ObjectiveId = 15, View = "Assessment3" });
-            emotional.Add(new PageInfo() { Order = 7, ObjectiveId = 16, View = "Assessment3" });
-            emotional.Add(new PageInfo() { Order = 8, ObjectiveId = 17, View = "Assessment3" });
-            emotional.Add(new PageInfo() { Order = 9, ObjectiveId = 1, View = "AssessmentEnd" });
+            //emotional.Add(new PageInfo() { Order = 2, ObjectiveId = 11, View = "Assessment3" });
+            //emotional.Add(new PageInfo() { Order = 3, ObjectiveId = 12, View = "Assessment3" });
+            //emotional.Add(new PageInfo() { Order = 4, ObjectiveId = 13, View = "Assessment3" });
+            //emotional.Add(new PageInfo() { Order = 5, ObjectiveId = 14, View = "Assessment3" });
+            //emotional.Add(new PageInfo() { Order = 6, ObjectiveId = 15, View = "Assessment3" });
+            //emotional.Add(new PageInfo() { Order = 7, ObjectiveId = 16, View = "Assessment3" });
+            //emotional.Add(new PageInfo() { Order = 8, ObjectiveId = 17, View = "Assessment3" });
+            emotional.Add(new PageInfo() { Order = 3, ObjectiveId = 1, View = "AssessmentEnd" });
             _views.Add("emotional", emotional);
             #endregion
 
@@ -331,7 +328,7 @@ namespace AgingMVC.Controllers
             if (_views.TryGetValue(Domain.ToLower() + GetUserAB(), out list))
                 return list[Page.Value];
 
-            return _views[Domain][Page.Value];
+            return _views[Domain.ToLower()][Page.Value];
         }
 
         private string GetUserAB()
