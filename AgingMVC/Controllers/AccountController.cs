@@ -85,6 +85,7 @@ namespace AgingMVC.Controllers
                 Membership.CreateUser(model.UserName, model.Password, model.Email, model.SecurityQuestion, model.SecurityAnswer, true, null, out createStatus);
 
                 ProfileBase profile = ProfileBase.Create(model.UserName);
+                
                 profile.SetPropertyValue("groupCode", model.GroupCode);
                 profile.Save();
 
