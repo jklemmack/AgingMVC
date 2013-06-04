@@ -6,9 +6,9 @@
                     <li><%: Html.ActionLink("Home", "Index", "Home")%></li>
                     <li><%: Html.ActionLink("About Age Ready", "About", "Home")%></li>
                     <li><%: Html.ActionLink("About Us", "AboutUs", "Home")%></li>
-                    <li><%: Html.ActionLink("Contact Us", "ContactUs", "Home")%></li>
-                    <% if (Request.IsAuthenticated)
-                       { %><li><%: Html.ActionLink("Help", "Help", "Home")%></li> <%} %>
+                    <%--<li><%: Html.ActionLink("Contact Us", "ContactUs", "Home")%></li>--%>
+                    <%--<% if (Request.IsAuthenticated)
+                       { %><li><%: Html.ActionLink("Help", "Help", "Home")%></li> <%} %>--%>
                     <% if (HttpContext.Current.User.IsInRole("Admin"))
                        { %><li><%: Html.ActionLink("Admin", "Index", "Admin")%></li> <%} %>
                 </ul>
