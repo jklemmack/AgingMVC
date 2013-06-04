@@ -96,7 +96,7 @@ namespace AgingMVC.Controllers
             #region Emotional
             List<PageInfo> emotional = new List<PageInfo>();
             emotional.Add(new PageInfo() { Order = 0, ObjectiveId = 1, View = "AssessmentIntro2" });
-            emotional.Add(new PageInfo() { Order = 1, ObjectiveId = 10, View = "Assessment3" });
+            emotional.Add(new PageInfo() { Order = 1, ObjectiveId = 10, View = "Assessment" });
             //emotional.Add(new PageInfo() { Order = 2, ObjectiveId = 11, View = "Assessment3" });
             //emotional.Add(new PageInfo() { Order = 3, ObjectiveId = 12, View = "Assessment3" });
             //emotional.Add(new PageInfo() { Order = 4, ObjectiveId = 13, View = "Assessment3" });
