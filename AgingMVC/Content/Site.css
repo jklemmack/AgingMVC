@@ -479,7 +479,7 @@ background:#333;
 width:400px;
 height:290px;
  margin: 0 0 0 578px;
-  z-index: 2147483647;	
+  z-index: 99;	
 }
 
 .school_logo{
