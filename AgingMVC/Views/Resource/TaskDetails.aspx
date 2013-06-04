@@ -4,74 +4,84 @@
     Task Details
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <p><a href="/Resources/<%:ViewBag.ParentName %>/<%:ViewBag.Domain %>">Back to list of important <%:ViewBag.Domain %> tasks</a></p>
-    <h2 style="color: Black;">
-        Task : <%: ViewBag.Task.ShortText %></h2>
-    <%if (ViewBag.IsSelf) 
-          Response.Write(ViewBag.Task.AssessmentTextSelf);
-          else 
-          Response.Write(ViewBag.Task.AssessmentText);
-      %>
+    <div class="heading">
+        <h1>
+            Resources to help you complete this task</h1>
+    </div>
+    <p>
+        <a href="/Resources/<%:ViewBag.ParentName %>/<%:ViewBag.Domain %>" id="resourcelink">
+            << Back to list of important
+            <%:ViewBag.Domain %>
+            tasks</a></p>
+    <br />
+    <h2 style="color: #3C7491; border: 1px solid #CCCCCC; font-family: trebuchet ms;
+        font-weight: 100; letter-spacing: 1px; padding: 10px; text-transform: uppercase;">
+        Task :
+        <%: ViewBag.Task.ShortText %></h2>
+    <div style="background: none repeat scroll 0 0 #F5F5F5; border-radius: 10px 10px 10px 10px;
+        float: right; padding: 20px; width: 400px;">
+        <div id="resourceheader">
+            <b>
+                <% if (ViewBag.IsSelf)
+                       Response.Write(ViewBag.Task.PromptTextSelf);
+                   else
+                       Response.Write(ViewBag.Task.PromptText);
+                %>
+            </b>
+        </div>
+        <%if (ViewBag.IsSelf)
+              Response.Write(ViewBag.Task.AssessmentTextSelf);
+          else
+              Response.Write(ViewBag.Task.AssessmentText);
+        %>
+    </div>
     <div>
-        <div style="width: 450px; float: left;padding-top:20px; ">
+        <h3>
+            Select National or State Resources</h3>
+        <select id="state" style="float: left; margin-bottom: 30px; padding-top: 0px; width: 450px;">
+            <option style="cursor: pointer;">Select</option>
             <%foreach (var s in Model)
               {%>
-            <div style="cursor: pointer;" class="state" statecode="<%:s.StateCode %>" >
-                <%: s.StateName %></div>
+            <option style="cursor: pointer;" class="state" value="<%:s.StateCode %>">
+                <%: s.StateName %></option>
             <%} %>
-        </div>
-        <div style="width: 450px; padding-top:20px; float: right; height: 100%; overflow: auto;" class="task-box">
-        <!-- repeating content here.  Have title, URL, and often  (but not always) a short description -->
-            <b><a href="http://www.caregiver.org/caregiver/jsp/fcn_content_node.jsp?nodeid=2128">
-                Montana Family Caregiver Alliance</a></b> The Montana Family Caregiver Alliance
-            is comprised of a vast assortment of publications and services at the national,
-            state, and local levels to help meet the needs of caregivers.
-            <hr />
-            <b><a href="http://www.caregiver.org/caregiver/jsp/fcn_content_node.jsp?nodeid=2128">
-                Montana Family Caregiver Alliance</a></b> The Montana Family Caregiver Alliance
-            is comprised of a vast assortment of publications and services at the national,
-            state, and local levels to help meet the needs of caregivers.
-            <hr />
-            <b><a href="http://www.caregiver.org/caregiver/jsp/fcn_content_node.jsp?nodeid=2128">
-                Montana Family Caregiver Alliance</a></b> The Montana Family Caregiver Alliance
-            is comprised of a vast assortment of publications and services at the national,
-            state, and local levels to help meet the needs of caregivers.
-            <hr />
+        </select>
+        <div style="width: 450px; padding-top: 20px;" class="task-box">
         </div>
     </div>
-    
-    <Div style="clear:both;"></Div>
+    <div style="clear: both;">
+    </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="HeaderContent" runat="server">
-<script language="javascript" type="text/javascript">
-    $(document).ready(function () {
+    <script language="javascript" type="text/javascript">
+        $(document).ready(function () {
 
-        $(".state").click(
+            $("#state").change(
             function () {
-                var statecode = $(this).attr("statecode");
+                var statecode = $(this).val(); // $(this).attr("statecode");
                 SetState(statecode);
+            });
+
+            $("#state").val('<%: ViewBag.State %>');
+            SetState('<%: ViewBag.State %>');
+        });
+
+        function SetResources(data) {
+            var html = "";
+            for (var i = 0; i < data.length; i++) {
+                if (html != "") html += "<hr />";
+
+                html += "<b><a href=" + data[i].URL + ">" + data[i].Name + "</a></b><br />";
+                if (data[i].Description)
+                    html += data[i].Description;
             }
-        );
-
-        SetState('<%: ViewBag.State %>');
-    });
-
-    function SetResources(data) {
-        var html = "";
-        for (var i = 0; i < data.length; i++) {
-            if (html != "") html += "<hr />";
-
-            html += "<b><a href=" + data[i].URL + ">" + data[i].Name + "</a></b><br />";
-            if (data[i].Description)
-                html += data[i].Description;
+            $(".task-box").html(html);
         }
-        $(".task-box").html(html);
-    }
 
-    function SetState(statecode) {
-        $.get('/Resources/Task/' + statecode + '/<%: ViewBag.Task.TaskId %>', SetResources);
-    }
+        function SetState(statecode) {
+            $.get('/Resources/Task/' + statecode + '/<%: ViewBag.Task.TaskId %>', SetResources);
+        }
 
 
-</script>
+    </script>
 </asp:Content>

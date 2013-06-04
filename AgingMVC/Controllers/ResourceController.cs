@@ -18,10 +18,12 @@ namespace AgingMVC.Controllers
                 if (domain == null)
                     throw new ArgumentException(string.Format("'{0}' is not a valid domain name", Domain), "Domain");
 
-
                 Guid userId = context.User.Include("Parents").First(u => u.UserName == this.User.Identity.Name).UserId;
-                Guid parentId = context.Parents.First(p => p.UserID == userId
-                        && p.FirstName.Equals(Parent, StringComparison.InvariantCultureIgnoreCase)).ParentID;
+
+                Models.Parent parent = context.Parents.First(p => p.UserID == userId
+                        && p.FirstName.Equals(Parent, StringComparison.InvariantCultureIgnoreCase));
+                Guid parentId = parent.ParentID;
+
 
                 var model = (from t in context.Tasks
                              join tsr in context.TaskSurveyResponses on new { TaskID = t.TaskId } equals new { TaskID = tsr.TaskID }
@@ -32,8 +34,19 @@ namespace AgingMVC.Controllers
                                t.DomainId == domain.DomainId
                              select t).Take(7);
 
+                bool isSelf = false;
+                if (string.Compare(Parent, "myself", true) == 0)
+                    isSelf = true;
+                ViewBag.IsSelf = isSelf;
+
                 var tasks = (from m in model
-                             select new { m.TaskId, m.PromptText, m.AssessmentText }).ToDictionary(k => k.TaskId.ToString(), v => v);
+                             select new
+                             {
+                                 m.TaskId,
+                                 PromptText = (isSelf) ? m.PromptTextSelf : m.PromptText,
+                                 AssessmentText = (isSelf) ? m.AssessmentTextSelf : m.AssessmentText
+                             }).ToDictionary(k => k.TaskId.ToString(), v => v);
+
                 string taskInfo = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(tasks);
 
                 ViewBag.TaskData = taskInfo;
@@ -57,7 +70,12 @@ namespace AgingMVC.Controllers
                 Guid parentId = parent.ParentID;
                 ViewBag.ParentName = parent.FirstName;
                 ViewBag.Domain = Domain;
-                
+
+                bool isSelf = false;
+                if (string.Compare(Parent, "myself", true) == 0)
+                    isSelf = true;
+                ViewBag.IsSelf = isSelf;
+
                 //Set the state
                 if (parent.State != null)
                     ViewBag.State = parent.State;
@@ -69,10 +87,6 @@ namespace AgingMVC.Controllers
                 AgingMVC.Models.Task task = context.Tasks.Single(t => t.TaskId == Task);
                 ViewBag.Task = task;
 
-                if (string.Compare(Parent, "myself", true) == 0)
-                    ViewBag.IsSelf = true;
-                else
-                    ViewBag.IsSelf = false;
 
                 var model = context.States.OrderBy(s => s.SortOrder);
 
