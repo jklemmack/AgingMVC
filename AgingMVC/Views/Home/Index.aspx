@@ -121,6 +121,9 @@
             <div class="slides_container">
                 <a href="">
                     <img src="/images/home_photo1.jpg"></a> <a href="">
+                                            <img src="/images/home_photo4.jpg"></a> <a href="">
+                        <img src="/images/home_photo5.jpg"></a> <a href="">
+
                         <img src="/images/home_photo2.jpg"></a> <a href="">
                             <img src="/images/home_photo3.jpg"></a>
             </div>

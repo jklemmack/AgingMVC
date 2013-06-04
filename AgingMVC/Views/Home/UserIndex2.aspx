@@ -74,11 +74,26 @@
         
         var parentData = <%=ViewBag.ParentData %>
         var selectedParent = null;
+        jQuery.fn.visible = function() {
+            return this.css('visibility', 'visible');
+        }
+
+        jQuery.fn.invisible = function() {
+            return this.css('visibility', 'hidden');
+        }
+
+        jQuery.fn.visibilityToggle = function() {
+            return this.css('visibility', function(i, visibility) {
+                    return (visibility == 'visible') ? 'hidden' : 'visible';
+                });
+        }
 
         $(document).ready(function () {
             SetProgressBars();
-            <% if (ViewBag.FirstParent != null)
+            <% if (ViewBag.FirstParent != null) 
                  Response.Write(string.Format("NavigateToParent('{0}');", ViewBag.FirstParent));
+               else
+                 Response.Write("$('#domains').invisible();");
             %>
         });
 
@@ -204,24 +219,24 @@
     <div id="topwrapper">
         <fieldset id="carerecipientlist" style="min-height: 300px;">
             <p>
-                <span style="font-weight: 700;">Step 1: </span>
+                <span style="font-weight: 700; font-size: 21px; color: #3C7491">Step 1: </span>
                 <br />
                 Select a care recipient, or create a new one.
             </p>
             <p>
-                <span style="font-weight: 700;">Step 2: </span>
+                <span style="font-weight: 700; font-size: 21px; color: #3C7491">Step 2: </span>
                 <br />
-                Complete the evaluation for this person in each of the four domains.
+                Complete the evaluation for this person in each of the four categories.
             </p>
             <p>
-                <span style="font-weight: 700;">Step 3: </span>
+                <span style="font-weight: 700; font-size: 21px; color: #3C7491">Step 3: </span>
                 <br />
                 Access resources to help you complete the most important tasks that were identified
-                in each domain.
+                in each category.
             </p>
         </fieldset>
         <div style="width: 700px; margin-left: 190px; min-height: 50px;">
-            <p>
+            <p style="font-size: 16px; line-height: 20px;">
                 The AgeReady Program is designed using the transtheoretical model of change, a proven
                 model that helps people become informed, formulate a strategy, and act on a new,
                 better behavior.
@@ -239,9 +254,13 @@
                 <div style="position: relative;">
                     <div class="progressbar" progress="<%: Math.Round( 100.0 * parent.Completed / parent.Total ) %>">
                     </div>
+                    <div class="under_progress">
+                        Percentage of Tasks Completed</div>
                     <div style="width: 100%;">
-                        <a href="/Parent/Edit/<%:parent.FirstName %>" style="color: White; font-size: small;
-                            margin-top: 5px; text-align: center;">Recipient details</a></div>
+                        <a href="/Parent/Edit/<%:parent.FirstName %>" style="background: none repeat scroll 0 0 #F5F5F5;
+                            border-radius: 4px 4px 4px 4px; box-shadow: 1px 1px 1px #AAAAAA; color: #3C7491;
+                            padding: 4px; font-size: small; margin-top: 15px; display: block; text-align: center;
+                            text-decoration: none;">Recipient details</a></div>
                     <div style="width: 100%;">
                     </div>
                 </div>

@@ -524,7 +524,7 @@ button.ui-button::-moz-focus-inner {
 }
 
 .ui-progressbar {
-	height: 2em;
+	height: 15px;
 	text-align: left;
 	overflow: hidden;
 }
