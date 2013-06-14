@@ -121,11 +121,10 @@
             <div class="slides_container">
                 <a href="">
                     <img src="/images/home_photo1.jpg"></a> <a href="">
-                                            <img src="/images/home_photo4.jpg"></a> <a href="">
-                        <img src="/images/home_photo5.jpg"></a> <a href="">
-
-                        <img src="/images/home_photo2.jpg"></a> <a href="">
-                            <img src="/images/home_photo3.jpg"></a>
+                        <img src="/images/home_photo4.jpg"></a> <a href="">
+                            <img src="/images/home_photo5.jpg"></a> <a href="">
+                                <img src="/images/home_photo2.jpg"></a> <a href="">
+                                    <img src="/images/home_photo3.jpg"></a>
             </div>
         </div>
         <div class="login_box">
@@ -188,8 +187,8 @@
                 and social. At the end of each category you will learn what your high priority tasks
                 are and you will be given access to national and state-based resources that have
                 been critically approved and reviewed in order to help you address elder care challenges
-                you may face in the future for either yourself or your parents. The Parent Care
-                Readiness Assessment will help you and your family be more prepared for the future!</p>
+                you may face in the future for either yourself or your parents. AgeReady will help
+                you and your family be more prepared for the future!</p>
             <p>
                 <img src="../../images/home_thumb_medical.jpg" width="116" height="130" />
                 <img src="../../images/home_thumb_legal.jpg" width="116" height="130" />
@@ -228,7 +227,7 @@
     </div>
     <div id="videoDialog2" style="display: none;">
         <% Html.RenderPartial("/Views/Shared/VideoPlayer.ascx",
-               new AgingMVC.Models.VideoModel() { ID = "video2", Video = "/Content/Videos/IntroParentCare.mp4" }); %>
+               new AgingMVC.Models.VideoModel() { ID = "video2", Video = "/Content/Videos/ParkerIntro.mp4" }); %>
         <div id="videodescription2">
             Dr. Michael Parker, selected by the Hartford Foundation and Gerontological Society
             of America as one of the top 10 geriatric scholars in the United States, explains
@@ -251,7 +250,7 @@
                     resizable: false,
                     width: 595,
                     height: "auto",
-                    buttons: { Ok: function () { $(this).dialog("close"); } }
+                    buttons: { Close: function () { $(this).dialog("close"); } }
                 });
 
             });
@@ -265,7 +264,7 @@
                     resizable: false,
                     width: 595,
                     height: "auto",
-                    buttons: { Ok: function () { $(this).dialog("close"); } }
+                    buttons: { Close: function () { $(this).dialog("close"); } }
                 });
 
             });

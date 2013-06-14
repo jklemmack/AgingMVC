@@ -8,12 +8,12 @@
     <param name="quality" value="high" />
     <param name="scale" value="noscale" />
     <param name="wmode" value="opaque" />
-    <param name="flashvars" value="source=/Content/Videos/IntroParentCare.mp4&amp;type=video&amp;duration=52&amp;streamtype=file&amp;autostart=false&amp;amp;hardwarescaling=false&amp;darkcolor=000000&amp;brightcolor=4c4c4c&amp;controlcolor=FFFFFF&amp;hovercolor=67A8C1&amp;controltype=1" />
+    <param name="flashvars" value="source=<%=Model.Video%>&amp;type=video&amp;duration=52&amp;streamtype=file&amp;autostart=false&amp;amp;hardwarescaling=false&amp;darkcolor=000000&amp;brightcolor=4c4c4c&amp;controlcolor=FFFFFF&amp;hovercolor=67A8C1&amp;controltype=1" />
     <param name="seamlesstabbing" value="false" />
     <embed type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash"
         width="576" height="360" src="/jaris/JarisFLVPlayer.swf" allowfullscreen="true"
         allowscriptaccess="always" bgcolor="#000000" quality="high" scale="noscale" wmode="opaque"
-        flashvars="source=/Content/Videos/IntroParentCare.mp4&amp;type=video&amp;duration=52&amp;streamtype=file&amp;autostart=false&amp;hardwarescaling=false&amp;controltype=1"
+        flashvars="source=<%=Model.Video%>&amp;type=video&amp;duration=52&amp;streamtype=file&amp;autostart=false&amp;hardwarescaling=false&amp;controltype=1"
         seamlesstabbing="false" />
     <noembed>
   </noembed>
