@@ -8,9 +8,9 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="<%:ViewBag.ShortName %>heading">
         <h1>
-            Begin
+            Begin Evaluation :
             <%:Model.Name %>
-            Evaluation</h1>
+        </h1>
     </div>
     <div>
         <%=Model.DescriptionText %>
@@ -27,9 +27,8 @@
            { %>
         <li class="carouselitem" videoindex="<%:video.Index%>" style="cursor: pointer;">
             <div align="center">
-                <img src="<%: Url.Content(video.ThumbImageURL) %>" 
-                alt="<%: (string) video.ShortText %>" width="367"
-                    height="109" /><br />
+                <img src="<%: Url.Content(video.ThumbImageURL) %>" alt="<%: (string) video.ShortText %>"
+                    width="367" height="109" /><br />
                 <%: (string) video.ShortText %></div>
         </li>
         <%} %>
