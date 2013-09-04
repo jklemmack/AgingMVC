@@ -215,8 +215,9 @@
         </div>
     </div>
     <div id="videoDialog1" style="display: none;">
-        <% Html.RenderPartial("/Views/Shared/VideoPlayer.ascx",
-               new AgingMVC.Models.VideoModel() { ID = "video1", Video = "/Content/Videos/IntroParentCare.mp4" }); %>
+        <div id="video1">
+            Loading the player...
+        </div>
         <div id="videodescription1">
             Most adult children assume care giving duties for a parent after a health event.
             In the movie "Dad", Jack Lemmon's wife, his primary care giver, suffers a heart
@@ -226,8 +227,8 @@
         </div>
     </div>
     <div id="videoDialog2" style="display: none;">
-        <% Html.RenderPartial("/Views/Shared/VideoPlayer.ascx",
-               new AgingMVC.Models.VideoModel() { ID = "video2", Video = "/Content/Videos/ParkerIntro.mp4" }); %>
+        <div id="video2">
+            Loading the player...</div>
         <div id="videodescription2">
             Dr. Michael Parker, selected by the Hartford Foundation and Gerontological Society
             of America as one of the top 10 geriatric scholars in the United States, explains
@@ -236,12 +237,20 @@
     </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="HeaderContent" runat="server">
-    <script src="/jaris/jarisflvplayer.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/jwplayer/jwplayer.js"></script>
+    <script type="text/javascript">        jwplayer.key = "mp6SILGik5i77LMmvhRE9W+LQOAFMt0tPRJH3w==";</script>
+    <%--    <script src="/jaris/jarisflvplayer.js" type="text/javascript"></script>
+    --%>
     <script language="javascript" type="text/javascript">
         var player1, player2;
 
         $(function () {
-            player1 = new JarisFLVPlayer("video1");
+
+            player1 = jwplayer("video1").setup({
+                file: "/Content/Videos/IntroParentCare.mp4",
+                width: 576,
+                height: 360,
+            });
 
             $("#introvideo").click(function () {
 
@@ -252,10 +261,15 @@
                     height: "auto",
                     buttons: { Close: function () { $(this).dialog("close"); } }
                 });
-
+                player1.play();
             });
 
-            player2 = new JarisFLVPlayer("video2");
+            player2 = jwplayer("video2").setup({
+                //file: "/Content/Videos/Dad6.f4v",
+                file: "/Content/Videos/ParkerIntro.mp4",
+                width: 576,
+                height: 360,
+            });
 
             $("#mikevideo").click(function () {
 
@@ -266,7 +280,7 @@
                     height: "auto",
                     buttons: { Close: function () { $(this).dialog("close"); } }
                 });
-
+                player2.play();
             });
         });
     </script>

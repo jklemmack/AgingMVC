@@ -1,5 +1,8 @@
 ﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<AgingMVC.Models.VideoModel>" %>
-<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=10,0,45,2"
+<div id="<%=Model.ID %>">
+    Loading the player...
+</div>
+<%--<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=10,0,45,2"
     width="576" height="360" id="<%=Model.ID %>">
     <param name="allowFullscreen" value="true" />
     <param name="allowScriptAccess" value="always" />
@@ -17,4 +20,4 @@
         seamlesstabbing="false" />
     <noembed>
   </noembed>
-</object>
+</object>--%>
