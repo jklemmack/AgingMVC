@@ -60,6 +60,5 @@
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="HeaderContent" runat="server">
-<script src="/ckeditor/ckeditor.js" type="text/javascript"></script>
 
 </asp:Content>

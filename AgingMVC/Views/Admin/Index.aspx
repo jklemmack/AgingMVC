@@ -7,8 +7,10 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
 <h2>Index</h2>
-    <%: Html.ActionLink("Edit Tasks", "Index", "Task") %>
+    <%: Html.ActionLink("Edit Tasks", "Index", "Task") %><br />
+    <%: Html.ActionLink("Edit Resources", "Index", "Resource") %>
 </asp:Content>
+
 
 <asp:Content ID="Content3" ContentPlaceHolderID="HeaderContent" runat="server">
 </asp:Content>

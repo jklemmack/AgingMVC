@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using AgingMVC.Models;
 
 namespace AgingMVC.Controllers
 {
@@ -11,9 +13,9 @@ namespace AgingMVC.Controllers
 
         public ActionResult TasksByDomain(string Parent, string Domain)
         {
-            using (AgingMVC.Models.AgingEntities context = new Models.AgingEntities())
+            using (AgingEntities context = new AgingEntities())
             {
-                AgingMVC.Models.Domain domain = context.Domains.SingleOrDefault(d => string.Compare(d.ShortName, Domain, true) == 0);
+                Domain domain = context.Domains.SingleOrDefault(d => string.Compare(d.ShortName, Domain, true) == 0);
 
                 if (domain == null)
                     throw new ArgumentException(string.Format("'{0}' is not a valid domain name", Domain), "Domain");
@@ -61,7 +63,7 @@ namespace AgingMVC.Controllers
 
         public ActionResult TaskDetails(string Parent, string Domain, int Task)
         {
-            using (AgingMVC.Models.AgingEntities context = new Models.AgingEntities())
+            using (AgingEntities context = new AgingEntities())
             {
                 Guid userId = context.User.Include("Parents").First(u => u.UserName == this.User.Identity.Name).UserId;
 
@@ -84,7 +86,7 @@ namespace AgingMVC.Controllers
 
 
                 //Current task
-                AgingMVC.Models.Task task = context.Tasks.Single(t => t.TaskId == Task);
+                Task task = context.Tasks.Single(t => t.TaskId == Task);
                 ViewBag.Task = task;
 
 
@@ -96,7 +98,7 @@ namespace AgingMVC.Controllers
 
         public JsonResult ResoucesForTaskAndState(int Task, string State)
         {
-            using (AgingMVC.Models.AgingEntities context = new Models.AgingEntities())
+            using (AgingEntities context = new AgingEntities())
             {
                 var resources =
                     context.Task_Resources.Where(tr => (tr.Resource.ResourceState == State
@@ -107,5 +109,49 @@ namespace AgingMVC.Controllers
             }
         }
 
+        public ActionResult Index()
+        {
+            using (AgingEntities context = new AgingEntities())
+            {
+                var resources = context.Resources;
+
+                var states = context.States.ToList();
+                states.Add(new Models.State() { StateCode = null, SortOrder = -1, StateName = "[Show All]" });
+
+                ViewBag.SelectedState = null;
+                ViewBag.States = states.OrderBy(s => s.SortOrder).ToList();
+
+                return View(resources.ToList());
+            }
+        }
+
+        public ActionResult Edit(Guid id)
+        {
+            using (AgingEntities context = new AgingEntities())
+            {
+                var resource = context.Resources.SingleOrDefault(r => r.ResourceID == id);
+                ViewBag.States = context.States.OrderBy(s => s.SortOrder).ToList();
+
+                return View(resource);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Resource resource)
+        {
+
+            using (AgingEntities context = new AgingEntities())
+            {
+                if (ModelState.IsValid)
+                {
+                    context.Resources.Attach(resource);
+                    context.ObjectStateManager.ChangeObjectState(resource, EntityState.Modified);
+                    context.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+
+                return View();
+            }
+        }
     }
 }

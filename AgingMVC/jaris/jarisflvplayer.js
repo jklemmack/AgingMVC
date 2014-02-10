@@ -81,12 +81,14 @@ JarisFLVPlayer.prototype.removeListener = function(event){
 	this.player.api_removelistener(event);
 }
 
-JarisFLVPlayer.prototype.play = function(){
-	this.player.api_play();
+JarisFLVPlayer.prototype.play = function () {
+    this.setPlayer();
+    this.player.api_play();
 }
 
 JarisFLVPlayer.prototype.pause = function(){
-	this.player.api_pause();
+    this.setPlayer();
+    this.player.api_pause();
 }
 
 JarisFLVPlayer.prototype.seek = function(seconds){
@@ -95,4 +97,9 @@ JarisFLVPlayer.prototype.seek = function(seconds){
 
 JarisFLVPlayer.prototype.volume = function(value){
 	this.player.api_volume(value);
+}
+
+
+JarisFLVPlayer.prototype.setPlayer = function (value) {
+    this.player = document.getElementById(this.playerId);
 }

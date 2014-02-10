@@ -71,10 +71,10 @@
 
 <asp:Content ID="Content3" ContentPlaceHolderID="HeaderContent" runat="server">
 <script language="javascript" type="text/javascript">
-    $(function () {
-        CKEDITOR.replace('AssessmentText');
-        CKEDITOR.replace('AssessmentTextSelf');
-    });
+    //$(function () {
+    //    CKEDITOR.replace('AssessmentText');
+    //    CKEDITOR.replace('AssessmentTextSelf');
+    //});
 </script>
 <style type="text/css">
     input#ShortText { width: 95%; }

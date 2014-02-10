@@ -9,13 +9,13 @@ using AgingMVC.Models;
 
 namespace AgingMVC.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class TaskController : Controller
     {
         private AgingEntities db = new AgingEntities();
 
         //
         // GET: /Task/
-
         public ViewResult Index()
         {
             var tasks = db.Tasks.Include("Domain").Include("Objective");
