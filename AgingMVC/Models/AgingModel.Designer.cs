@@ -3163,11 +3163,6 @@ namespace AgingMVC.Models
         /// <param name="parentID">Initial value of the ParentID property.</param>
         /// <param name="firstName">Initial value of the FirstName property.</param>
         /// <param name="completed">Initial value of the Completed property.</param>
-        /// <param name="total">Initial value of the Total property.</param>
-        /// <param name="medicalTotal">Initial value of the MedicalTotal property.</param>
-        /// <param name="legalTotal">Initial value of the LegalTotal property.</param>
-        /// <param name="emotionalTotal">Initial value of the EmotionalTotal property.</param>
-        /// <param name="socialTotal">Initial value of the SocialTotal property.</param>
         /// <param name="medicalAssessmentCompleted">Initial value of the MedicalAssessmentCompleted property.</param>
         /// <param name="medicalTaskCompleted">Initial value of the MedicalTaskCompleted property.</param>
         /// <param name="legalAssessmentCompleted">Initial value of the LegalAssessmentCompleted property.</param>
@@ -3176,18 +3171,13 @@ namespace AgingMVC.Models
         /// <param name="socialTaskCompleted">Initial value of the SocialTaskCompleted property.</param>
         /// <param name="emotionalAssessmentCompleted">Initial value of the EmotionalAssessmentCompleted property.</param>
         /// <param name="emotionalTaskCompleted">Initial value of the EmotionalTaskCompleted property.</param>
-        public static vw_ParentSummary Createvw_ParentSummary(global::System.Guid userID, global::System.Guid parentID, global::System.String firstName, global::System.Int32 completed, global::System.Int32 total, global::System.Int32 medicalTotal, global::System.Int32 legalTotal, global::System.Int32 emotionalTotal, global::System.Int32 socialTotal, global::System.Int32 medicalAssessmentCompleted, global::System.Int32 medicalTaskCompleted, global::System.Int32 legalAssessmentCompleted, global::System.Int32 legalTaskCompleted, global::System.Int32 socialAssessmentCompleted, global::System.Int32 socialTaskCompleted, global::System.Int32 emotionalAssessmentCompleted, global::System.Int32 emotionalTaskCompleted)
+        public static vw_ParentSummary Createvw_ParentSummary(global::System.Guid userID, global::System.Guid parentID, global::System.String firstName, global::System.Int32 completed, global::System.Int32 medicalAssessmentCompleted, global::System.Int32 medicalTaskCompleted, global::System.Int32 legalAssessmentCompleted, global::System.Int32 legalTaskCompleted, global::System.Int32 socialAssessmentCompleted, global::System.Int32 socialTaskCompleted, global::System.Int32 emotionalAssessmentCompleted, global::System.Int32 emotionalTaskCompleted)
         {
             vw_ParentSummary vw_ParentSummary = new vw_ParentSummary();
             vw_ParentSummary.UserID = userID;
             vw_ParentSummary.ParentID = parentID;
             vw_ParentSummary.FirstName = firstName;
             vw_ParentSummary.Completed = completed;
-            vw_ParentSummary.Total = total;
-            vw_ParentSummary.MedicalTotal = medicalTotal;
-            vw_ParentSummary.LegalTotal = legalTotal;
-            vw_ParentSummary.EmotionalTotal = emotionalTotal;
-            vw_ParentSummary.SocialTotal = socialTotal;
             vw_ParentSummary.MedicalAssessmentCompleted = medicalAssessmentCompleted;
             vw_ParentSummary.MedicalTaskCompleted = medicalTaskCompleted;
             vw_ParentSummary.LegalAssessmentCompleted = legalAssessmentCompleted;
@@ -3308,9 +3298,9 @@ namespace AgingMVC.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.Int32 Total
+        public Nullable<global::System.Int32> Total
         {
             get
             {
@@ -3325,16 +3315,16 @@ namespace AgingMVC.Models
                 OnTotalChanged();
             }
         }
-        private global::System.Int32 _Total;
-        partial void OnTotalChanging(global::System.Int32 value);
+        private Nullable<global::System.Int32> _Total;
+        partial void OnTotalChanging(Nullable<global::System.Int32> value);
         partial void OnTotalChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.Int32 MedicalTotal
+        public Nullable<global::System.Int32> MedicalTotal
         {
             get
             {
@@ -3349,16 +3339,16 @@ namespace AgingMVC.Models
                 OnMedicalTotalChanged();
             }
         }
-        private global::System.Int32 _MedicalTotal;
-        partial void OnMedicalTotalChanging(global::System.Int32 value);
+        private Nullable<global::System.Int32> _MedicalTotal;
+        partial void OnMedicalTotalChanging(Nullable<global::System.Int32> value);
         partial void OnMedicalTotalChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.Int32 LegalTotal
+        public Nullable<global::System.Int32> LegalTotal
         {
             get
             {
@@ -3373,16 +3363,16 @@ namespace AgingMVC.Models
                 OnLegalTotalChanged();
             }
         }
-        private global::System.Int32 _LegalTotal;
-        partial void OnLegalTotalChanging(global::System.Int32 value);
+        private Nullable<global::System.Int32> _LegalTotal;
+        partial void OnLegalTotalChanging(Nullable<global::System.Int32> value);
         partial void OnLegalTotalChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.Int32 EmotionalTotal
+        public Nullable<global::System.Int32> EmotionalTotal
         {
             get
             {
@@ -3397,16 +3387,16 @@ namespace AgingMVC.Models
                 OnEmotionalTotalChanged();
             }
         }
-        private global::System.Int32 _EmotionalTotal;
-        partial void OnEmotionalTotalChanging(global::System.Int32 value);
+        private Nullable<global::System.Int32> _EmotionalTotal;
+        partial void OnEmotionalTotalChanging(Nullable<global::System.Int32> value);
         partial void OnEmotionalTotalChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.Int32 SocialTotal
+        public Nullable<global::System.Int32> SocialTotal
         {
             get
             {
@@ -3421,8 +3411,8 @@ namespace AgingMVC.Models
                 OnSocialTotalChanged();
             }
         }
-        private global::System.Int32 _SocialTotal;
-        partial void OnSocialTotalChanging(global::System.Int32 value);
+        private Nullable<global::System.Int32> _SocialTotal;
+        partial void OnSocialTotalChanging(Nullable<global::System.Int32> value);
         partial void OnSocialTotalChanged();
     
         /// <summary>

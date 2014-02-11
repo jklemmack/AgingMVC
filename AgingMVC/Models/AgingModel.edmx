@@ -145,7 +145,7 @@
             <PropertyRef Name="ParentID" />
           </Key>
           <Property Name="UserID" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="ParentID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ParentID" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Relationship" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="FirstName" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="Age" Type="int" />
@@ -499,7 +499,7 @@
           <Property Name="UserID" Type="Guid" Nullable="false" />
           <Property Name="ParentID" Type="Guid" Nullable="false" />
           <Property Name="TaskID" Type="Int32" Nullable="false" />
-          <Property Name="LastUpdated" Type="DateTime" Nullable="false" />
+          <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Completed" Type="Boolean" Nullable="false" />
           <Property Name="Timeline" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Parent" Relationship="AgingModel.FK_TaskSurveyResponse_Parent" FromRole="TaskSurveyResponse" ToRole="Parent" />
@@ -543,7 +543,7 @@
           <Property Type="String" Name="LoweredUserName" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="MobileAlias" MaxLength="16" FixedLength="false" Unicode="true" />
           <Property Type="Boolean" Name="IsAnonymous" Nullable="false" />
-          <Property Type="DateTime" Name="LastActivityDate" Nullable="false" />
+          <Property Type="DateTime" Name="LastActivityDate" Nullable="false" Precision="3" />
           <NavigationProperty Name="Parents" Relationship="AgingModel.FK_Parent_aspnet_Users" FromRole="aspnet_Users" ToRole="Parent" />
           <NavigationProperty Name="TaskSurveyResponses" Relationship="AgingModel.FK_TaskSurveyResponse_aspnet_Users" FromRole="aspnet_Users" ToRole="TaskSurveyResponse" />
           <NavigationProperty Name="ParentSummaries" Relationship="AgingModel.Uservw_ParentSummary" FromRole="User" ToRole="vw_ParentSummary" />
@@ -618,7 +618,7 @@
             <PropertyRef Name="AuditId" />
           </Key>
           <Property Type="Guid" Name="AuditId" Nullable="false" />
-          <Property Type="DateTime" Name="AuditDate" Nullable="false" />
+          <Property Type="DateTime" Name="AuditDate" Nullable="false" Precision="3" />
           <Property Type="Guid" Name="UserId" />
           <Property Type="String" Name="Action" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="Data1" MaxLength="255" FixedLength="false" Unicode="true" />
@@ -644,11 +644,11 @@
           <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="User" Relationship="AgingModel.Uservw_ParentSummary" FromRole="vw_ParentSummary" ToRole="User" />
           <Property Type="Int32" Name="Completed" Nullable="false" />
-          <Property Type="Int32" Name="Total" Nullable="false" />
-          <Property Type="Int32" Name="MedicalTotal" Nullable="false" />
-          <Property Type="Int32" Name="LegalTotal" Nullable="false" />
-          <Property Type="Int32" Name="EmotionalTotal" Nullable="false" />
-          <Property Type="Int32" Name="SocialTotal" Nullable="false" />
+          <Property Type="Int32" Name="Total" />
+          <Property Type="Int32" Name="MedicalTotal" />
+          <Property Type="Int32" Name="LegalTotal" />
+          <Property Type="Int32" Name="EmotionalTotal" />
+          <Property Type="Int32" Name="SocialTotal" />
           <Property Type="Int32" Name="MedicalAssessmentCompleted" Nullable="false" />
           <Property Type="Int32" Name="MedicalTaskCompleted" Nullable="false" />
           <Property Type="Int32" Name="LegalAssessmentCompleted" Nullable="false" />
@@ -1014,7 +1014,7 @@
     </Options>
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
-      <Diagram Name="AgingModel" ZoomLevel="64">
+      <Diagram Name="AgingModel" ZoomLevel="73">
         <EntityTypeShape EntityType="AgingModel.Parent" Width="1.5" PointX="3.625" PointY="1" Height="2.7494921874999996" IsExpanded="true" />
         <EntityTypeShape EntityType="AgingModel.State" Width="1.5" PointX="1.375" PointY="5.375" Height="1.9802864583333317" IsExpanded="true" />
         <EntityTypeShape EntityType="AgingModel.TaskSurveyResponse" Width="1.75" PointX="5.875" PointY="1" Height="2.5571907552083335" IsExpanded="true" />

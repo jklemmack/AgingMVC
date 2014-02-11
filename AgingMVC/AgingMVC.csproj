@@ -63,8 +63,15 @@
     <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ClosedXML">
+      <HintPath>..\packages\ClosedXML.0.69.2\lib\net40-client\ClosedXML.dll</HintPath>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.0.5022.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DocumentFormat.OpenXml.1.0\lib\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.4.1.10331.0\lib\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.4.3.1\lib\net40\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -124,6 +131,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AssessmentController.cs" />
     <Compile Include="Controllers\Code\CacheControlAttribute.cs" />
+    <Compile Include="Controllers\Code\ResourceDescriptionValidationAttribute.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ParentController.cs" />
     <Compile Include="Controllers\ResourceController.cs" />
@@ -562,13 +570,16 @@
     <Content Include="Views\Assessment\Assessment2.aspx" />
     <Content Include="Views\Assessment\Assessment3.aspx" />
     <Content Include="Views\Assessment\ObjectiveIntro.aspx" />
+    <Content Include="Views\Resource\Create.aspx" />
+    <Content Include="Views\Resource\Delete.aspx" />
+    <Content Include="Views\Resource\Details.aspx" />
+    <Content Include="Views\Resource\Edit.aspx" />
+    <Content Include="Views\Resource\Index.aspx" />
     <Content Include="Views\Home\ContactUs.aspx" />
     <Content Include="Views\Home\AboutUs.aspx" />
     <Content Include="Views\Account\ForgotPassword.aspx" />
     <Content Include="Views\Home\Help.aspx" />
     <Content Include="Views\Home\UserIndex2.aspx" />
-    <Content Include="Views\Resource\Edit.aspx" />
-    <Content Include="Views\Resource\Index.aspx" />
     <Content Include="Views\Resource\ResourceEdit.aspx" />
     <Content Include="Views\Resource\TasksByDomain.aspx" />
     <Content Include="Views\Resource\TaskDetails.aspx" />
