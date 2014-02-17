@@ -181,22 +181,6 @@ namespace AgingMVC.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<Audit> Audits
-        {
-            get
-            {
-                if ((_Audits == null))
-                {
-                    _Audits = base.CreateObjectSet<Audit>("Audits");
-                }
-                return _Audits;
-            }
-        }
-        private ObjectSet<Audit> _Audits;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<vw_ParentSummary> vw_ParentSummary
         {
             get
@@ -327,14 +311,6 @@ namespace AgingMVC.Models
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the Audits EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToAudits(Audit audit)
-        {
-            base.AddObject("Audits", audit);
-        }
-    
-        /// <summary>
         /// Deprecated Method for adding a new object to the vw_ParentSummary EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddTovw_ParentSummary(vw_ParentSummary vw_ParentSummary)
@@ -426,235 +402,6 @@ namespace AgingMVC.Models
     #endregion
 
     #region Entities
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="AgingModel", Name="Audit")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class Audit : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new Audit object.
-        /// </summary>
-        /// <param name="auditId">Initial value of the AuditId property.</param>
-        /// <param name="auditDate">Initial value of the AuditDate property.</param>
-        /// <param name="action">Initial value of the Action property.</param>
-        public static Audit CreateAudit(global::System.Guid auditId, global::System.DateTime auditDate, global::System.String action)
-        {
-            Audit audit = new Audit();
-            audit.AuditId = auditId;
-            audit.AuditDate = auditDate;
-            audit.Action = action;
-            return audit;
-        }
-
-        #endregion
-
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Guid AuditId
-        {
-            get
-            {
-                return _AuditId;
-            }
-            set
-            {
-                if (_AuditId != value)
-                {
-                    OnAuditIdChanging(value);
-                    ReportPropertyChanging("AuditId");
-                    _AuditId = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("AuditId");
-                    OnAuditIdChanged();
-                }
-            }
-        }
-        private global::System.Guid _AuditId;
-        partial void OnAuditIdChanging(global::System.Guid value);
-        partial void OnAuditIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.DateTime AuditDate
-        {
-            get
-            {
-                return _AuditDate;
-            }
-            set
-            {
-                OnAuditDateChanging(value);
-                ReportPropertyChanging("AuditDate");
-                _AuditDate = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("AuditDate");
-                OnAuditDateChanged();
-            }
-        }
-        private global::System.DateTime _AuditDate;
-        partial void OnAuditDateChanging(global::System.DateTime value);
-        partial void OnAuditDateChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Guid> UserId
-        {
-            get
-            {
-                return _UserId;
-            }
-            set
-            {
-                OnUserIdChanging(value);
-                ReportPropertyChanging("UserId");
-                _UserId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("UserId");
-                OnUserIdChanged();
-            }
-        }
-        private Nullable<global::System.Guid> _UserId;
-        partial void OnUserIdChanging(Nullable<global::System.Guid> value);
-        partial void OnUserIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String Action
-        {
-            get
-            {
-                return _Action;
-            }
-            set
-            {
-                OnActionChanging(value);
-                ReportPropertyChanging("Action");
-                _Action = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Action");
-                OnActionChanged();
-            }
-        }
-        private global::System.String _Action;
-        partial void OnActionChanging(global::System.String value);
-        partial void OnActionChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String Data1
-        {
-            get
-            {
-                return _Data1;
-            }
-            set
-            {
-                OnData1Changing(value);
-                ReportPropertyChanging("Data1");
-                _Data1 = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("Data1");
-                OnData1Changed();
-            }
-        }
-        private global::System.String _Data1;
-        partial void OnData1Changing(global::System.String value);
-        partial void OnData1Changed();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String Data2
-        {
-            get
-            {
-                return _Data2;
-            }
-            set
-            {
-                OnData2Changing(value);
-                ReportPropertyChanging("Data2");
-                _Data2 = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("Data2");
-                OnData2Changed();
-            }
-        }
-        private global::System.String _Data2;
-        partial void OnData2Changing(global::System.String value);
-        partial void OnData2Changed();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String Data3
-        {
-            get
-            {
-                return _Data3;
-            }
-            set
-            {
-                OnData3Changing(value);
-                ReportPropertyChanging("Data3");
-                _Data3 = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("Data3");
-                OnData3Changed();
-            }
-        }
-        private global::System.String _Data3;
-        partial void OnData3Changing(global::System.String value);
-        partial void OnData3Changed();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String Data4
-        {
-            get
-            {
-                return _Data4;
-            }
-            set
-            {
-                OnData4Changing(value);
-                ReportPropertyChanging("Data4");
-                _Data4 = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("Data4");
-                OnData4Changed();
-            }
-        }
-        private global::System.String _Data4;
-        partial void OnData4Changing(global::System.String value);
-        partial void OnData4Changed();
-
-        #endregion
-
-    
-    }
     
     /// <summary>
     /// No Metadata Documentation available.
@@ -3163,6 +2910,11 @@ namespace AgingMVC.Models
         /// <param name="parentID">Initial value of the ParentID property.</param>
         /// <param name="firstName">Initial value of the FirstName property.</param>
         /// <param name="completed">Initial value of the Completed property.</param>
+        /// <param name="total">Initial value of the Total property.</param>
+        /// <param name="medicalTotal">Initial value of the MedicalTotal property.</param>
+        /// <param name="legalTotal">Initial value of the LegalTotal property.</param>
+        /// <param name="emotionalTotal">Initial value of the EmotionalTotal property.</param>
+        /// <param name="socialTotal">Initial value of the SocialTotal property.</param>
         /// <param name="medicalAssessmentCompleted">Initial value of the MedicalAssessmentCompleted property.</param>
         /// <param name="medicalTaskCompleted">Initial value of the MedicalTaskCompleted property.</param>
         /// <param name="legalAssessmentCompleted">Initial value of the LegalAssessmentCompleted property.</param>
@@ -3171,13 +2923,18 @@ namespace AgingMVC.Models
         /// <param name="socialTaskCompleted">Initial value of the SocialTaskCompleted property.</param>
         /// <param name="emotionalAssessmentCompleted">Initial value of the EmotionalAssessmentCompleted property.</param>
         /// <param name="emotionalTaskCompleted">Initial value of the EmotionalTaskCompleted property.</param>
-        public static vw_ParentSummary Createvw_ParentSummary(global::System.Guid userID, global::System.Guid parentID, global::System.String firstName, global::System.Int32 completed, global::System.Int32 medicalAssessmentCompleted, global::System.Int32 medicalTaskCompleted, global::System.Int32 legalAssessmentCompleted, global::System.Int32 legalTaskCompleted, global::System.Int32 socialAssessmentCompleted, global::System.Int32 socialTaskCompleted, global::System.Int32 emotionalAssessmentCompleted, global::System.Int32 emotionalTaskCompleted)
+        public static vw_ParentSummary Createvw_ParentSummary(global::System.Guid userID, global::System.Guid parentID, global::System.String firstName, global::System.Int32 completed, global::System.Int32 total, global::System.Int32 medicalTotal, global::System.Int32 legalTotal, global::System.Int32 emotionalTotal, global::System.Int32 socialTotal, global::System.Int32 medicalAssessmentCompleted, global::System.Int32 medicalTaskCompleted, global::System.Int32 legalAssessmentCompleted, global::System.Int32 legalTaskCompleted, global::System.Int32 socialAssessmentCompleted, global::System.Int32 socialTaskCompleted, global::System.Int32 emotionalAssessmentCompleted, global::System.Int32 emotionalTaskCompleted)
         {
             vw_ParentSummary vw_ParentSummary = new vw_ParentSummary();
             vw_ParentSummary.UserID = userID;
             vw_ParentSummary.ParentID = parentID;
             vw_ParentSummary.FirstName = firstName;
             vw_ParentSummary.Completed = completed;
+            vw_ParentSummary.Total = total;
+            vw_ParentSummary.MedicalTotal = medicalTotal;
+            vw_ParentSummary.LegalTotal = legalTotal;
+            vw_ParentSummary.EmotionalTotal = emotionalTotal;
+            vw_ParentSummary.SocialTotal = socialTotal;
             vw_ParentSummary.MedicalAssessmentCompleted = medicalAssessmentCompleted;
             vw_ParentSummary.MedicalTaskCompleted = medicalTaskCompleted;
             vw_ParentSummary.LegalAssessmentCompleted = legalAssessmentCompleted;
@@ -3298,9 +3055,9 @@ namespace AgingMVC.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int32> Total
+        public global::System.Int32 Total
         {
             get
             {
@@ -3315,16 +3072,16 @@ namespace AgingMVC.Models
                 OnTotalChanged();
             }
         }
-        private Nullable<global::System.Int32> _Total;
-        partial void OnTotalChanging(Nullable<global::System.Int32> value);
+        private global::System.Int32 _Total;
+        partial void OnTotalChanging(global::System.Int32 value);
         partial void OnTotalChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int32> MedicalTotal
+        public global::System.Int32 MedicalTotal
         {
             get
             {
@@ -3339,16 +3096,16 @@ namespace AgingMVC.Models
                 OnMedicalTotalChanged();
             }
         }
-        private Nullable<global::System.Int32> _MedicalTotal;
-        partial void OnMedicalTotalChanging(Nullable<global::System.Int32> value);
+        private global::System.Int32 _MedicalTotal;
+        partial void OnMedicalTotalChanging(global::System.Int32 value);
         partial void OnMedicalTotalChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int32> LegalTotal
+        public global::System.Int32 LegalTotal
         {
             get
             {
@@ -3363,16 +3120,16 @@ namespace AgingMVC.Models
                 OnLegalTotalChanged();
             }
         }
-        private Nullable<global::System.Int32> _LegalTotal;
-        partial void OnLegalTotalChanging(Nullable<global::System.Int32> value);
+        private global::System.Int32 _LegalTotal;
+        partial void OnLegalTotalChanging(global::System.Int32 value);
         partial void OnLegalTotalChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int32> EmotionalTotal
+        public global::System.Int32 EmotionalTotal
         {
             get
             {
@@ -3387,16 +3144,16 @@ namespace AgingMVC.Models
                 OnEmotionalTotalChanged();
             }
         }
-        private Nullable<global::System.Int32> _EmotionalTotal;
-        partial void OnEmotionalTotalChanging(Nullable<global::System.Int32> value);
+        private global::System.Int32 _EmotionalTotal;
+        partial void OnEmotionalTotalChanging(global::System.Int32 value);
         partial void OnEmotionalTotalChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int32> SocialTotal
+        public global::System.Int32 SocialTotal
         {
             get
             {
@@ -3411,8 +3168,8 @@ namespace AgingMVC.Models
                 OnSocialTotalChanged();
             }
         }
-        private Nullable<global::System.Int32> _SocialTotal;
-        partial void OnSocialTotalChanging(Nullable<global::System.Int32> value);
+        private global::System.Int32 _SocialTotal;
+        partial void OnSocialTotalChanging(global::System.Int32 value);
         partial void OnSocialTotalChanged();
     
         /// <summary>

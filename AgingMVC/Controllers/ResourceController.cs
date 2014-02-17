@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using AgingMVC.Models;
+using ClosedXML.Excel;
 
 namespace AgingMVC.Controllers
 {
@@ -99,6 +101,72 @@ namespace AgingMVC.Controllers
             return Json(resources, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult Download()
+        {
+            var tasks = db.Tasks.OrderBy(t => t.TaskOrder).OrderBy(t => t.Domain.DomainOrder)
+                .Select(t => new { TaskId = t.TaskId, Domain = t.Domain.Name, Task = t.ShortText });
+            var resources = db.Resources.Include("Task_Resources.Task")
+                .Select(r => new
+                {
+                    ResourceId = r.ResourceID,
+                    Name = r.Name,
+                    State = r.State.StateCode,
+                    Description = r.Description,
+                    URL = r.URL,
+                    //Tasks = r.Task_Resources //.SelectMany<Task_Resources, Task_Resources>(tr => tr)// .Select(tr => new { tr.Task.TaskId }) //.SelectMany(tr=>tr.Task)
+                    Tasks = r.Task_Resources.Select(tr => tr.Task).OrderBy(t => t.TaskId)
+                });
+
+            XLWorkbook wb = new XLWorkbook();
+            using (IXLWorksheet ws = wb.AddWorksheet("Tasks"))
+            {
+                ws.Cell(1, 1).Value = "TaskId";
+                ws.Cell(1, 2).Value = "Domain";
+                ws.Cell(1, 3).Value = "Task";
+                ws.Cell(2, 1).InsertData(tasks);
+                ws.Columns().AdjustToContents();
+            }
+            using (IXLWorksheet ws = wb.AddWorksheet("Resources"))
+            {
+                ws.Cell(1, 1).Value = "ResourceId";
+                ws.Cell(1, 2).Value = "Name";
+                ws.Cell(1, 3).Value = "State";
+                ws.Cell(1, 4).Value = "Description";
+                ws.Cell(1, 5).Value = "URL";
+                int row = 2;
+                int maxTasks = 0;
+                foreach (var resource in resources)
+                {
+                    int column = 6;
+                    ws.Cell(row, 1).Value = resource.ResourceId;
+                    ws.Cell(row, 2).Value = resource.Name;
+                    ws.Cell(row, 3).Value = resource.State;
+                    ws.Cell(row, 4).Value = resource.Description;
+                    ws.Cell(row, 5).Value = resource.URL;
+                    foreach (var task in resource.Tasks)
+                    {
+                        ws.Cell(row, column++).Value = task.TaskId;
+                    }
+
+                    if (resource.Tasks.Count() > maxTasks) maxTasks = resource.Tasks.Count();
+                    row++;
+                }
+                for (int col = 0; col < maxTasks; col++)
+                {
+                    ws.Cell(1, col + 6).Value = "Task";
+                }
+                ws.Columns(2, maxTasks + 6).AdjustToContents();
+                ws.Columns(1, 1).Hide();
+            }
+
+
+            MemoryStream ms = new MemoryStream();
+            wb.SaveAs(ms);
+            ms.Position = 0;
+            string fileName = "TasksAndResources.xlsx";
+            return File(ms, @"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml", fileName);
+
+        }
 
         //
         // GET: /Resource/
@@ -108,7 +176,7 @@ namespace AgingMVC.Controllers
             return View(resources.ToList());
         }
 
-        
+
         //
         // GET: /Resource/Details/5
         public ViewResult Details(Guid id)

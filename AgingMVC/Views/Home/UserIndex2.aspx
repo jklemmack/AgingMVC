@@ -72,7 +72,7 @@
     <link href="/Content/jquery.loadmask.css" rel="stylesheet" type="text/css" />
     <script language="javascript" type="text/javascript">
         
-        var parentData = <%=ViewBag.ParentData %>
+        var parentData = <%=ViewBag.ParentData %>;
         var selectedParent = null;
         jQuery.fn.visible = function() {
             return this.css('visibility', 'visible');

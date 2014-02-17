@@ -9,7 +9,8 @@
     <h2>Index</h2>
 
     <p>
-        <%: Html.ActionLink("Create New", "Create") %>
+        <%: Html.ActionLink("Create New", "Create") %><br />
+        <%: Html.ActionLink("Download", "Download") %>
     </p>
     <table>
         <tr>

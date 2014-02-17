@@ -455,7 +455,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tooltip.min.css" />
-    <Content Include="Content\Videos\ParkerIntro.mp4" />
+    <Content Include="Content\Videos\ParkerIntro.m4v" />
     <Content Include="Content\Videos\FamilyDomain.mov.mp4" />
     <Content Include="Content\Videos\IntroParentCare.mp4" />
     <Content Include="Content\Videos\legalmedical.mov.flv" />
@@ -485,19 +485,6 @@
     <Content Include="Images\video_filler.jpg" />
     <Content Include="Images\video_thumb1.jpg" />
     <Content Include="Images\video_thumb2.jpg" />
-    <Content Include="jaris\index.html" />
-    <Content Include="jaris\jaris-intro.flv" />
-    <Content Include="jaris\jarisflvplayer.js" />
-    <Content Include="jaris\JarisFLVPlayer.swf" />
-    <Content Include="jaris\logo-color.png" />
-    <Content Include="jaris\logo.png" />
-    <Content Include="jaris\poster.png" />
-    <Content Include="jaris\swfobject.js" />
-    <Content Include="jaris\video.aspx" />
-    <Content Include="jwplayer\jwplayer.flash.swf" />
-    <Content Include="jwplayer\jwplayer.html5.js" />
-    <Content Include="jwplayer\jwplayer.js" />
-    <Content Include="jwplayer\README.html" />
     <Content Include="Scripts\jquery-1.8.3-vsdoc.js" />
     <Content Include="Scripts\jquery-1.8.3.js" />
     <Content Include="Scripts\jquery-1.8.3.min.js" />
@@ -513,6 +500,13 @@
     <Content Include="Scripts\slides.min.jquery.js" />
     <Content Include="Scripts\spin.js" />
     <Content Include="Scripts\spin.min.js" />
+    <Content Include="videojs\demo.html" />
+    <Content Include="videojs\font\vjs.svg" />
+    <Content Include="videojs\video-js.css" />
+    <Content Include="videojs\video-js.min.css" />
+    <Content Include="videojs\video-js.swf" />
+    <Content Include="videojs\video.dev.js" />
+    <Content Include="videojs\video.js" />
     <Content Include="Views\Admin\Index.aspx" />
     <Content Include="Views\Assessment\Assessment.aspx" />
     <Content Include="Views\Assessment\AssessmentEnd.aspx" />
@@ -659,6 +653,12 @@
     <Content Include="Web.ParentCareProduction.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
+    <Content Include="videojs\.DS_Store" />
+    <Content Include="videojs\demo.captions.vtt" />
+    <Content Include="videojs\font\.DS_Store" />
+    <Content Include="videojs\font\vjs.eot" />
+    <Content Include="videojs\font\vjs.ttf" />
+    <Content Include="videojs\font\vjs.woff" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

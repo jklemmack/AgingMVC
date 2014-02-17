@@ -7,20 +7,21 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="<%:ViewBag.ShortName %>heading">
-        <h1>
-            Begin Evaluation :
+        <h1>Begin Evaluation :
             <%:Model.Name %>
         </h1>
     </div>
     <div>
         <%=Model.DescriptionText %>
         <p>
-            <%=Model.ObjectivesText %></p>
+            <%=Model.ObjectivesText %>
+        </p>
     </div>
     <div>
         The following videos help to illustrate the importance of the
         <%:Model.ShortName %>
-        tasks.</div>
+        tasks.
+    </div>
     <ul id="mycarousel" class="jcarousel-skin-tango">
         <!-- Carousel of available videos-->
         <% foreach (var video in ViewBag.Videos)
@@ -29,23 +30,24 @@
             <div align="center">
                 <img src="<%: Url.Content(video.ThumbImageURL) %>" alt="<%: (string) video.ShortText %>"
                     width="367" height="109" /><br />
-                <%: (string) video.ShortText %></div>
+                <%: (string) video.ShortText %>
+            </div>
         </li>
         <%} %>
     </ul>
     <div>
         <div style="float: left;">
-            <a href="/" class="back">Return to Main Page</a></div>
+            <a href="/" class="back">Return to Main Page</a>
+        </div>
         <div class="rightnav">
             <a href="/Assessment/<%: ViewBag.Domain %>/<%: ViewBag.Parent %>/<%: ViewBag.Page + 1 %>"
-                class="back">Proceed to the Assessment</a></div>
+                class="back">Proceed to the Assessment</a>
+        </div>
     </div>
     <div id="videoDialog" style="display: none;">
-        <div id="videoContainer">
-            Loading the player ...</div>
-        <script type="text/javascript">
-     
-        </script>
+        <%--<video id="videoContainer" class="video-js vjs-default-skin" controls preload="none" width="576" height="360" data-setup="{}">
+        </video>
+        --%>
         <div id="videodescription">
         </div>
     </div>
@@ -53,28 +55,31 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="HeaderContent" runat="server">
     <link href="<%: Url.Content("~/Content/jCarouselSkin.css") %>" rel="stylesheet" type="text/css" />
     <script src="<%: Url.Content("~/Scripts/jquery.jcarousel.min.js") %>" type="text/javascript"></script>
-    <script src="/jwplayer/jwplayer.js" type="text/javascript"></script>
+
+    <link href="/videojs/video-js.css" rel="stylesheet" type="text/css">
+    <script src="/videojs/video.dev.js"></script>
+
     <script type="text/javascript">
         var videos = <%=ViewBag.VideoDescriptions %>;
-
+        var player = null;
         $(function () {
+            videojs.options.flash.swf = "/videojs/video-js.swf";
+
             $(".carouselitem").click(function () {
+                $("#videoDialog").prepend('<video id="videoContainer" class="video-js vjs-default-skin" controls preload="none" width="576" height="360" data-setup="{}"></video>');
+
+                player = videojs('videoContainer');
+
                 var videoindex = $(this).attr("videoindex");
-
-                var item = [{
-                        file: videos[videoindex].URL, 
-                        image: videos[videoindex].ThumbImageURL,
-                        title: videos[videoindex].ShortText 
-                    }];
-
-                jwplayer("videoContainer").load(item);
+                player.src([
+                    {type: "video/m4v", src: videos[videoindex].URL}
+                ]);
 
                 $("#videodescription").html(videos[videoindex].Description);
-
                 $("#videoDialog ").dialog({ modal: true,
-                    //title: videos[videoindex].ShortText,
                     resizable: false,
-                    width: 520,
+                    width: 590,
+                    //title: videos[videoindex].Title,
                     height: "auto",
                     buttons: { Ok: function () { $(this).dialog("close"); } }
                 });
@@ -82,20 +87,13 @@
             });
 
             $("#videoDialog").on("dialogclose", function(event, ui) {
-                jwplayer().stop();
+                player.dispose();
             });
 
             $("#videoDialog").on("dialogopen", function(event, ui) {
-                jwplayer().play();
+                player.play();
             });
 
-           jwplayer("videoContainer").setup({
-                flashplayer: '/jwplayer/jwplayer.flash.swf',
-                controlbar: 'bottom',
-                height: 270,
-                width: 480,
-                file: '/Content/Videos/IntroParentCare.mp4' // Dummy placeholder video!
-            });  
         });
 
         jQuery(document).ready(function () {
@@ -105,10 +103,7 @@
                 buttonPrevHTML: null
             });
 
-            jwplayer().key = "mp6SILGik5i77LMmvhRE9W+LQOAFMt0tPRJH3w==";
-
         });
-
         
     </script>
 </asp:Content>
