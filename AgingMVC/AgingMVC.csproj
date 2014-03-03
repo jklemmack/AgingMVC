@@ -659,6 +659,9 @@
     <Content Include="videojs\font\vjs.eot" />
     <Content Include="videojs\font\vjs.ttf" />
     <Content Include="videojs\font\vjs.woff" />
+    <None Include="Properties\PublishProfiles\Intelligent Irrigation FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\Intelligent Irrigation.pubxml" />
+    <None Include="Properties\PublishProfiles\ParentCare.pubxml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

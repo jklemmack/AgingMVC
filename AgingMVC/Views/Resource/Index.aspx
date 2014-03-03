@@ -10,8 +10,13 @@
 
     <p>
         <%: Html.ActionLink("Create New", "Create") %><br />
-        <%: Html.ActionLink("Download", "Download") %>
+        <%: Html.ActionLink("Download", "Download") %><br />
     </p>
+    <form action="/Resource" method="post" enctype="multipart/form-data">
+        <label for="file">Filename:</label>
+        <input type="file" name="file" id="file" />
+        <input type="submit" />
+    </form>
     <table>
         <tr>
             <th>Name

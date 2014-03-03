@@ -103,8 +103,12 @@ namespace AgingMVC.Controllers
 
         public ActionResult Download()
         {
+            // all tasks
             var tasks = db.Tasks.OrderBy(t => t.TaskOrder).OrderBy(t => t.Domain.DomainOrder)
-                .Select(t => new { TaskId = t.TaskId, Domain = t.Domain.Name, Task = t.ShortText });
+                .OrderBy(t => t.TaskOrder)
+                .OrderBy(t => t.Domain.DomainOrder)
+                .Select(t => new { TaskId = t.TaskId, Domain = t.Domain.Name, Task = t.ShortText }).ToList();
+
             var resources = db.Resources.Include("Task_Resources.Task")
                 .Select(r => new
                 {
@@ -113,50 +117,55 @@ namespace AgingMVC.Controllers
                     State = r.State.StateCode,
                     Description = r.Description,
                     URL = r.URL,
-                    //Tasks = r.Task_Resources //.SelectMany<Task_Resources, Task_Resources>(tr => tr)// .Select(tr => new { tr.Task.TaskId }) //.SelectMany(tr=>tr.Task)
                     Tasks = r.Task_Resources.Select(tr => tr.Task).OrderBy(t => t.TaskId)
-                });
+                }).ToList();
 
             XLWorkbook wb = new XLWorkbook();
-            using (IXLWorksheet ws = wb.AddWorksheet("Tasks"))
-            {
-                ws.Cell(1, 1).Value = "TaskId";
-                ws.Cell(1, 2).Value = "Domain";
-                ws.Cell(1, 3).Value = "Task";
-                ws.Cell(2, 1).InsertData(tasks);
-                ws.Columns().AdjustToContents();
-            }
+
             using (IXLWorksheet ws = wb.AddWorksheet("Resources"))
             {
-                ws.Cell(1, 1).Value = "ResourceId";
-                ws.Cell(1, 2).Value = "Name";
-                ws.Cell(1, 3).Value = "State";
-                ws.Cell(1, 4).Value = "Description";
-                ws.Cell(1, 5).Value = "URL";
-                int row = 2;
-                int maxTasks = 0;
+                ws.Cell(2, 1).Value = "ResourceId";
+                ws.Cell(2, 2).Value = "Name";
+                ws.Cell(2, 3).Value = "State";
+                ws.Cell(2, 4).Value = "Description";
+                ws.Cell(2, 5).Value = "URL";
+                int column = 6;
+                foreach (var task in tasks)
+                {
+                    ws.Cell(2, column).Value = task.Task;
+                    column++;
+                }
+
+                int row = 3;
                 foreach (var resource in resources)
                 {
-                    int column = 6;
+                    column = 6;
                     ws.Cell(row, 1).Value = resource.ResourceId;
                     ws.Cell(row, 2).Value = resource.Name;
                     ws.Cell(row, 3).Value = resource.State;
                     ws.Cell(row, 4).Value = resource.Description;
                     ws.Cell(row, 5).Value = resource.URL;
-                    foreach (var task in resource.Tasks)
+
+                    foreach (var task in tasks)
                     {
-                        ws.Cell(row, column++).Value = task.TaskId;
+                        if (resource.Tasks.Count(t => t.TaskId == task.TaskId) > 0)
+                            ws.Cell(row, column).Value = "X";
+                        column++;
                     }
 
-                    if (resource.Tasks.Count() > maxTasks) maxTasks = resource.Tasks.Count();
                     row++;
                 }
-                for (int col = 0; col < maxTasks; col++)
-                {
-                    ws.Cell(1, col + 6).Value = "Task";
-                }
-                ws.Columns(2, maxTasks + 6).AdjustToContents();
+
+                var firstCell = ws.Cell(2, 1);
+                var lastCell = ws.LastCellUsed();
+                var range = ws.Range(firstCell, lastCell);
+
+                range.CreateTable();
                 ws.Columns(1, 1).Hide();
+                ws.Range(ws.Cell(2, 6), ws.Cell(2, 6 + tasks.Count())).Style
+                    .Alignment.SetTextRotation(90)
+                    .Alignment.SetVertical(XLAlignmentVerticalValues.Top);
+                ws.Columns(2, 6 + tasks.Count()).AdjustToContents();
             }
 
 
@@ -166,6 +175,87 @@ namespace AgingMVC.Controllers
             string fileName = "TasksAndResources.xlsx";
             return File(ms, @"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml", fileName);
 
+        }
+
+        [HttpPost]
+        public ActionResult Index(HttpPostedFileBase file)
+        {
+            using (XLWorkbook wb = new XLWorkbook(file.InputStream))
+            {
+                IXLWorksheet ws = wb.Worksheet("Resources");
+                int headerRow = 2;
+                int ID = 1;
+                int Name = 2;
+                int State = 3;
+                int Description = 4;
+                int URL = 5;
+
+                int lastCol = ws.LastColumnUsed().ColumnNumber();
+                int lastRow = ws.LastRowUsed().RowNumber();
+                var tasks = db.Tasks.ToList();
+                var states = db.States.ToList();
+                var resources = db.Resources.Include("Task_Resources").ToList();
+                Dictionary<int, int> columnToTasks = new Dictionary<int, int>();
+
+                // Get the tasks, by name in order.  Map column ID to TaskID
+                for (int col = 6; col <= lastCol; col++)
+                {
+                    string task = (string)ws.Cell(headerRow, col).Value;
+                    int taskId = tasks.Single(t => string.Compare(t.ShortText, task, true) == 0).TaskId;
+                    columnToTasks.Add(col, taskId);
+                }
+                for (int row = 3; row <= lastRow; row++)
+                {
+                    Resource resource = null;
+                    Guid resourceId;
+                    if (Guid.TryParse((string)ws.Cell(row, ID).Value, out resourceId))
+                    {
+                        resource = resources.FirstOrDefault(r => r.ResourceID == resourceId);
+                    }
+                    else
+                    {
+                        resource = new Resource();
+                        //resource.ResourceID = resourceId;
+                        resource.Task_Resources = new System.Data.Objects.DataClasses.EntityCollection<Task_Resources>();
+                        db.Resources.AddObject(resource);
+                    }
+
+                    try
+                    {
+                        // set name, state, description, url
+                        resource.Name = (string)ws.Cell(row, Name).Value;
+                        resource.Description = (string)ws.Cell(row, Description).Value;
+                        resource.URL = (string)ws.Cell(row, URL).Value;
+                        resource.State = states.First(s => string.Compare(s.StateCode, (string)ws.Cell(row, State).Value) == 0);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw;
+                    }
+                    for (int col = 6; col <= lastCol; col++)
+                    {
+                        string value = ws.Cell(row, col).Value.ToString();
+                        int taskId = columnToTasks[col];
+                        var tr = resource.Task_Resources.SingleOrDefault(x => x.TaskID == taskId);
+                        if (string.IsNullOrWhiteSpace(value) && tr != null)
+                        {
+                            // If resource had this task, remove it
+                            db.Task_Resources.DeleteObject(tr);
+                        }
+                        else if (!string.IsNullOrWhiteSpace(value) && tr == null)
+                        {
+                            // If resource doesn't have this task, add it
+                            tr = new Task_Resources() { TaskID = taskId, Resource = resource };
+                            db.Task_Resources.AddObject(tr);
+                        }
+                    }
+                    db.SaveChanges();
+
+                }
+
+            }
+
+            return RedirectToAction("Index");
         }
 
         //
