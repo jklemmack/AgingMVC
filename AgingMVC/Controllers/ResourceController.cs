@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -117,7 +118,8 @@ namespace AgingMVC.Controllers
                     State = r.State.StateCode,
                     Description = r.Description,
                     URL = r.URL,
-                    Tasks = r.Task_Resources.Select(tr => tr.Task).OrderBy(t => t.TaskId)
+                    Tasks = r.Task_Resources.Select(tr => tr.Task).OrderBy(t => t.TaskId),
+                    Active = r.Active
                 }).ToList();
 
             XLWorkbook wb = new XLWorkbook();
@@ -129,7 +131,10 @@ namespace AgingMVC.Controllers
                 ws.Cell(2, 3).Value = "State";
                 ws.Cell(2, 4).Value = "Description";
                 ws.Cell(2, 5).Value = "URL";
-                int column = 6;
+                ws.Cell(2, 6).Value = "Active";
+
+                int firstTaskCol = 7;
+                int column = firstTaskCol;
                 foreach (var task in tasks)
                 {
                     ws.Cell(2, column).Value = task.Task;
@@ -139,12 +144,13 @@ namespace AgingMVC.Controllers
                 int row = 3;
                 foreach (var resource in resources)
                 {
-                    column = 6;
+                    column = firstTaskCol;
                     ws.Cell(row, 1).Value = resource.ResourceId;
                     ws.Cell(row, 2).Value = resource.Name;
                     ws.Cell(row, 3).Value = resource.State;
                     ws.Cell(row, 4).Value = resource.Description;
                     ws.Cell(row, 5).Value = resource.URL;
+                    ws.Cell(row, 6).Value = (resource.Active) ? "Y" : "N";
 
                     foreach (var task in tasks)
                     {
@@ -162,10 +168,10 @@ namespace AgingMVC.Controllers
 
                 range.CreateTable();
                 ws.Columns(1, 1).Hide();
-                ws.Range(ws.Cell(2, 6), ws.Cell(2, 6 + tasks.Count())).Style
+                ws.Range(ws.Cell(2, firstTaskCol), ws.Cell(2, firstTaskCol + tasks.Count())).Style
                     .Alignment.SetTextRotation(90)
                     .Alignment.SetVertical(XLAlignmentVerticalValues.Top);
-                ws.Columns(2, 6 + tasks.Count()).AdjustToContents();
+                ws.Columns(2, firstTaskCol + tasks.Count()).AdjustToContents();
             }
 
 
@@ -189,6 +195,9 @@ namespace AgingMVC.Controllers
                 int State = 3;
                 int Description = 4;
                 int URL = 5;
+                int Active = 6;
+
+                int firstTaskCol = 7;
 
                 int lastCol = ws.LastColumnUsed().ColumnNumber();
                 int lastRow = ws.LastRowUsed().RowNumber();
@@ -198,26 +207,39 @@ namespace AgingMVC.Controllers
                 Dictionary<int, int> columnToTasks = new Dictionary<int, int>();
 
                 // Get the tasks, by name in order.  Map column ID to TaskID
-                for (int col = 6; col <= lastCol; col++)
+                for (int col = firstTaskCol; col <= lastCol; col++)
                 {
                     string task = (string)ws.Cell(headerRow, col).Value;
-                    int taskId = tasks.Single(t => string.Compare(t.ShortText, task, true) == 0).TaskId;
-                    columnToTasks.Add(col, taskId);
+                    Task objTask = tasks.SingleOrDefault(t => string.Compare(t.ShortText, task, true) == 0);
+                    if (objTask == null)
+                    {
+                        throw new ArgumentException("The task '{0}' wasn't found.", task);
+                    }
+
+                    columnToTasks.Add(col, objTask.TaskId);
                 }
+
                 for (int row = 3; row <= lastRow; row++)
                 {
                     Resource resource = null;
                     Guid resourceId;
+                    // Guid exists
                     if (Guid.TryParse((string)ws.Cell(row, ID).Value, out resourceId))
                     {
                         resource = resources.FirstOrDefault(r => r.ResourceID == resourceId);
                     }
                     else
                     {
-                        resource = new Resource();
-                        //resource.ResourceID = resourceId;
-                        resource.Task_Resources = new System.Data.Objects.DataClasses.EntityCollection<Task_Resources>();
-                        db.Resources.AddObject(resource);
+                        // no guid, lookup by Name?
+                        string name = (string)ws.Cell(row, Name).Value;
+                        resource = resources.FirstOrDefault(r => string.Compare(name, r.Name, true) == 0);
+                        if (resource == null)
+                        {
+                            resource = new Resource();
+                            resource.ResourceID = Guid.NewGuid();
+                            resource.Task_Resources = new System.Data.Objects.DataClasses.EntityCollection<Task_Resources>();
+                            db.Resources.AddObject(resource);
+                        }
                     }
 
                     try
@@ -227,12 +249,18 @@ namespace AgingMVC.Controllers
                         resource.Description = (string)ws.Cell(row, Description).Value;
                         resource.URL = (string)ws.Cell(row, URL).Value;
                         resource.State = states.First(s => string.Compare(s.StateCode, (string)ws.Cell(row, State).Value) == 0);
+                        string active = (string)ws.Cell(row, Active).Value;
+                        if (!string.IsNullOrWhiteSpace(active) && string.Compare(active, "Y", true) == 0)
+                            resource.Active = true;
+                        else
+                            resource.Active = false;
+
                     }
                     catch (Exception ex)
                     {
                         throw;
                     }
-                    for (int col = 6; col <= lastCol; col++)
+                    for (int col = firstTaskCol; col <= lastCol; col++)
                     {
                         string value = ws.Cell(row, col).Value.ToString();
                         int taskId = columnToTasks[col];
