@@ -71,7 +71,7 @@
             for (var i = 0; i < data.length; i++) {
                 if (html != "") html += "<hr />";
 
-                html += "<b><a href=" + data[i].URL + ">" + data[i].Name + "</a></b><br />";
+                html += "<b><a href=\"" + data[i].URL + "\">" + data[i].Name + "</a></b><br />";
                 if (data[i].Description)
                     html += data[i].Description;
             }

@@ -221,7 +221,7 @@
     </div>
     <div id="videoDialog1" style="display: none;">
         <video id="video1" class="video-js vjs-default-skin" controls preload="none" width="576" height="360" data-setup="{}">
-            <source src="/Content/Videos/IntroParentcare.m4v" type="video/mp4" />
+            <source src="/Content/Videos/IntroParentcare.m4v" type="video/m4v" />
         </video>
 
         <div id="videodescription1">
@@ -234,7 +234,7 @@
     </div>
     <div id="videoDialog2" style="display: none;">
         <video id="video2" class="video-js vjs-default-skin" controls preload="none" width="576" height="360" data-setup="{}">
-            <source src="/Content/Videos/ParkerIntro.mp4" type="video/m4v" />
+            <source src="/Content/Videos/ParkerIntro.m4v" type="video/m4v" />
         </video>
         <div id="videodescription2">
             Dr. Michael Parker, selected by the Hartford Foundation and Gerontological Society

@@ -457,7 +457,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.tooltip.min.css" />
     <Content Include="Content\Videos\ParkerIntro.m4v" />
     <Content Include="Content\Videos\FamilyDomain.mov.mp4" />
-    <Content Include="Content\Videos\IntroParentCare.mp4" />
+    <Content Include="Content\Videos\IntroParentCare.m4v" />
     <Content Include="Content\Videos\legalmedical.mov.flv" />
     <Content Include="Content\Videos\legalmedical.mp4" />
     <Content Include="Content\Videos\MedicalDomain.flv" />

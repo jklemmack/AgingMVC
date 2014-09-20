@@ -36,7 +36,7 @@ namespace AgingMVC.Controllers
                            tsr.ParentID == parentId &&
                            tsr.UserID == userId &&
                            t.DomainId == domain.DomainId
-                         select t).Take(7);
+                         select t); //.Take(7);
 
             bool isSelf = false;
             if (string.Compare(Parent, "myself", true) == 0)
@@ -96,7 +96,8 @@ namespace AgingMVC.Controllers
         {
             var resources =
                 db.Task_Resources.Where(tr => (tr.Resource.ResourceState == State
-                                                    && tr.TaskID == Task)
+                                                    && tr.TaskID == Task
+                                                    && tr.Resource.Active == true)
                     ).Select(tr => new { tr.Resource.Name, tr.Resource.Description, tr.Resource.URL })
                     .ToList();
             return Json(resources, JsonRequestBehavior.AllowGet);
