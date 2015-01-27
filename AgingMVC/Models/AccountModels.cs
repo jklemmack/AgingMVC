@@ -30,7 +30,7 @@ namespace AgingMVC.Models
     public class ForgotPasswordModel
     {
         [Required]
-        [Display(Name= "User name")]
+        [Display(Name = "User name")]
         public string UserName { get; set; }
 
         [Required]
@@ -42,6 +42,15 @@ namespace AgingMVC.Models
         [DataType(DataType.Text)]
         [Display(Name = "Security Answer")]
         public string SecurityAnswer { get; set; }
+
+        public string State { get; set; }
+    }
+
+    public enum ForgotPasswordStates
+    {
+        EnterUserName,
+        EnterSecretAnswer,
+        Finalize
     }
 
 

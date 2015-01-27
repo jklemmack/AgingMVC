@@ -7,11 +7,19 @@ using System.Web.Profile;
 using System.Web.Routing;
 using System.Web.Security;
 using AgingMVC.Models;
+using RestSharp;
 
 namespace AgingMVC.Controllers
 {
     public class AccountController : Controller
     {
+        //
+        // GET: /Account/
+
+        public ActionResult Index()
+        {
+            return View();
+        }
 
         //
         // GET: /Account/LogOn
@@ -85,7 +93,7 @@ namespace AgingMVC.Controllers
                 Membership.CreateUser(model.UserName, model.Password, model.Email, model.SecurityQuestion, model.SecurityAnswer, true, null, out createStatus);
 
                 ProfileBase profile = ProfileBase.Create(model.UserName);
-                
+
                 profile.SetPropertyValue("groupCode", model.GroupCode);
                 profile.Save();
 
@@ -157,7 +165,103 @@ namespace AgingMVC.Controllers
             return View();
         }
 
+        public ActionResult ForgotPassword()
+        {
+            ForgotPasswordModel model = new ForgotPasswordModel();
+            model.State = ForgotPasswordStates.EnterUserName.ToString();
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult ForgotPassword(ForgotPasswordModel model)
+        {
+            // lookup user
+            MembershipUser user = Membership.GetUser(model.UserName);
+            if (model.State == ForgotPasswordStates.EnterUserName.ToString()
+                && !string.IsNullOrWhiteSpace(model.UserName)
+                && user == null)
+            {
+                ModelState.AddModelError("", "User not found");
+                model = new ForgotPasswordModel()
+                {
+                    State = ForgotPasswordStates.EnterUserName.ToString()
+                };
+
+                return View(model);
+            }
+            else if (model.State == ForgotPasswordStates.EnterUserName.ToString())
+            {
+                model = new ForgotPasswordModel()
+                {
+                    UserName = model.UserName,
+                    SecurityQuestion = user.PasswordQuestion,
+                    State = ForgotPasswordStates.EnterSecretAnswer.ToString()
+                };
+                model.State = ForgotPasswordStates.EnterSecretAnswer.ToString();
+                return View(model);
+            }
+            else if (model.State == ForgotPasswordStates.EnterSecretAnswer.ToString())
+            {
+                string newPassword = "rolltide15";
+                try
+                {
+                    var tempPassword = user.ResetPassword(model.SecurityAnswer);
+                    user.ChangePassword(tempPassword, newPassword);
+
+                    SendForgotPasswordEmail(user.Email, newPassword);
+                    model = new ForgotPasswordModel()
+                    {
+                        State = ForgotPasswordStates.Finalize.ToString()
+                    };
+                }
+                catch (MembershipPasswordException ex)
+                {
+                    model = new ForgotPasswordModel()
+                    {
+                        State = ForgotPasswordStates.EnterSecretAnswer.ToString(),
+                        UserName = model.UserName,
+                        SecurityQuestion = model.SecurityQuestion
+                    };
+                    ModelState.AddModelError("", "Invalid security answer.");
+                }
+                return View(model);
+            }
+            else
+            {
+                model = new ForgotPasswordModel()
+                {
+                    State = ForgotPasswordStates.EnterUserName.ToString()
+                };
+                return View(model);
+
+            }
+
+        }
+
+        private void SendForgotPasswordEmail(string email, string newPassword)
+        {
+            string API_KEY = "key-3xyyhwdmmzl-2xv308v4-g-wxs-j63o4";
+            string DOMAIN = "mail.agereadynow.com";
+
+            RestClient client = new RestClient();
+            client.BaseUrl = new Uri("https://api.mailgun.net/v2");
+            client.Authenticator =
+                    new HttpBasicAuthenticator("api", API_KEY);
+            RestRequest request = new RestRequest();
+            request.AddParameter("domain", DOMAIN, ParameterType.UrlSegment);
+            request.Resource = DOMAIN + "/messages";
+            request.AddParameter("from", "Excited User <YOU@YOUR_DOMAIN_NAME>");
+            request.AddParameter("to", email);
+            request.AddParameter("subject", "Hello");
+            request.AddParameter("text", "Testing some Mailgun awesomness!");
+            request.Method = Method.POST;
+            var response = client.Execute(request);
+
+        }
+
+
         #region Status Codes
+
         private static string ErrorCodeToString(MembershipCreateStatus createStatus)
         {
             // See http://go.microsoft.com/fwlink/?LinkID=177550 for
@@ -195,6 +299,7 @@ namespace AgingMVC.Controllers
                     return "An unknown error occurred. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
             }
         }
+
         #endregion
     }
 }

@@ -50,6 +50,7 @@ namespace AgingMVC.Controllers
             {
                 parent.ParentID = Guid.NewGuid();   //Shouldn't have to do this, but for some reason it wasn't working
                 parent.UserID = db.User.First(u => u.UserName == this.User.Identity.Name).UserId;
+                parent.FirstName = parent.FirstName.Trim();
                 db.Parents.AddObject(parent);
                 db.SaveChanges();
                 return RedirectToAction("Index", "Home");

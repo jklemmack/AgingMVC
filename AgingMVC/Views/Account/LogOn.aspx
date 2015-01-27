@@ -14,7 +14,7 @@
     <script src="<%: Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js") %>" type="text/javascript"></script>
 
     <% using (Html.BeginForm()) { %>
-        <%: Html.ValidationSummary(true, "Login was unsuccessful. Please correct the errors and try again.") %>
+        <%: Html.ValidationSummary(true, "Username not found.") %>
         <div>
             <fieldset>
                 <legend>Account Information</legend>

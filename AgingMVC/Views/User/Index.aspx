@@ -6,12 +6,14 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
-<h2>Index</h2>
-    <%: Html.ActionLink("Edit Tasks", "Index", "Task") %><br />
-    <%: Html.ActionLink("Edit Resources", "Index", "Resource") %>
-    <%: Html.ActionLink("Edit Users", "Index", "User") %>
+    <h2>Index</h2>
+    <%foreach (string user in ViewBag.Users)
+      {
+          
+    %>
+    <%: Html.ActionLink(user, "Edit", "User", new { userName = user}, null ) %>
+    <%} %>
 </asp:Content>
-
 
 <asp:Content ID="Content3" ContentPlaceHolderID="HeaderContent" runat="server">
 </asp:Content>

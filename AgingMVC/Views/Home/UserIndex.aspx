@@ -65,7 +65,7 @@
     </style>
     <script language="javascript" type="text/javascript">
         
-        var parentData = <%=ViewBag.ParentData %>
+        var parentData = <%=ViewBag.ParentData %> || {};
         var selectedParent = '';
 
         $(document).ready(function () {
